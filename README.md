@@ -4,7 +4,11 @@
 
 ## La Canchita de Carlos
 
+<br>
+
 # Sistema de Gestión de Alquiler de Canchas
+
+<br>
 
 ### Documento de Producto — Propuesta 1 (Uso Interno)
 
@@ -13,6 +17,8 @@
 **Cliente: Carlos Maldonado**
 
 **Desarrolladora: Brianna Salinas**
+
+<br>
 
 *Plazo: 2 semanas (documentación, diseño, prototipo, desarrollo, pruebas y despliegue)*
 

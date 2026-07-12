@@ -41,17 +41,20 @@
 * [1.2. Alcance del producto](#12-alcance-del-producto)
 * [1.3. Objetivos del proyecto](#13-objetivos-del-proyecto)
 * [1.4. Usuarios del sistema](#14-usuarios-del-sistema)
+  
 [Capítulo II: Especificación de Requisitos](#capítulo-ii-especificación-de-requisitos)
 * [2.1. Requisitos Funcionales (RF)](#21-requisitos-funcionales-rf)
 * [2.2. Requisitos No Funcionales (RNF)](#22-requisitos-no-funcionales-rnf)
 * [2.3. Lenguaje Ubicuo (Glosario del Dominio)](#23-lenguaje-ubicuo-glosario-del-dominio)
 * [2.4. User Stories](#24-user-stories)
 * [2.5. Product Backlog](#25-product-backlog)
+  
 [Capítulo III: Diseño de Producto (UX/UI)](#capítulo-iii-diseño-de-producto-uxui)
 * [3.1. Arquitectura de Información](#31-arquitectura-de-información)
 * [3.2. Wireframes](#32-wireframes)
 * [3.3. Prototipo en Figma](#33-prototipo-en-figma)
 * [3.4. Guía de Estilos](#34-guía-de-estilos)
+  
 [Capítulo IV: Arquitectura de Software (Domain-Driven Design)](#capítulo-iv-arquitectura-de-software-domain-driven-design)
 * [4.1. Event Storming (Diseño)](#41-event-storming-diseño)
 * [4.2. Bounded Contexts y Context Map](#42-bounded-contexts-y-context-map)
@@ -60,32 +63,39 @@
 * [4.5. Diagrama de Componentes (C4 - Nivel 3)](#45-diagrama-de-componentes-c4---nivel-3)
 * [4.6. Arquitectura en la Nube (PWA)](#46-arquitectura-en-la-nube-pwa)
 * [4.7. Análisis Técnico-Económico de la Infraestructura](#47-análisis-técnico-económico-de-la-infraestructura)
+  
 [Capítulo V: Diseño Orientado a Objetos](#capítulo-v-diseño-orientado-a-objetos)
 * [5.1. Diagrama de Clases — Backend](#51-diagrama-de-clases--backend)
 * [5.2. Diagrama de Clases — Frontend](#52-diagrama-de-clases--frontend)
+  
 [Capítulo VI: Diseño de Base de Datos](#capítulo-vi-diseño-de-base-de-datos)
 * [6.1. Modelo Entidad-Relación](#61-modelo-entidad-relación)
 * [6.2. Diagrama de Base de Datos](#62-diagrama-de-base-de-datos)
 * [6.3. Diccionario de Datos](#63-diccionario-de-datos)
+  
 [Capítulo VII: Gestión del Proyecto (Scrum, 2 semanas)](#capítulo-vii-gestión-del-proyecto-scrum-2-semanas)
 * [7.1. Plan de Sprints](#71-plan-de-sprints)
 * [7.2. Sprint 1 — Documentación, Diseño y Base del Sistema](#72-sprint-1--documentación-diseño-y-base-del-sistema)
 * [7.3. Sprint 2 — Desarrollo, Integración, Pruebas y Despliegue](#73-sprint-2--desarrollo-integración-pruebas-y-despliegue)
 * [7.4. Definition of Done](#74-definition-of-done)
+  
 [Capítulo VIII: Implementación](#capítulo-viii-implementación)
 * [8.1. Configuración del Entorno de Desarrollo](#81-configuración-del-entorno-de-desarrollo)
 * [8.2. Gestión de Código Fuente](#82-gestión-de-código-fuente)
 * [8.3. Convenciones de Código](#83-convenciones-de-código)
 * [8.4. Configuración de Despliegue](#84-configuración-de-despliegue)
 * [8.5. Avance por Sprint](#85-avance-por-sprint)
+  
 [Capítulo IX: Pruebas y Validación](#capítulo-ix-pruebas-y-validación)
 * [9.1. Estrategia de Pruebas](#91-estrategia-de-pruebas)
 * [9.2. Casos de Prueba Clave](#92-casos-de-prueba-clave)
 * [9.3. Validación con el Cliente](#93-validación-con-el-cliente)
+  
 [Capítulo X: Despliegue](#capítulo-x-despliegue)
 * [10.1. Ambiente de Producción](#101-ambiente-de-producción)
 * [10.2. Checklist de Despliegue](#102-checklist-de-despliegue)
 * [10.3. Plan de Rollback](#103-plan-de-rollback)
+  
 [Anexos](#anexos)
  
 ---

@@ -8,6 +8,9 @@
 
 # La Canchita de Carlos
 
+
+ <img src="assets/styles/logo.png" alt="Logo La Canchita de Carlos" width="200"/>
+ 
 <br>
 
 ### Documento de Producto — Propuesta 1 (Uso Interno)
@@ -276,7 +279,7 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
  
 | Término | Significado |
 |---|---|
-| Cancha | Espacio deportivo alquilable del colegio (vóley, fútbol o básquet). El sistema administra 5. |
+| Cancha | Espacio deportivo alquilable del colegio (vóley, fútbol o básquet). Actualmente son 5, pero el catálogo es administrable por Carlos (RF11), no un número fijo en el sistema. |
 | Franja horaria | Bloque de tiempo en el que una cancha puede alquilarse (ej. 6:00 pm – 7:00 pm). |
 | Alquiler | Reserva confirmada de una cancha, para un cliente, en una fecha y franja horaria específica. |
 | Doble reserva | Situación inválida en la que dos alquileres ocupan la misma cancha en la misma franja horaria. El sistema debe impedirla siempre (RF06). |
@@ -293,6 +296,7 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | Pago parcial | Pago que cubre solo una parte del monto total del alquiler; el alquiler queda con saldo pendiente. |
 | Pendiente | Estado de un alquiler cuyo monto (total o restante) aún no ha sido cobrado. |
 | Método de pago | Forma en la que se recibió el dinero (efectivo, Yape, u otro registrado manualmente). |
+| Comprobante de pago | Imagen adjunta a un `Pago` (captura de Yape, foto de voucher) que respalda visualmente que el cobro ocurrió (RF25). |
 
 <br>
 
@@ -309,25 +313,46 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
  
 | Término | Significado |
 |---|---|
-| Administrador | Usuario con acceso al sistema: Carlos o su trabajador autorizado. Único rol funcional del sistema. |
+| Administrador | Usuario con acceso al sistema: Carlos o su trabajador autorizado. Rol operativo único (1.4). |
+| Administrador dueño | Administrador con la capacidad adicional de autorizar o rechazar solicitudes de nuevas cuentas (RF21). Solo Carlos tiene este atributo. |
 | Sesión | Periodo en el que un administrador permanece autenticado tras iniciar sesión. |
+| Solicitud de acceso | Registro creado por alguien que pide una cuenta de administrador, en estado pendiente hasta que el administrador dueño la autoriza o rechaza (RF20–RF21). |
+
+<br>
+
+**Subdominio Notificaciones** *(alcance mínimo — ver 4.2)*
  
+| Término | Significado |
+|---|---|
+| Correo de confirmación | Correo transaccional único enviado al cliente cuando se registra su `Alquiler`, si tiene correo registrado (RF23). No es un recordatorio recurrente. |
+| Correo de resultado de solicitud | Correo enviado al solicitante de una cuenta de administrador informando si fue autorizada o rechazada (RF22). |
+
+<br>
+
+*Este glosario es la referencia obligatoria para nombrar clases, tablas y endpoints — evita que en el código aparezcan sinónimos distintos para el mismo concepto (ej. "reserva" vs. "alquiler").*
  
+<br>
+
 ## 2.4. User Stories
 
 >*Las User Stories expresan necesidades reales del negocio de Carlos, no funcionalidades de pantalla. Cada historia describe una capacidad operacional con impacto concreto en la gestión de "La Canchita de Carlos". Los criterios de aceptación siguen la estructura Gherkin (Given/When/Then) y validan **comportamiento del dominio**: estados que cambian, **invariantes que se protegen**, y eventos que se emiten — no lo que muestra la pantalla. Los aggregates raíz (`Alquiler`, `Cancha`, `Cliente`, `Pago`, `Usuario`) y los Domain Events utilizados en estas historias fueron derivados del Event Storming (sección 4.1). Los criterios de aceptación se redactan en tiempo presente y tercera persona, sin referencias a detalles de interfaz.*
-<br>
+
  
+<br>
+
 ### Epics
  
 | **ID** | **Título** | **Descripción** | **Historias Relacionadas** |
 |---|---|---|---|
 | **EP01** | **Identidad y Acceso** | Capacidad de negocio que garantiza que solo Carlos y su trabajador autorizado accedan al sistema, protegiendo la información operativa y financiera del negocio. | US01, US02, US03 |
-| **EP02** | **Gestión de Reservas** | Capacidad de negocio central: administrar la disponibilidad de las 5 canchas y garantizar que nunca coexistan dos alquileres para el mismo horario. | US04, US05, US06, US07, US08 |
-| **EP03** | **Gestión de Clientes** | Capacidad de negocio que permite mantener un registro de quién alquila, para dar seguimiento comercial básico. | US09, US10 |
-| **EP04** | **Gestión de Canchas** | Capacidad de negocio que permite mantener actualizado el inventario de canchas del colegio y sus precios, base para calcular correctamente cada alquiler. | US11, US12, US13 |
-| **EP05** | **Gestión de Pagos** | Capacidad de negocio que permite registrar y trazar el dinero cobrado por cada alquiler, incluyendo pagos parciales. | US14, US15, US16 |
+| **EP02** | **Gestión de Reservas** | Capacidad de negocio central: administrar la disponibilidad de las canchas (calendario completo día/semana/mes) y garantizar que nunca coexistan dos alquileres para el mismo horario, permitiendo además registrar un cliente nuevo sin salir del flujo. | US04, US05, US06, US07, US08, US28 |
+| **EP03** | **Gestión de Clientes** | Capacidad de negocio que permite mantener un registro de quién alquila, incluyendo un canal directo de contacto (WhatsApp), para dar seguimiento comercial básico. | US09, US10, US30 |
+| **EP04** | **Gestión de Canchas** | Capacidad de negocio que permite mantener actualizado el inventario de canchas del colegio (catálogo administrable, no un número fijo), sus precios y su identificación visual con fotos, base para calcular y comunicar correctamente cada alquiler. | US11, US12, US13, US29 |
+| **EP05** | **Gestión de Pagos** | Capacidad de negocio que permite registrar y trazar el dinero cobrado por cada alquiler, incluyendo pagos parciales y el respaldo visual del comprobante. | US14, US15, US16, US27 |
 | **EP06** | **Panel Operativo del Día** | Capacidad de negocio que da a Carlos visibilidad inmediata de la operación diaria: qué se alquiló, cuánto se cobró y qué falta cobrar. | US17, US18, US19 |
+| **EP07** | **Registro y Autorización de Administradores** | Capacidad de negocio que permite a Carlos incorporar nuevos administradores de forma controlada, sin crear cada cuenta manualmente ni ceder acceso sin verificación, y ver quién tiene acceso activo. | US20, US21, US26 |
+| **EP08** | **Confirmación por Correo** | Capacidad de negocio que da respaldo automático por correo de las acciones clave (reserva registrada, cuenta autorizada/rechazada), sin construir un sistema de notificaciones completo. | US22, US23 |
+| **EP09** | **Ajustes de Cuenta** | Capacidad de negocio que permite a cada administrador mantener actualizados sus propios datos de acceso (correo, contraseña), sin depender de soporte técnico externo. | US24, US25 |
  
 <br>
 
@@ -345,21 +370,35 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | **US06** | Impedir la doble reserva de una cancha | Como administrador, quiero que el sistema impida crear un alquiler en un horario ya ocupado, para que nunca ocurra una doble reserva. | **Escenario 1 – Doble reserva rechazada (invariante central):** <br> **Given:** ya existe un `Alquiler` en estado `RESERVADO` para la cancha X en la franja 6:00–7:00 pm <br> **When:** el administrador intenta registrar otro `Alquiler` para la misma cancha y franja <br> **Then:** el sistema rechaza la operación, no se crea un nuevo `Alquiler` y se emite el evento `DobleReservaRechazada` en lugar de `AlquilerRegistrado`. <br><br> **Escenario 2 – Franja liberada permite nueva reserva:** <br> **Given:** el `Alquiler` que ocupaba la franja X fue cancelado (`AlquilerCancelado`) <br> **When:** el administrador registra un nuevo alquiler para esa misma cancha y franja <br> **Then:** el sistema lo acepta y emite `AlquilerRegistrado`, porque la invariante de exclusividad ya no se viola. <br><br> **Escenario 3 – Edición que colisiona con otro alquiler:** <br> **Given:** el `Alquiler` A ocupa la franja X y el `Alquiler` B ocupa la franja Y de la misma cancha <br> **When:** el administrador intenta editar B para moverlo a la franja X <br> **Then:** el sistema rechaza la edición, `B` conserva su horario original y se emite `DobleReservaRechazada`. | EP02 |
 | **US07** | Bloquear una franja por mantenimiento | Como administrador, quiero bloquear manualmente una franja de una cancha por mantenimiento, para que no pueda alquilarse mientras no esté disponible. | **Escenario 1 – Bloqueo exitoso:** <br> **Given:** la franja de la cancha X está libre <br> **When:** el administrador la marca como bloqueada por mantenimiento <br> **Then:** se crea un `BloqueoHorario` para esa cancha y franja, se emite `HorarioBloqueado`, y la franja deja de estar disponible para alquileres. <br><br> **Escenario 2 – No se puede bloquear una franja con alquiler activo:** <br> **Given:** la franja de la cancha X ya tiene un `Alquiler` en estado `RESERVADO` <br> **When:** el administrador intenta bloquearla <br> **Then:** el sistema rechaza el bloqueo, no se crea `BloqueoHorario` y el `Alquiler` existente no se ve afectado. | EP02 |
 | **US08** | Buscar y filtrar el historial de alquileres | Como administrador, quiero buscar y filtrar el historial de alquileres, para resolver dudas o reclamos de clientes rápidamente. | **Escenario 1 – Filtro con resultados:** <br> **Given:** existen `Alquiler` registrados con distintas fechas, canchas, clientes y estados <br> **When:** el administrador filtra por una combinación de esos criterios <br> **Then:** el sistema retorna únicamente los `Alquiler` que cumplen todos los criterios, sin modificar su estado. <br><br> **Escenario 2 – Filtro sin coincidencias:** <br> **Given:** los criterios seleccionados no corresponden a ningún `Alquiler` registrado <br> **When:** el sistema procesa la búsqueda <br> **Then:** retorna un conjunto vacío sin alterar el historial existente. | EP02 |
+| **US28** | Registrar un cliente nuevo desde el formulario de alquiler | Como administrador, quiero poder crear un cliente nuevo sin salir del formulario de alquiler, para no interrumpir el registro cuando el cliente no existe todavía en el sistema. | **Escenario 1 – Cliente creado y usado en el mismo flujo:** <br> **Given:** el administrador está registrando un `Alquiler` (US05) y el cliente buscado no existe <br> **When:** completa nombre y contacto en el mismo formulario y confirma <br> **Then:** el sistema crea el aggregate `Cliente` (emite `ClienteRegistrado`), lo asocia de inmediato al `Alquiler` en curso, y el administrador no necesita navegar a la sección de Clientes. <br><br> **Escenario 2 – Cliente creado queda disponible después:** <br> **Given:** se creó un `Cliente` desde el formulario de alquiler <br> **When:** el administrador busca ese cliente más tarde desde la sección de Clientes (EP03) <br> **Then:** aparece con su historial actualizado, igual que cualquier cliente creado desde su propia pantalla. | EP02 |
 | **EP03 – Gestión de Clientes** |||||
 | **US09** | Registrar, editar y eliminar clientes | Como administrador, quiero registrar, editar y eliminar clientes, para mantener actualizada la información de contacto del negocio. | **Escenario 1 – Registro exitoso:** <br> **Given:** el administrador ingresa nombre y contacto de un nuevo cliente <br> **When:** confirma el registro <br> **Then:** se crea el aggregate `Cliente` y se emite `ClienteRegistrado`, quedando disponible de inmediato para asociarse a un `Alquiler`. <br><br> **Escenario 2 – Eliminación de cliente con historial:** <br> **Given:** un `Cliente` tiene `Alquiler` asociados en su historial <br> **When:** el administrador intenta eliminarlo <br> **Then:** el sistema conserva los `Alquiler` históricos intactos (referenciando al cliente por su identificador), sin romper la trazabilidad del historial existente. | EP03 |
 | **US10** | Consultar historial de un cliente | Como administrador, quiero ver el historial de alquileres de un cliente, para conocer su frecuencia de uso. | **Escenario 1 – Historial con alquileres:** <br> **Given:** un `Cliente` tiene uno o más `Alquiler` asociados <br> **When:** el administrador consulta su ficha <br> **Then:** el sistema retorna la lista de `Alquiler` de ese cliente ordenados por fecha, sin modificar ningún estado. <br><br> **Escenario 2 – Cliente sin alquileres:** <br> **Given:** un `Cliente` fue registrado pero aún no tiene `Alquiler` asociados <br> **When:** el administrador consulta su ficha <br> **Then:** el sistema retorna historial vacío sin fabricar datos. | EP03 |
+| **US30** | Registrar WhatsApp del cliente con acceso directo | Como administrador, quiero registrar el WhatsApp del cliente y poder abrir el chat directamente desde el sistema, para coordinar rápido sin copiar el número a mano. | **Escenario 1 – WhatsApp registrado y accesible:** <br> **Given:** el administrador registra o edita un `Cliente` con un número de WhatsApp válido <br> **When:** guarda los cambios <br> **Then:** el `Cliente` queda con el número asociado, y tanto su ficha como el detalle de sus `Alquiler` muestran un acceso directo (enlace `wa.me`) para abrir el chat. <br><br> **Escenario 2 – Cliente sin WhatsApp registrado:** <br> **Given:** un `Cliente` no tiene número de WhatsApp <br> **When:** el administrador consulta su ficha o un alquiler asociado <br> **Then:** el sistema no muestra el acceso directo, sin generar errores. | EP03 |
 | **EP04 – Gestión de Canchas** |||||
 | **US11** | Registrar y editar canchas | Como administrador, quiero dar de alta y editar las canchas del colegio, para mantener el sistema alineado a la infraestructura real. | **Escenario 1 – Alta exitosa:** <br> **Given:** el administrador ingresa nombre y disciplina de una cancha nueva <br> **When:** confirma el registro <br> **Then:** se crea el aggregate `Cancha` y se emite `CanchaRegistrada`. <br><br> **Escenario 2 – Nombre de cancha duplicado:** <br> **Given:** ya existe una `Cancha` con ese nombre <br> **When:** el administrador intenta registrar otra con el mismo nombre <br> **Then:** el sistema rechaza el registro y la `Cancha` existente no se altera. | EP04 |
 | **US12** | Configurar precios por cancha | Como administrador, quiero configurar el precio de cada cancha, para que el sistema calcule montos correctos automáticamente. | **Escenario 1 – Precio actualizado y aplicado:** <br> **Given:** una `Cancha` existente con un precio configurado <br> **When:** el administrador actualiza el precio a un valor válido (mayor a cero) <br> **Then:** se emite `PrecioCanchaActualizado` y todo nuevo `Alquiler` para esa cancha calcula el monto con el precio vigente. <br><br> **Escenario 2 – Precio inválido rechazado:** <br> **Given:** el administrador intenta fijar un precio en cero o negativo <br> **When:** confirma <br> **Then:** el sistema rechaza el cambio y la `Cancha` conserva su precio anterior. | EP04 |
 | **US13** | Ver disponibilidad consolidada de todas las canchas | Como administrador, quiero ver la disponibilidad consolidada de todas las canchas, para decidir rápido qué ofrecer a un cliente que llama. | **Escenario 1 – Vista consolidada correcta:** <br> **Given:** las 5 canchas tienen distintas combinaciones de `Alquiler` y `BloqueoHorario` para una fecha <br> **When:** el administrador consulta la vista consolidada <br> **Then:** el sistema retorna, en una sola respuesta, el estado de disponibilidad de las 5 canchas para esa fecha. | EP04 |
+| **US29** | Adjuntar fotos a una cancha | Como administrador, quiero adjuntar una o más fotos a cada cancha, para que se identifique visualmente al momento de alquilarla. | **Escenario 1 – Foto adjuntada correctamente:** <br> **Given:** el administrador edita una `Cancha` existente <br> **When:** sube una o más imágenes <br> **Then:** las fotos quedan asociadas a la `Cancha` y visibles en el calendario/ficha de esa cancha. <br><br> **Escenario 2 – Cancha sin fotos:** <br> **Given:** una `Cancha` no tiene fotos adjuntas <br> **When:** se consulta su ficha <br> **Then:** el sistema muestra un estado vacío/genérico en vez de fallar, y la cancha sigue siendo alquilable con normalidad (las fotos son opcionales, no bloquean RF11). | EP04 |
 | **EP05 – Gestión de Pagos** |||||
 | **US14** | Registrar estado de pago de un alquiler | Como administrador, quiero marcar un alquiler como pagado o pendiente, para saber qué dinero falta cobrar. | **Escenario 1 – Pago total registrado:** <br> **Given:** un `Alquiler` con estado de pago `PENDIENTE` <br> **When:** el administrador registra un `Pago` por el monto total <br> **Then:** se emite `PagoRegistrado`, el `Alquiler` transita su estado de pago a `PAGADO` y el saldo pendiente queda en cero. <br><br> **Escenario 2 – Monto excede el total del alquiler:** <br> **Given:** un `Alquiler` tiene un monto total definido <br> **When:** el administrador intenta registrar un `Pago` mayor a ese total <br> **Then:** el sistema rechaza el registro, protegiendo la invariante de que el pago nunca puede exceder el total adeudado. | EP05 |
 | **US15** | Registrar pagos parciales | Como administrador, quiero registrar pagos parciales, para llevar control cuando el cliente abona por partes. | **Escenario 1 – Pago parcial con saldo recalculado:** <br> **Given:** un `Alquiler` con estado de pago `PENDIENTE` y monto total S/ 100 <br> **When:** el administrador registra un `Pago` parcial de S/ 40 <br> **Then:** se emite `PagoParcialRegistrado`, el `Alquiler` transita a estado de pago `PARCIAL` y el saldo pendiente queda en S/ 60. <br><br> **Escenario 2 – Suma de parciales completa el pago:** <br> **Given:** un `Alquiler` en estado `PARCIAL` con saldo pendiente de S/ 60 <br> **When:** el administrador registra un nuevo `Pago` de S/ 60 <br> **Then:** el `Alquiler` transita automáticamente a estado `PAGADO` y el saldo pendiente queda en cero. | EP05 |
 | **US16** | Registrar método de pago | Como administrador, quiero registrar el método de pago usado, para tener trazabilidad de cómo se cobró cada alquiler. | **Escenario 1 – Método de pago asociado al registro:** <br> **Given:** el administrador registra un `Pago` (total o parcial) <br> **When:** selecciona el método (efectivo, Yape u otro) <br> **Then:** el `Pago` queda persistido con el método indicado, disponible en el historial del `Alquiler`. | EP05 |
+| **US27** | Adjuntar comprobante de pago | Como administrador, quiero adjuntar una imagen del comprobante al registrar un pago, para tener respaldo visual de que el cliente pagó. | **Escenario 1 – Comprobante adjuntado correctamente:** <br> **Given:** el administrador está registrando un `Pago` <br> **When:** adjunta una imagen (captura de Yape, foto de voucher) antes de confirmar <br> **Then:** el `Pago` queda persistido con la referencia al comprobante, visible después en el historial del `Alquiler`. <br><br> **Escenario 2 – Pago sin comprobante permitido:** <br> **Given:** el administrador registra un `Pago` en efectivo sin comprobante físico <br> **When:** confirma sin adjuntar imagen <br> **Then:** el sistema permite el registro igualmente — el comprobante es opcional, no bloquea RF14/RF15. | EP05 |
 | **EP06 – Panel Operativo del Día** |||||
 | **US17** | Ver alquileres del día | Como administrador, quiero ver los alquileres del día al iniciar sesión, para saber de un vistazo qué toca hoy. | **Escenario 1 – Panel refleja alquileres activos del día:** <br> **Given:** existen `Alquiler` en estado `RESERVADO` para la fecha actual <br> **When:** el administrador consulta el panel <br> **Then:** el sistema retorna esos `Alquiler`, excluyendo los que estén en estado `CANCELADO`. | EP06 |
 | **US18** | Ver ingreso total del día | Como administrador, quiero ver el ingreso total del día, para llevar control diario sin sacar cuentas manualmente. | **Escenario 1 – Ingreso calculado desde pagos reales:** <br> **Given:** existen uno o más `Pago` (totales y/o parciales) registrados en la fecha actual <br> **When:** el administrador consulta el panel <br> **Then:** el sistema retorna la suma exacta de esos `Pago`, sin incluir montos de alquileres aún no pagados. | EP06 |
 | **US19** | Ver pagos pendientes del día | Como administrador, quiero ver los pagos pendientes del día, para hacer seguimiento a los clientes que aún deben. | **Escenario 1 – Pendientes correctamente identificados:** <br> **Given:** existen `Alquiler` del día con estado de pago `PENDIENTE` o `PARCIAL` <br> **When:** el administrador consulta el panel <br> **Then:** el sistema retorna esos `Alquiler` junto con su saldo pendiente, excluyendo los que ya están en estado `PAGADO`. | EP06 |
+| **EP07 – Registro y Autorización de Administradores** |||||
+| **US20** | Solicitar registro de nueva cuenta de administrador | Como persona autorizada por Carlos para operar el negocio (ej. un nuevo trabajador), quiero registrar mi solicitud de cuenta, para que Carlos pueda autorizarme sin que él tenga que crear la cuenta manualmente. | **Escenario 1 – Solicitud creada en estado pendiente:** <br> **Given:** el solicitante completa nombre y correo válidos en el formulario de registro <br> **When:** confirma el envío <br> **Then:** se crea el aggregate `Usuario` en estado `PENDIENTE`, se emite `SolicitudRegistroCreada`, y el solicitante no obtiene ningún acceso al sistema todavía. <br><br> **Escenario 2 – Correo ya registrado:** <br> **Given:** el correo ingresado ya pertenece a un `Usuario` existente (activo o pendiente) <br> **When:** se intenta enviar la solicitud <br> **Then:** el sistema rechaza la solicitud sin crear un duplicado. | EP07 |
+| **US21** | Autorizar o rechazar solicitudes de acceso | Como administrador dueño, quiero revisar y autorizar o rechazar las solicitudes de cuenta pendientes, para controlar quién tiene acceso al negocio. | **Escenario 1 – Autorización exitosa:** <br> **Given:** existe un `Usuario` en estado `PENDIENTE` y quien ejecuta la acción es el administrador dueño <br> **When:** autoriza la solicitud <br> **Then:** el `Usuario` transita a estado `ACTIVO`, se emite `AdministradorAutorizado`, y desde ese momento puede iniciar sesión (US01). <br><br> **Escenario 2 – Rechazo:** <br> **Given:** existe un `Usuario` en estado `PENDIENTE` <br> **When:** el administrador dueño lo rechaza <br> **Then:** el `Usuario` transita a estado `RECHAZADO`, se emite `AdministradorRechazado`, y no puede iniciar sesión. <br><br> **Escenario 3 – Un administrador no dueño intenta autorizar:** <br> **Given:** quien intenta autorizar es un `Usuario` con rol `ADMINISTRADOR` (no dueño) <br> **When:** intenta ejecutar la acción <br> **Then:** el sistema la rechaza y el `Usuario` pendiente no cambia de estado. | EP07 |
+| **US26** | Ver administradores activos | Como administrador dueño, quiero ver el listado de cuentas de administrador activas, para saber en todo momento quién tiene acceso al negocio. | **Escenario 1 – Listado correcto:** <br> **Given:** existen `Usuario` en distintos estados (`ACTIVO`, `PENDIENTE`, `RECHAZADO`) <br> **When:** el administrador dueño consulta el listado de activos <br> **Then:** el sistema retorna únicamente los `Usuario` en estado `ACTIVO`, sin exponer las solicitudes pendientes o rechazadas en esa misma vista (esas viven en US21). | EP07 |
+| **EP08 – Confirmación por Correo** |||||
+| **US22** | Recibir correo de confirmación al registrar un alquiler | Como cliente del negocio, quiero recibir un correo de confirmación cuando se registra mi alquiler, para tener un respaldo del acuerdo sin depender solo de la palabra del administrador. | **Escenario 1 – Correo enviado con cliente con correo registrado:** <br> **Given:** un `Alquiler` se registra (`AlquilerRegistrado`) y el `Cliente` asociado tiene correo registrado <br> **When:** el subdominio Notificaciones procesa el evento <br> **Then:** se envía un correo de confirmación con los datos del alquiler y se emite `CorreoConfirmacionEnviado`. <br><br> **Escenario 2 – Cliente sin correo registrado:** <br> **Given:** el `Cliente` asociado al `Alquiler` no tiene correo registrado <br> **When:** se procesa `AlquilerRegistrado` <br> **Then:** no se intenta ningún envío y el `Alquiler` se registra con normalidad, sin errores visibles para el administrador. <br><br> **Escenario 3 – Fallo de envío no revierte el alquiler:** <br> **Given:** el proveedor de correo (Resend) no responde o falla <br> **When:** el sistema intenta enviar la confirmación <br> **Then:** el `Alquiler` permanece registrado sin cambios (RF24); el fallo queda registrado en logs para revisión posterior, no bloquea al administrador. | EP08 |
+| **US23** | Recibir correo con el resultado de mi solicitud de acceso | Como solicitante de una cuenta de administrador, quiero recibir un correo cuando mi solicitud sea autorizada o rechazada, para saber si ya puedo ingresar al sistema. | **Escenario 1 – Correo de autorización:** <br> **Given:** se emite `AdministradorAutorizado` para un `Usuario` <br> **When:** el subdominio Notificaciones procesa el evento <br> **Then:** se envía un correo al solicitante indicando que su cuenta fue autorizada. <br><br> **Escenario 2 – Correo de rechazo:** <br> **Given:** se emite `AdministradorRechazado` <br> **When:** el subdominio Notificaciones procesa el evento <br> **Then:** se envía un correo indicando que la solicitud fue rechazada, sin exponer el motivo interno de la decisión. | EP08 |
+| **EP09 – Ajustes de Cuenta** |||||
+| **US24** | Actualizar mi correo | Como administrador autenticado, quiero actualizar mi propio correo, para mantenerlo vigente sin depender de soporte técnico. | **Escenario 1 – Correo actualizado:** <br> **Given:** el administrador está autenticado <br> **When:** ingresa un nuevo correo válido y no usado por otro `Usuario` <br> **Then:** el `Usuario` actualiza su correo y este queda disponible de inmediato para el próximo inicio de sesión. <br><br> **Escenario 2 – Correo ya en uso:** <br> **Given:** el nuevo correo ya pertenece a otro `Usuario` <br> **When:** intenta guardar el cambio <br> **Then:** el sistema rechaza la actualización y el correo original se mantiene sin cambios. | EP09 |
+| **US25** | Cambiar mi contraseña | Como administrador autenticado, quiero cambiar mi propia contraseña, para mantener segura mi cuenta. | **Escenario 1 – Cambio exitoso:** <br> **Given:** el administrador ingresa su contraseña actual correctamente y una nueva contraseña válida <br> **When:** confirma el cambio <br> **Then:** la contraseña se actualiza (hasheada con bcrypt) y las sesiones activas en otros dispositivos se invalidan. <br><br> **Escenario 2 – Contraseña actual incorrecta:** <br> **Given:** el administrador ingresa mal su contraseña actual <br> **When:** intenta confirmar el cambio <br> **Then:** el sistema rechaza la operación y la contraseña original no se modifica. | EP09 |
  
 <br>
 
@@ -371,14 +410,21 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | **TS02** | Endpoint de login y emisión de JWT | Como Developer, quiero implementar el endpoint de autenticación en Express para emitir un JWT a los administradores válidos. | **Escenario 1 – Login exitoso (200):** <br> **Given:** POST `/api/auth/login` con credenciales válidas de un `Usuario` <br> **When:** el servidor valida el hash de la contraseña <br> **Then:** retorna 200 con JWT y expiración. <br><br> **Escenario 2 – Credenciales inválidas (401):** <br> **Given:** contraseña incorrecta <br> **When:** el servidor valida <br> **Then:** retorna 401 sin emitir token. | EP01 |
 | **TS03** | Endpoint de registro de pagos con recálculo de saldo | Como Developer, quiero implementar el endpoint de registro de `Pago` en Express, recalculando el saldo pendiente del `Alquiler` asociado en una misma transacción. | **Escenario 1 – Pago parcial registrado (201):** <br> **Given:** POST `/api/pagos` con monto menor al saldo pendiente del `Alquiler` <br> **When:** el servidor procesa <br> **Then:** crea el `Pago`, actualiza el estado del `Alquiler` a `PARCIAL`, emite `PagoParcialRegistrado` y retorna 201 con el nuevo saldo. <br><br> **Escenario 2 – Monto excede saldo pendiente (400):** <br> **Given:** el monto enviado es mayor al saldo pendiente <br> **When:** el servidor valida <br> **Then:** retorna 400 y no persiste el pago. | EP05 |
 | **TS04** | Endpoint de health check | Como Developer, quiero implementar un endpoint `/health` en Express para verificar que el backend y la conexión a base de datos estén operativos, dado que Render suspende el servicio por inactividad. | **Escenario 1 – Sistema operativo (200):** <br> **Given:** el backend está corriendo y la conexión a PostgreSQL responde <br> **When:** se consulta GET `/health` <br> **Then:** retorna 200 con estado `ok`. <br><br> **Escenario 2 – Base de datos no disponible (503):** <br> **Given:** la conexión a PostgreSQL falla <br> **When:** se consulta GET `/health` <br> **Then:** retorna 503, permitiendo detectar el problema antes de que Carlos reporte que "la app no funciona". | EP02 |
+| **TS05** | Endpoints de solicitud y autorización de cuentas de administrador | Como Developer, quiero implementar los endpoints de registro de solicitud y de autorización/rechazo, restringiendo la autorización al rol de administrador dueño. | **Escenario 1 – Solicitud creada (201):** <br> **Given:** POST `/api/usuarios/solicitudes` con nombre y correo no registrados <br> **When:** el servidor procesa <br> **Then:** crea `Usuario` en estado `PENDIENTE`, emite `SolicitudRegistroCreada` y retorna 201. <br><br> **Escenario 2 – Autorización restringida al dueño (200/403):** <br> **Given:** PATCH `/api/usuarios/{id}/autorizar` <br> **When:** el token del solicitante no corresponde a un administrador con rol dueño <br> **Then:** retorna 403 y el `Usuario` pendiente no cambia de estado; si el rol es correcto, retorna 200 y emite `AdministradorAutorizado`. | EP07 |
+| **TS06** | Listener de correo de confirmación sobre `AlquilerRegistrado` | Como Developer, quiero implementar un listener desacoplado del endpoint de alquiler que reaccione a `AlquilerRegistrado` y envíe el correo de confirmación vía Resend, sin bloquear la respuesta HTTP del registro del alquiler. | **Escenario 1 – Envío asíncrono exitoso:** <br> **Given:** se emite `AlquilerRegistrado` para un `Alquiler` con `Cliente` con correo <br> **When:** el listener procesa el evento <br> **Then:** llama a la API de Resend, y en caso de éxito emite `CorreoConfirmacionEnviado`; el endpoint TS01 ya respondió 201 antes de que esto ocurra. <br><br> **Escenario 2 – Fallo del proveedor no afecta el alquiler (RF24):** <br> **Given:** la API de Resend retorna error <br> **When:** el listener lo captura <br> **Then:** registra el error en logs, no reintenta de forma bloqueante y el `Alquiler` permanece intacto. | EP08 |
+| **TS07** | Endpoints de ajustes de cuenta (correo y contraseña) | Como Developer, quiero implementar los endpoints de actualización de correo y cambio de contraseña, validando la identidad del `Usuario` autenticado. | **Escenario 1 – Cambio de correo (200/409):** <br> **Given:** PATCH `/api/usuarios/me/correo` con correo no usado <br> **When:** el servidor procesa <br> **Then:** retorna 200; si el correo ya existe, retorna 409 sin modificar el `Usuario`. <br><br> **Escenario 2 – Cambio de contraseña (200/401):** <br> **Given:** PATCH `/api/usuarios/me/contrasena` con la contraseña actual y una nueva <br> **When:** el servidor valida el hash actual <br> **Then:** retorna 200 y actualiza el hash; si la contraseña actual no coincide, retorna 401 sin cambios. | EP09 |
+| **TS08** | Endpoint de carga de comprobante de pago con almacenamiento en la nube | Como Developer, quiero implementar el endpoint que recibe una imagen de comprobante, la sube a un servicio de almacenamiento de archivos y guarda la referencia en el `Pago`. | **Escenario 1 – Comprobante subido (201):** <br> **Given:** POST `/api/pagos/{id}/comprobante` con una imagen válida (jpg/png, tamaño razonable) <br> **When:** el servidor sube la imagen al servicio de almacenamiento (4.7) <br> **Then:** guarda la URL resultante en el `Pago` y retorna 201. <br><br> **Escenario 2 – Archivo inválido (400):** <br> **Given:** el archivo no es una imagen o excede el tamaño máximo permitido <br> **When:** el servidor valida <br> **Then:** retorna 400 y no persiste ninguna referencia en el `Pago`. | EP05 |
+| **TS09** | Endpoint de alquiler con creación de cliente embebida | Como Developer, quiero extender el endpoint de registro de `Alquiler` (TS01) para aceptar opcionalmente los datos de un cliente nuevo y crearlo en la misma transacción antes de asociarlo. | **Escenario 1 – Alquiler y cliente creados en una sola operación (201):** <br> **Given:** POST `/api/alquileres` incluye un bloque `clienteNuevo` en vez de un `clienteId` existente <br> **When:** el servidor procesa dentro de una transacción <br> **Then:** crea el `Cliente`, emite `ClienteRegistrado`, crea el `Alquiler` asociado, emite `AlquilerRegistrado` y retorna 201 con ambos identificadores. <br><br> **Escenario 2 – Conflicto de horario revierte también al cliente (rollback, 409):** <br> **Given:** la franja solicitada ya está ocupada <br> **When:** el servidor detecta el conflicto dentro de la misma transacción <br> **Then:** revierte la creación del `Cliente` también (no debe quedar un cliente huérfano de un alquiler fallido) y retorna 409. | EP02 |
+| **TS10** | Endpoint de carga de fotos de cancha | Como Developer, quiero implementar el endpoint que recibe una o más imágenes de una `Cancha`, las sube a Supabase Storage (mismo servicio que TS08) y guarda las URLs resultantes. | **Escenario 1 – Fotos subidas (201):** <br> **Given:** POST `/api/canchas/{id}/fotos` con una o más imágenes válidas <br> **When:** el servidor las sube al bucket de Storage <br> **Then:** guarda el arreglo de URLs en la `Cancha` y retorna 201. <br><br> **Escenario 2 – Archivo inválido (400):** <br> **Given:** un archivo no es imagen o excede el tamaño máximo <br> **When:** el servidor valida <br> **Then:** retorna 400 sin modificar las fotos existentes de la `Cancha`. | EP04 |
 
+<br>
 
- 
 ## 2.5. Product Backlog
 
->*El Product Backlog consolida las funcionalidades priorizadas por valor operacional para el negocio de "La Canchita de Carlos". Las historias están estimadas en Story Points (escala Fibonacci) y ordenadas por impacto operacional y dependencias funcionales: el subdominio núcleo (Reservas) precede a los subdominios de soporte (Clientes, Canchas, Pagos, Panel), porque ahí se concentra el riesgo de negocio más alto — la doble reserva. Las Technical Stories se listan al final para no contaminar la priorización por valor de negocio.*
+>*El Product Backlog consolida las funcionalidades priorizadas por valor operacional para el negocio de "La Canchita de Carlos". Las historias están estimadas en Story Points (escala Fibonacci) y ordenadas por impacto operacional y dependencias funcionales: el subdominio núcleo (Reservas) precede a los subdominios de soporte (Clientes, Canchas, Pagos, Panel), porque ahí se concentra el riesgo de negocio más alto — la doble reserva. Las Technical Stories se listan al final para no contaminar la priorización por valor de negocio. Los aggregates raíz y Domain Events referenciados en las historias fueron derivados del Event Storming (4.1): los comandos identificados se tradujeron en comportamientos de dominio encapsulados en `Alquiler`, `Cancha`, `Cliente`, `Pago` y `Usuario`.*
+
  
-**Total de Story Points: 65 | Total de historias: 23 (19 User Stories + 4 Technical Stories)**
+**Total de Story Points: 112 | Total de historias: 40 (30 User Stories + 10 Technical Stories)**
 
 <br>
  
@@ -407,39 +453,325 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | 21 | **TS02** | EP01 – Identidad y Acceso | Endpoint de login y emisión de JWT | Como Developer, quiero implementar el endpoint de autenticación en Express para emitir un JWT a los administradores válidos. | 2 |
 | 22 | **TS03** | EP05 – Gestión de Pagos | Endpoint de pagos con recálculo de saldo | Como Developer, quiero implementar el endpoint de registro de `Pago` en Express, recalculando el saldo pendiente del `Alquiler` asociado en una misma transacción. | 3 |
 | 23 | **TS04** | EP02 – Gestión de Reservas | Endpoint de health check | Como Developer, quiero implementar un endpoint `/health` en Express para verificar que el backend y la base de datos estén operativos, dado que Render suspende el servicio por inactividad. | 1 |
+| 24 | **US20** | EP07 – Registro y Autorización de Administradores | Solicitar registro de nueva cuenta de administrador | Como persona autorizada por Carlos para operar el negocio, quiero registrar mi solicitud de cuenta, para que Carlos pueda autorizarme sin crearla él manualmente. | 3 |
+| 25 | **US21** | EP07 – Registro y Autorización de Administradores | Autorizar o rechazar solicitudes de acceso | Como administrador dueño, quiero revisar y autorizar o rechazar solicitudes de cuenta pendientes, para controlar quién tiene acceso al negocio. | 3 |
+| 26 | **US22** | EP08 – Confirmación por Correo | Recibir correo de confirmación al registrar un alquiler | Como cliente del negocio, quiero recibir un correo de confirmación cuando se registra mi alquiler, para tener un respaldo del acuerdo. | 3 |
+| 27 | **US23** | EP08 – Confirmación por Correo | Recibir correo con el resultado de mi solicitud de acceso | Como solicitante de una cuenta de administrador, quiero recibir un correo cuando mi solicitud sea autorizada o rechazada. | 2 |
+| 28 | **TS05** | EP07 – Registro y Autorización de Administradores | Endpoints de solicitud y autorización de cuentas | Como Developer, quiero implementar los endpoints de registro de solicitud y de autorización/rechazo, restringiendo la autorización al rol de administrador dueño. | 3 |
+| 29 | **TS06** | EP08 – Confirmación por Correo | Listener de correo de confirmación sobre `AlquilerRegistrado` | Como Developer, quiero implementar un listener desacoplado que reaccione a `AlquilerRegistrado` y envíe el correo vía Resend, sin bloquear la respuesta HTTP del registro. | 3 |
+| 30 | **US26** | EP07 – Registro y Autorización de Administradores | Ver administradores activos | Como administrador dueño, quiero ver el listado de cuentas de administrador activas, para saber en todo momento quién tiene acceso al negocio. | 2 |
+| 31 | **US27** | EP05 – Gestión de Pagos | Adjuntar comprobante de pago | Como administrador, quiero adjuntar una imagen del comprobante al registrar un pago, para tener respaldo visual de que el cliente pagó. | 3 |
+| 32 | **US28** | EP02 – Gestión de Reservas | Registrar un cliente nuevo desde el formulario de alquiler | Como administrador, quiero poder crear un cliente nuevo sin salir del formulario de alquiler, para no interrumpir el registro cuando el cliente no existe todavía. | 3 |
+| 33 | **US24** | EP09 – Ajustes de Cuenta | Actualizar mi correo | Como administrador autenticado, quiero actualizar mi propio correo, para mantenerlo vigente sin depender de soporte técnico. | 2 |
+| 34 | **US25** | EP09 – Ajustes de Cuenta | Cambiar mi contraseña | Como administrador autenticado, quiero cambiar mi propia contraseña, para mantener segura mi cuenta. | 2 |
+| 35 | **TS07** | EP09 – Ajustes de Cuenta | Endpoints de ajustes de cuenta (correo y contraseña) | Como Developer, quiero implementar los endpoints de actualización de correo y cambio de contraseña, validando la identidad del `Usuario` autenticado. | 3 |
+| 36 | **TS08** | EP05 – Gestión de Pagos | Endpoint de carga de comprobante con almacenamiento en la nube | Como Developer, quiero implementar el endpoint que recibe una imagen de comprobante, la sube a Supabase Storage y guarda la referencia en el `Pago`. | 5 |
+| 37 | **TS09** | EP02 – Gestión de Reservas | Endpoint de alquiler con creación de cliente embebida | Como Developer, quiero extender el endpoint de registro de `Alquiler` para aceptar opcionalmente datos de un cliente nuevo y crearlo en la misma transacción. | 2 |
+| 38 | **US29** | EP04 – Gestión de Canchas | Adjuntar fotos a una cancha | Como administrador, quiero adjuntar una o más fotos a cada cancha, para que se identifique visualmente al momento de alquilarla. | 3 |
+| 39 | **US30** | EP03 – Gestión de Clientes | Registrar WhatsApp del cliente con acceso directo | Como administrador, quiero registrar el WhatsApp del cliente y poder abrir el chat directamente desde el sistema, para coordinar rápido sin copiar el número a mano. | 2 |
+| 40 | **TS10** | EP04 – Gestión de Canchas | Endpoint de carga de fotos de cancha | Como Developer, quiero implementar el endpoint que recibe una o más imágenes de una `Cancha`, las sube a Supabase Storage (mismo servicio que TS08) y guarda las URLs resultantes. | 3 |
  
 <br>
 
 <div align="center">
 
-**Herramienta utilizada:** `Trello`
+**Herramienta utilizada:** `Jira`
 
 **URL del Product Backlog:** *(pendiente — se agrega el link al tablero una vez creado)*
  
 </div>
-
+<br>
  
 ---
  
 # Capítulo III: Diseño de Producto (UX/UI)
  
 ## 3.1. Arquitectura de Información
-Mapa de navegación de la aplicación (login → panel → módulos: calendario, clientes, canchas, pagos, reportes).
+
+Estructura de navegación derivada directamente de los Epics y priorizada según lo que Carlos usa con más frecuencia en el día a día (panel y calendario primero, configuración al final).
  
-## 3.2. Wireframes
-Bocetos de baja fidelidad de las pantallas principales: login, panel del día, calendario de reservas, ficha de cliente, ficha de cancha, registro de pago.
+**Mapa de navegación:**
  
+- **Bienvenida (pública, sin sesión)**
+
+  - Iniciar sesión
+
+  - Registrar solicitud de administrador
+
+    - Formulario: nombre, correo, complejo/negocio
+
+    - Pantalla de espera: "Tu solicitud fue enviada, Carlos debe autorizarla"
+
+
+- **Panel Operativo del Día** *(pantalla de inicio tras autenticarse)*
+
+  - Calendario de Reservas
+
+    - Nuevo alquiler
+
+    - Detalle / editar alquiler
+
+    - Bloquear franja (mantenimiento)
+
+  - Clientes
+
+    - Ficha de cliente (historial)
+
+  - Canchas
+
+    - Editar cancha (precio, disciplina)
+
+  - Pagos
+
+    - Registrar pago (asociado a un alquiler existente)
+
+  - Solicitudes de acceso *(visible solo para el administrador dueño)*
+
+    - Autorizar / rechazar solicitud pendiente
+
+  - Cerrar sesión
+
+<br>
+
+**Criterios de organización:**
+
+- **Panel como home:** siguiendo US17–US19, lo primero que ve un administrador al iniciar sesión es el resumen del día, no un menú vacío — reduce clics para la tarea más frecuente.
+
+- **Registro separado del login:** a diferencia del login, el registro de una nueva cuenta de administrador es un flujo público (sin sesión previa) pero no da acceso inmediato — queda en estado pendiente hasta que el administrador dueño la autorice desde "Solicitudes de acceso", evitando que cualquiera con el link se autoasigne acceso al negocio.
+
+- **"Solicitudes de acceso" es visible solo para el dueño:** es la única sección de la navegación con visibilidad condicionada al tipo de cuenta — el resto de pantallas se ve igual para ambos administradores.
+
+- **Pagos no es una sección aislada:** un pago siempre se registra desde el contexto de un alquiler específico (coherente con el subdominio Pagos dependiendo de Reservas), evitando que el administrador tenga que buscar manualmente a qué alquiler corresponde un pago.
+
+- **Clientes y Canchas son configuración de apoyo:** se accede a ellas con menor frecuencia que al calendario, por lo que quedan un nivel más profundo en la navegación en vez de competir por espacio con el calendario en la barra principal.
+
+- **Sin nivel de "cliente final":** no existe ninguna rama de navegación para clientes externos, reforzando el alcance de la Propuesta 1 — el correo de confirmación es un efecto secundario del registro de un alquiler, no una pantalla propia del cliente.
+
+<br>
+
+## 3.2. Wireframes y Mockups
+
+## Wireframes 
+
+>*Los wireframes representan la estructura base del diseño de la aplicación, permitiendo definir la organización de contenidos, la jerarquía visual y el flujo de navegación antes del diseño visual final. Se desarrollaron versiones para escritorio (desktop web browser) y dispositivos móviles (mobile web browser):*
+
+
+<br>
+<div align="center">
+
+**Desktop Web Browser**
+
+<br>
+
+![Login](mockup-login.png)
+ 
+<br>
+
+![Panel del día](mockup-panel.png)
+
+<br>
+
+![Calendario de disponibilidad](mockup-calendario.png)
+ 
+<br>
+
+![Ficha de cliente](mockup-cliente.png)
+
+<br>
+
+![Ficha de cancha](mockup-cancha.png)
+
+<br>
+
+![Registro de pago](mockup-pago.png)
+
+<br>
+
+**Mobile Web Browser**
+
+<br>
+
+![Login](mockup-login.png)
+ 
+<br>
+
+![Panel del día](mockup-panel.png)
+
+<br>
+
+![Calendario de disponibilidad](mockup-calendario.png)
+ 
+<br>
+
+![Ficha de cliente](mockup-cliente.png)
+
+<br>
+
+![Ficha de cancha](mockup-cancha.png)
+
+<br>
+
+![Registro de pago](mockup-pago.png)
+
+
+</div>
+
+## Mockups
+
+> *Los mock-ups representan la versión visual final de la aplicación, incorporando los elementos definidos en el Design System, como la paleta de colores, la tipografía, la iconografía y los estilos de componentes.*
+
+
+<br>
+<div align="center">
+
+**Desktop Web Browser**
+
+![Mockup Desktop](brandradar-report/assets/ux-design/landing-page/mockups/landingmockup-desktop.png)
+
+<br>
+
+**Mobile Web Browser**
+
+![Mockup Mobile](brandradar-report/assets/ux-design/landing-page/mockups/landingmockup-mobile.png)
+
+</div>
+
+<br>
+
+ 
+<br>
+
 ## 3.3. Prototipo en Figma
-Link al prototipo navegable en Figma + capturas de las pantallas de alta fidelidad, cubriendo el flujo completo de: crear alquiler → asignar cliente → registrar pago → ver panel.
+
+Los mockups son el punto de partida del prototipo, en el cual se importan las pantallas, y como se conectan con el flujo de navegación.
+
+<br>
+
+*Link al prototipo navegable:*
+
+<br>
+
+## 3.4. Style Guideline
+
+### 3.4.1. General Style Guidelines
+
+Lineamientos de identidad visual, independientes de la plataforma técnica.
  
-## 3.4. Guía de Estilos
-Paleta de colores, tipografía, componentes base (botones, inputs, tarjetas), adaptados para uso responsive/PWA.
+- **Personalidad de marca:** funcional y de confianza, no "startup". "La Canchita de Carlos" es una herramienta de trabajo diario para un administrador, no un producto de consumo masivo — la identidad debe transmitir orden y claridad antes que estética llamativa.
+
+- **Paleta de marca (definida por Carlos):** azul, celeste y blanco — usados en header, navegación, botones principales e identidad visual general de la app.
+
+- **Paleta funcional (independiente de la marca):** verde (acción positiva — disponible, pagado), ámbar (alerta suave — pendiente, bloqueado), rojo (conflicto — ocupado, doble reserva rechazada). Se mantienen estos 3 colores semánticos aunque la marca sea azul, porque el código verde/ámbar/rojo es el que permite leer el estado de una cancha de un vistazo (RF06, RNF03); reemplazarlos por tonos de azul obligaría a leer texto en vez de color, más lento para el uso real del negocio.
+
+- **Tono de contenido:** directo y en español neutro/peruano informal ("Cancha ocupada" en vez de "Lo sentimos, esta cancha no está disponible en este momento"), porque el usuario opera bajo presión (cliente esperando respuesta al teléfono).
+
+- **Logo/marca:** definido — wordmark + isotipo, ver detalle completo abajo.
+
+<br>
+
+## Logo — concepto y estilo
+
+La identidad transmite cercanía, deporte, confianza y dinamismo. No representa un deporte específico, sino un espacio donde cualquier disciplina puede practicarse (coherente con el catálogo de canchas administrable de RF11: vóley, fútbol, básquet u otras).
  
+ <img src="assets/styles/logo.png" alt="Logo La Canchita de Carlos" width="300"/>
+
+<br>
+
+**Tipo:** Wordmark + isotipo.
+
+- **Personalidad:** amigable, moderna, deportiva y accesible.
+
+- **Estilo visual:** minimalista con detalles ilustrados; inspirado en canchas deportivas, movimiento y comunidad.
+
+**Tipografía del logo**
+
+- "La Canchita": **Lobster Two Bold** (tipografía Brush Script caligráfica).
+
+- "de Carlos": **Kaushan Script** o **Pacifico**.
+
+- Alternativas de la misma familia visual si se necesita variar: Bukhari Script, Brusher, Milkshake (de pago).
+
+<br>
+
+## Isotipo
+
+Representa una cancha deportiva de forma abstracta: líneas redondeadas, sin balón, sin porterías, sin deporte específico — formas simples, grosor uniforme, escalable desde 32 px.
+ 
+**Estilo gráfico:** bordes redondeados, trazos suaves, apariencia limpia, sin sombras ni degradados fuertes, colores planos.
+ 
+**Área de seguridad y tamaño mínimo:** espacio libre alrededor del logo equivalente a la altura de la letra "L"; tamaño mínimo 120 px de ancho en digital, 30 mm en impresión.
+ 
+**Versiones del logo:** principal (azul + celeste), monocromático azul, blanco para fondos oscuros, isotipo solo (la cancha) — esta última es la que se usa como ícono de la PWA (favicon/app icon).
+
+<br>
+ 
+### 3.4.2. Web Style Guidelines
+
+Tokens de diseño concretos, implementables directamente en Tailwind CSS.
+
+<br>
+
+## Colors
+ 
+| Token | Uso | Valor referencial |
+|---|---|---|
+| `brand-primary` (azul) | Header, navegación, botones principales, identidad de marca | `#2563EB` |
+| `brand-secondary` (celeste) | Fondos de sección, estados hover/activos, elementos secundarios de marca | `#7DD3FC` |
+| `brand-base` (blanco) | Fondo general de la app, tarjetas | `#FFFFFF` |
+| `success` (verde) | Estado funcional "disponible"/"pagado" — independiente de la marca | `#16A34A` |
+| `warning` (ámbar) | Estado funcional "pendiente"/"bloqueado" | `#D97706` |
+| `danger` (rojo) | Estado funcional "ocupado"/conflicto, acciones destructivas (cancelar) | `#DC2626` |
+| `neutral-900` a `neutral-50` | Texto y fondos, escala de grises de Tailwind | `slate` (Tailwind default) |
+
+<br>
+
+<img src="assets/styles/primary-colors.png" alt="Primary Colors" width="400"/>
+
+<img src="assets/styles/functional-colors.png" alt="Functional Colors" width="400"/>
+
+<img src="assets/styles/neutral-colors.png" alt="Neutral Colors" width="400"/>
+<br>
+
+## Tipography
+
+Sistema de dos niveles, para que la interfaz se sienta alineada a la marca (3.4.1) sin sacrificar legibilidad en una app con mucho texto denso (tablas, badges, montos):
+ 
+- **`font-display` (Lobster Two, peso Bold — la misma tipografía del logo, 3.4.1):** reservada a textos grandes de marca, ≥24px: título de bienvenida en el login ("La Canchita de Carlos"), saludo del panel ("Hoy, sábado 11 de julio"). A ese tamaño el trazo caligráfico se lee bien y refuerza la identidad de marca en cada apertura de la app.
+
+- **`font-sans` (Outfit, pesos 400/500/600/700):** para todo lo demás — formularios, tablas, badges de estado, montos, metadatos, nombres de sección y cualquier texto bajo 24px. Geométrica y redondeada, combina bien con el isotipo del logo (también de líneas redondeadas) y se ve más cuidada que una fuente de sistema genérica, sin perder legibilidad en tamaños chicos. Un script cursivo en un badge de 12px o un monto en soles sí se volvería difícil de leer rápido, y en esta app la lectura rápida del estado de una cancha no es negociable.
+
+- Lobster Two y Outfit están disponibles en Google Fonts (gratuitas). Lobster Two se carga en un solo peso (Bold) y Outfit en 4 pesos — ambas de uso puntual/acotado, así que el impacto en RNF05 sigue siendo mínimo.
+
+- Escala reducida a 4 tamaños: `text-xl` (títulos de sección, en `font-display`), `text-base` (contenido, `font-sans`), `text-sm` (metadatos: fecha, estado), `text-xs` (etiquetas). Suficiente para una app de gestión, sin necesidad de una escala tipográfica extensa.
+
+<br>
+
+<img src="assets/styles/bodytype.png" alt="Styles La Canchita de Carlos" width="400"/>
+
+<br>
+
+## Componentes base (Tailwind + shadcn/ui si se requiere velocidad)
+
+- Botones: `primary` (azul, acción principal — marca), `outline` (celeste/borde, secundaria), `destructive` (rojo, cancelar/eliminar) — 3 variantes son suficientes para el catálogo de acciones del sistema.
+
+- Tarjeta de franja horaria: estado visual mediante color de fondo (libre/ocupada/bloqueada), sin depender solo de texto — accesible también para lectura rápida en pantallas pequeñas.
+
+- Inputs: altura mínima de 44px (estándar táctil), dado que el uso principal es desde celular.
+
+- Layout: mobile-first con breakpoint único a `md:` (768px) para la vista de escritorio — no se justifican breakpoints intermedios para 2 usuarios y un catálogo de pantallas pequeño.
+
+<br>
+
+<img src="assets/styles/typography.png" alt="Styles La Canchita de Carlos" width="600"/>
+
+<br>
+
 ---
  
 # Capítulo IV: Arquitectura de Software (Domain-Driven Design)
  
 ## 4.0. Patrón de Arquitectura
+
 El sistema combina dos niveles de arquitectura, uno de despliegue y otro de organización interna del código:
  
 **Nivel de despliegue — Arquitectura de tres capas:**

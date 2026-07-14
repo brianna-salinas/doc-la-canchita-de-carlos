@@ -184,7 +184,7 @@ No existe un rol de "cliente" dentro del sistema en esta fase los clientes de Ca
  
 ## 2.1. Requisitos Funcionales (RF)
 
-Requisitos derivados del alcance definido en 1.2, agrupados por módulo (bounded context), con prioridad asignada según su criticidad para resolver el problema central del negocio: la doble reserva y la falta de visibilidad de ingresos.
+Requisitos derivados del alcance definido , agrupados por módulo (bounded context), con prioridad asignada según su criticidad para resolver el problema central del negocio: la doble reserva y la falta de visibilidad de ingresos.
 
 <br>
 
@@ -207,15 +207,17 @@ Requisitos derivados del alcance definido en 1.2, agrupados por módulo (bounded
 | RF06 | El sistema debe impedir el registro de un nuevo alquiler si la cancha ya tiene un alquiler activo en el mismo horario (regla central del negocio). | Alta — crítica |
 | RF07 | El sistema debe permitir bloquear manualmente un horario de una cancha por motivo de mantenimiento, excluyéndolo de la disponibilidad. | Media |
 | RF08 | El sistema debe mantener un historial de alquileres, con filtros por fecha, cancha, cliente y estado. | Media |
-
+| RF26 | Si el cliente de un alquiler no existe aún en el sistema, el formulario de registro de alquiler debe permitir crearlo ahí mismo (nombre, contacto) sin salir de la pantalla, y usarlo de inmediato para el alquiler. | Media |
+ 
 <br>
 
 **Módulo: Gestión de clientes**
  
 | ID | Descripción | Prioridad |
 |---|---|---|
-| RF09 | El sistema debe permitir registrar, editar y eliminar clientes (nombre, contacto). | Media |
+| RF09 | El sistema debe permitir registrar, editar y eliminar clientes (nombre, contacto, correo opcional). | Media |
 | RF10 | El sistema debe mostrar el historial básico de alquileres asociado a cada cliente. | Baja |
+| RF30 | El sistema debe permitir registrar el número de WhatsApp del cliente y ofrecer un acceso directo (abrir chat de WhatsApp) desde su ficha o desde el detalle de un alquiler. | Media |
 
 <br>
 
@@ -223,9 +225,10 @@ Requisitos derivados del alcance definido en 1.2, agrupados por módulo (bounded
  
 | ID | Descripción | Prioridad |
 |---|---|---|
-| RF11 | El sistema debe permitir dar de alta y editar las 5 canchas (nombre, disciplina: vóley/fútbol/básquet). | Alta |
+| RF11 | El sistema debe permitir dar de alta, editar y dar de baja canchas (nombre, disciplina: vóley/fútbol/básquet). El catálogo actual tiene 5, pero el sistema no debe asumir ese número como fijo — Carlos puede agregar o retirar canchas sin soporte técnico. | Alta |
 | RF12 | El sistema debe permitir configurar el precio por cancha, y opcionalmente por franja horaria. | Media |
 | RF13 | El sistema debe mostrar una vista general de disponibilidad consolidada de todas las canchas. | Alta |
+| RF31 | El sistema debe permitir adjuntar una o más fotos a cada cancha, para identificarla visualmente al momento de alquilar. | Media |
 
 <br>
 
@@ -236,6 +239,7 @@ Requisitos derivados del alcance definido en 1.2, agrupados por módulo (bounded
 | RF14 | El sistema debe permitir registrar el estado de pago de un alquiler (pagado / pendiente). | Alta |
 | RF15 | El sistema debe permitir registrar pagos parciales, indicando el monto abonado y el saldo restante. | Media |
 | RF16 | El sistema debe permitir registrar el método de pago utilizado (efectivo, Yape, u otro). | Baja |
+| RF25 | El sistema debe permitir adjuntar una imagen de comprobante (captura de Yape, foto de voucher, etc.) al registrar un pago total o parcial. | Media |
 
 <br>
 
@@ -249,9 +253,38 @@ Requisitos derivados del alcance definido en 1.2, agrupados por módulo (bounded
 
 <br>
 
+**Módulo: Registro y autorización de administradores** 
+ 
+| ID | Descripción | Prioridad |
+|---|---|---|
+| RF20 | El sistema debe permitir que una persona registre una solicitud de cuenta de administrador (nombre, correo), quedando en estado pendiente sin acceso al sistema. | Media |
+| RF21 | El sistema debe permitir que únicamente el administrador dueño (1.4) visualice, autorice o rechace solicitudes de cuenta pendientes. | Media |
+| RF22 | El sistema debe notificar (correo simple) al solicitante si su cuenta fue autorizada o rechazada. | Baja |
+
+<br>
+
+**Módulo: Confirmación por correo**
+ 
+| ID | Descripción | Prioridad |
+|---|---|---|
+| RF23 | El sistema debe enviar automáticamente un correo de confirmación al cliente cuando se registra un `Booking`, siempre que el cliente tenga un correo registrado (RF09). | Media |
+| RF24 | Si el envío de correo falla, el sistema no debe bloquear ni revertir el registro del `Booking` — el correo es una notificación adicional, no una condición del negocio. | Media |
+| RF27 | El sistema debe permitir que el administrador dueño vea el listado de cuentas de administrador activas (no solo las pendientes de autorizar). | Baja |
+
+<br>
+
+**Módulo: Ajustes de cuenta** 
+ 
+| ID | Descripción | Prioridad |
+|---|---|---|
+| RF28 | El sistema debe permitir que un administrador autenticado actualice su propio correo. | Baja |
+| RF29 | El sistema debe permitir que un administrador autenticado cambie su propia contraseña, solicitando la contraseña actual como verificación. | Media |
+
+<br>
+
 ## 2.2. Requisitos No Funcionales (RNF)
 
-Requisitos de calidad del sistema, con criterio medible cuando aplica, alineados a la infraestructura definida en 4.6/4.7 (Vercel, Render, Neon).
+Requisitos de calidad del sistema, con criterio medible cuando aplica, alineados a la infraestructura definida en la documentación.
 
 <br>
 
@@ -1066,14 +1099,33 @@ Este mapa es el que después se traduce, a nivel de código, en los "anillos" de
 <br>
  
 ## 4.6. Arquitectura en la Nube (PWA)
-**Stack definido para este proyecto:**
- 
 
+ 
+**Stack definido para este proyecto:**
+
+<br>
+ 
+| Capa | Tecnología | Motivo |
+|---|---|---|
+| Frontend | React + Vite + TypeScript + `vite-plugin-pwa` + Tailwind CSS | Ya dominado, build rápido, soporte PWA (manifest + service worker) de fábrica. TypeScript comparte tipos con el backend (vía Prisma) para detectar errores antes de producción. |
+| Estado / datos | React Query (o similar) + React Router | Manejo simple de llamadas a la API y cacheo, sin over-engineering. |
+| Backend | Node.js + Express + TypeScript | Stack que ya manejas: mayor velocidad de desarrollo en 2 semanas frente a aprender NestJS o Firebase desde cero. |
+| ORM | Prisma | Migraciones automáticas y modelos tipados, acelera el diseño de BD del Capítulo VI. |
+| Base de datos | PostgreSQL gestionado (Neon o Supabase, plan gratuito) | Relacional, soporta transacciones/constraints para evitar doble reserva (clave para RF06). |
+| Autenticación | JWT + bcrypt implementado en Express | Solo 2 usuarios administradores; no se justifica un proveedor de auth externo todavía. |
+| Hosting Frontend | Render (Static Site, plan gratuito) | Build de Vite servido con CDN y HTTPS incluidos, en el mismo proveedor y dashboard que el backend — evita administrar una cuenta/proveedor adicional (Vercel/Netlify) con el plazo de 2 semanas y 1 sola desarrolladora. |
+| Hosting Backend | Render (Web Service, plan Starter, de pago, ~US$7/mes) | Despliegue simple de un servicio Node/Express, variables de entorno fáciles de configurar. El plan de pago evita el "cold start" del plan gratuito (que suspende el servicio tras inactividad) — importante porque la app se usa a diario en horario de alquiler. |
+| Repositorio | GitHub | Integración directa con Render para despliegue continuo de ambos servicios (Static Site + Web Service). |
+| Envío de correo | Resend (plan gratuito) | API simple desde Node/Express, plan gratuito con volumen muy por encima de lo que este negocio necesita (RF23–RF24); evita configurar SMTP manualmente. |
+| Almacenamiento de archivos | Supabase Storage (plan gratuito) | Guarda las imágenes de comprobante de pago (RF25) fuera de la base de datos relacional (evita guardar binarios pesados en Postgres); plan gratuito suficiente para el volumen de este negocio. |
+
+<br>
 
  
 ## 4.7. Análisis Técnico-Económico de la Infraestructura
 
-
+<br>
+ 
  
 ---
  

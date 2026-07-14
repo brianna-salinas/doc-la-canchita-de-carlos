@@ -549,7 +549,123 @@ Estructura de navegación derivada directamente de los Epics y priorizada según
 
 <br>
 
-## 3.2. Wireframes y Mockups
+## 3.2. Style Guideline
+
+### 3.2.1. General Style Guidelines
+
+Lineamientos de identidad visual, independientes de la plataforma técnica.
+ 
+- **Personalidad de marca:** funcional y de confianza, no "startup". "La Canchita de Carlos" es una herramienta de trabajo diario para un administrador, no un producto de consumo masivo — la identidad debe transmitir orden y claridad antes que estética llamativa.
+
+- **Paleta de marca (definida por Carlos):** azul, celeste y blanco — usados en header, navegación, botones principales e identidad visual general de la app.
+
+- **Paleta funcional (independiente de la marca):** verde (acción positiva — disponible, pagado), ámbar (alerta suave — pendiente, bloqueado), rojo (conflicto — ocupado, doble reserva rechazada). Se mantienen estos 3 colores semánticos aunque la marca sea azul, porque el código verde/ámbar/rojo es el que permite leer el estado de una cancha de un vistazo (RF06, RNF03); reemplazarlos por tonos de azul obligaría a leer texto en vez de color, más lento para el uso real del negocio.
+
+- **Tono de contenido:** directo y en español neutro/peruano informal ("Cancha ocupada" en vez de "Lo sentimos, esta cancha no está disponible en este momento"), porque el usuario opera bajo presión (cliente esperando respuesta al teléfono).
+
+- **Logo/marca:** definido — wordmark + isotipo, ver detalle completo abajo.
+
+<br>
+
+## Logo — concepto y estilo
+
+La identidad transmite cercanía, deporte, confianza y dinamismo. No representa un deporte específico, sino un espacio donde cualquier disciplina puede practicarse (coherente con el catálogo de canchas administrable de RF11: vóley, fútbol, básquet u otras).
+ 
+ <img src="assets/styles/logo.png" alt="Logo La Canchita de Carlos" width="300"/>
+
+<br>
+
+**Tipo:** Wordmark + isotipo.
+
+- **Personalidad:** amigable, moderna, deportiva y accesible.
+
+- **Estilo visual:** minimalista con detalles ilustrados; inspirado en canchas deportivas, movimiento y comunidad.
+
+**Tipografía del logo**
+
+- "La Canchita": **Lobster Two Bold** (tipografía Brush Script caligráfica).
+
+- "de Carlos": **Kaushan Script** o **Pacifico**.
+
+- Alternativas de la misma familia visual si se necesita variar: Bukhari Script, Brusher, Milkshake (de pago).
+
+<br>
+
+## Isotipo
+
+Representa una cancha deportiva de forma abstracta: líneas redondeadas, sin balón, sin porterías, sin deporte específico — formas simples, grosor uniforme, escalable desde 32 px.
+ 
+**Estilo gráfico:** bordes redondeados, trazos suaves, apariencia limpia, sin sombras ni degradados fuertes, colores planos.
+ 
+**Área de seguridad y tamaño mínimo:** espacio libre alrededor del logo equivalente a la altura de la letra "L"; tamaño mínimo 120 px de ancho en digital, 30 mm en impresión.
+ 
+**Versiones del logo:** principal (azul + celeste), monocromático azul, blanco para fondos oscuros, isotipo solo (la cancha) — esta última es la que se usa como ícono de la PWA (favicon/app icon).
+
+<br>
+ 
+### 3.2.2. Web Style Guidelines
+
+Tokens de diseño concretos, implementables directamente en Tailwind CSS.
+
+<br>
+
+## Colors
+ 
+| Token | Uso | Valor referencial |
+|---|---|---|
+| `brand-primary` (azul) | Header, navegación, botones principales, identidad de marca | `#2563EB` |
+| `brand-secondary` (celeste) | Fondos de sección, estados hover/activos, elementos secundarios de marca | `#7DD3FC` |
+| `brand-base` (blanco) | Fondo general de la app, tarjetas | `#FFFFFF` |
+| `success` (verde) | Estado funcional "disponible"/"pagado" — independiente de la marca | `#16A34A` |
+| `warning` (ámbar) | Estado funcional "pendiente"/"bloqueado" | `#D97706` |
+| `danger` (rojo) | Estado funcional "ocupado"/conflicto, acciones destructivas (cancelar) | `#DC2626` |
+| `neutral-900` a `neutral-50` | Texto y fondos, escala de grises de Tailwind | `slate` (Tailwind default) |
+
+<br>
+
+<img src="assets/styles/primary-colors.png" alt="Primary Colors" width="200"/>
+
+<img src="assets/styles/functional-colors.png" alt="Functional Colors" width="200"/>
+
+<img src="assets/styles/neutral-colors.png" alt="Neutral Colors" width="200"/>
+
+<br>
+
+## Tipography
+
+Sistema de dos niveles, para que la interfaz se sienta alineada a la marca (3.4.1) sin sacrificar legibilidad en una app con mucho texto denso (tablas, badges, montos):
+ 
+- **`font-display` (Lobster Two, peso Bold — la misma tipografía del logo, 3.4.1):** reservada a textos grandes de marca, ≥24px: título de bienvenida en el login ("La Canchita de Carlos"), saludo del panel ("Hoy, sábado 11 de julio"). A ese tamaño el trazo caligráfico se lee bien y refuerza la identidad de marca en cada apertura de la app.
+
+- **`font-sans` (Outfit, pesos 400/500/600/700):** para todo lo demás — formularios, tablas, badges de estado, montos, metadatos, nombres de sección y cualquier texto bajo 24px. Geométrica y redondeada, combina bien con el isotipo del logo (también de líneas redondeadas) y se ve más cuidada que una fuente de sistema genérica, sin perder legibilidad en tamaños chicos. Un script cursivo en un badge de 12px o un monto en soles sí se volvería difícil de leer rápido, y en esta app la lectura rápida del estado de una cancha no es negociable.
+
+- Lobster Two y Outfit están disponibles en Google Fonts (gratuitas). Lobster Two se carga en un solo peso (Bold) y Outfit en 4 pesos — ambas de uso puntual/acotado, así que el impacto en RNF05 sigue siendo mínimo.
+
+- Escala reducida a 4 tamaños: `text-xl` (títulos de sección, en `font-display`), `text-base` (contenido, `font-sans`), `text-sm` (metadatos: fecha, estado), `text-xs` (etiquetas). Suficiente para una app de gestión, sin necesidad de una escala tipográfica extensa.
+
+<br>
+
+<img src="assets/styles/bodytype.png" alt="Styles La Canchita de Carlos" width="400"/>
+
+<br>
+
+## Componentes base (Tailwind + shadcn/ui si se requiere velocidad)
+
+- Botones: `primary` (azul, acción principal — marca), `outline` (celeste/borde, secundaria), `destructive` (rojo, cancelar/eliminar) — 3 variantes son suficientes para el catálogo de acciones del sistema.
+
+- Tarjeta de franja horaria: estado visual mediante color de fondo (libre/ocupada/bloqueada), sin depender solo de texto — accesible también para lectura rápida en pantallas pequeñas.
+
+- Inputs: altura mínima de 44px (estándar táctil), dado que el uso principal es desde celular.
+
+- Layout: mobile-first con breakpoint único a `md:` (768px) para la vista de escritorio — no se justifican breakpoints intermedios para 2 usuarios y un catálogo de pantallas pequeño.
+
+<br>
+
+<img src="assets/styles/typography.png" alt="Styles La Canchita de Carlos" width="600"/>
+
+<br>
+
+## 3.3. Wireframes y Mockups
 
 ## Wireframes 
 
@@ -638,133 +754,42 @@ Estructura de navegación derivada directamente de los Epics y priorizada según
 
 <br>
 
- 
-<br>
-
-## 3.3. Prototipo en Figma
-
-Los mockups son el punto de partida del prototipo, en el cual se importan las pantallas, y como se conectan con el flujo de navegación.
+### 3.3.1. Web Applications User Flow Diagrams
 
 <br>
 
-*Link al prototipo navegable:*
+## 3.4. Prototipo en Figma
+
+En esta sección se presenta el prototipo interactivo de la aplicación web de *La Canchita de Carlos*, desarrollado en Figma a partir de los mockups de alta fidelidad definidos previamente. El prototipo permite simular la navegación e interacción entre los distintos módulos y bounded contexts de la plataforma, tanto en versiones Desktop como Mobile Web.
 
 <br>
 
-## 3.4. Style Guideline
+<div align="center">
 
-### 3.4.1. General Style Guidelines
+**Desktop Prototyping**
 
-Lineamientos de identidad visual, independientes de la plataforma técnica.
- 
-- **Personalidad de marca:** funcional y de confianza, no "startup". "La Canchita de Carlos" es una herramienta de trabajo diario para un administrador, no un producto de consumo masivo — la identidad debe transmitir orden y claridad antes que estética llamativa.
+![Desktop Video Prototype](brandradar-report/assets/ux-design/desktop-prototyping.png)
 
-- **Paleta de marca (definida por Carlos):** azul, celeste y blanco — usados en header, navegación, botones principales e identidad visual general de la app.
-
-- **Paleta funcional (independiente de la marca):** verde (acción positiva — disponible, pagado), ámbar (alerta suave — pendiente, bloqueado), rojo (conflicto — ocupado, doble reserva rechazada). Se mantienen estos 3 colores semánticos aunque la marca sea azul, porque el código verde/ámbar/rojo es el que permite leer el estado de una cancha de un vistazo (RF06, RNF03); reemplazarlos por tonos de azul obligaría a leer texto en vez de color, más lento para el uso real del negocio.
-
-- **Tono de contenido:** directo y en español neutro/peruano informal ("Cancha ocupada" en vez de "Lo sentimos, esta cancha no está disponible en este momento"), porque el usuario opera bajo presión (cliente esperando respuesta al teléfono).
-
-- **Logo/marca:** definido — wordmark + isotipo, ver detalle completo abajo.
+[Ver video de prototipo Desktop](https://)
 
 <br>
 
-## Logo — concepto y estilo
+**Mobile Prototyping**
 
-La identidad transmite cercanía, deporte, confianza y dinamismo. No representa un deporte específico, sino un espacio donde cualquier disciplina puede practicarse (coherente con el catálogo de canchas administrable de RF11: vóley, fútbol, básquet u otras).
- 
- <img src="assets/styles/logo.png" alt="Logo La Canchita de Carlos" width="300"/>
+![Mobile Video Prototype](brandradar-report/assets/ux-design/mobile-prototyping.png)
 
-<br>
+[Ver video de prototipo Mobile](https://)
 
-**Tipo:** Wordmark + isotipo.
+</div>
 
-- **Personalidad:** amigable, moderna, deportiva y accesible.
-
-- **Estilo visual:** minimalista con detalles ilustrados; inspirado en canchas deportivas, movimiento y comunidad.
-
-**Tipografía del logo**
-
-- "La Canchita": **Lobster Two Bold** (tipografía Brush Script caligráfica).
-
-- "de Carlos": **Kaushan Script** o **Pacifico**.
-
-- Alternativas de la misma familia visual si se necesita variar: Bukhari Script, Brusher, Milkshake (de pago).
 
 <br>
 
-## Isotipo
-
-Representa una cancha deportiva de forma abstracta: líneas redondeadas, sin balón, sin porterías, sin deporte específico — formas simples, grosor uniforme, escalable desde 32 px.
- 
-**Estilo gráfico:** bordes redondeados, trazos suaves, apariencia limpia, sin sombras ni degradados fuertes, colores planos.
- 
-**Área de seguridad y tamaño mínimo:** espacio libre alrededor del logo equivalente a la altura de la letra "L"; tamaño mínimo 120 px de ancho en digital, 30 mm en impresión.
- 
-**Versiones del logo:** principal (azul + celeste), monocromático azul, blanco para fondos oscuros, isotipo solo (la cancha) — esta última es la que se usa como ícono de la PWA (favicon/app icon).
-
-<br>
- 
-### 3.4.2. Web Style Guidelines
-
-Tokens de diseño concretos, implementables directamente en Tailwind CSS.
+*Link al prototipo navegable:* https://www.figma.com/site/iprLtSv1JAy2xLH9kklVbt/La-Canchita-de-Carlos?node-id=0-1&t=Z97IFu36y9xYDgxy-1
 
 <br>
 
-## Colors
- 
-| Token | Uso | Valor referencial |
-|---|---|---|
-| `brand-primary` (azul) | Header, navegación, botones principales, identidad de marca | `#2563EB` |
-| `brand-secondary` (celeste) | Fondos de sección, estados hover/activos, elementos secundarios de marca | `#7DD3FC` |
-| `brand-base` (blanco) | Fondo general de la app, tarjetas | `#FFFFFF` |
-| `success` (verde) | Estado funcional "disponible"/"pagado" — independiente de la marca | `#16A34A` |
-| `warning` (ámbar) | Estado funcional "pendiente"/"bloqueado" | `#D97706` |
-| `danger` (rojo) | Estado funcional "ocupado"/conflicto, acciones destructivas (cancelar) | `#DC2626` |
-| `neutral-900` a `neutral-50` | Texto y fondos, escala de grises de Tailwind | `slate` (Tailwind default) |
 
-<br>
-
-<img src="assets/styles/primary-colors.png" alt="Primary Colors" width="400"/>
-
-<img src="assets/styles/functional-colors.png" alt="Functional Colors" width="400"/>
-
-<img src="assets/styles/neutral-colors.png" alt="Neutral Colors" width="400"/>
-<br>
-
-## Tipography
-
-Sistema de dos niveles, para que la interfaz se sienta alineada a la marca (3.4.1) sin sacrificar legibilidad en una app con mucho texto denso (tablas, badges, montos):
- 
-- **`font-display` (Lobster Two, peso Bold — la misma tipografía del logo, 3.4.1):** reservada a textos grandes de marca, ≥24px: título de bienvenida en el login ("La Canchita de Carlos"), saludo del panel ("Hoy, sábado 11 de julio"). A ese tamaño el trazo caligráfico se lee bien y refuerza la identidad de marca en cada apertura de la app.
-
-- **`font-sans` (Outfit, pesos 400/500/600/700):** para todo lo demás — formularios, tablas, badges de estado, montos, metadatos, nombres de sección y cualquier texto bajo 24px. Geométrica y redondeada, combina bien con el isotipo del logo (también de líneas redondeadas) y se ve más cuidada que una fuente de sistema genérica, sin perder legibilidad en tamaños chicos. Un script cursivo en un badge de 12px o un monto en soles sí se volvería difícil de leer rápido, y en esta app la lectura rápida del estado de una cancha no es negociable.
-
-- Lobster Two y Outfit están disponibles en Google Fonts (gratuitas). Lobster Two se carga en un solo peso (Bold) y Outfit en 4 pesos — ambas de uso puntual/acotado, así que el impacto en RNF05 sigue siendo mínimo.
-
-- Escala reducida a 4 tamaños: `text-xl` (títulos de sección, en `font-display`), `text-base` (contenido, `font-sans`), `text-sm` (metadatos: fecha, estado), `text-xs` (etiquetas). Suficiente para una app de gestión, sin necesidad de una escala tipográfica extensa.
-
-<br>
-
-<img src="assets/styles/bodytype.png" alt="Styles La Canchita de Carlos" width="400"/>
-
-<br>
-
-## Componentes base (Tailwind + shadcn/ui si se requiere velocidad)
-
-- Botones: `primary` (azul, acción principal — marca), `outline` (celeste/borde, secundaria), `destructive` (rojo, cancelar/eliminar) — 3 variantes son suficientes para el catálogo de acciones del sistema.
-
-- Tarjeta de franja horaria: estado visual mediante color de fondo (libre/ocupada/bloqueada), sin depender solo de texto — accesible también para lectura rápida en pantallas pequeñas.
-
-- Inputs: altura mínima de 44px (estándar táctil), dado que el uso principal es desde celular.
-
-- Layout: mobile-first con breakpoint único a `md:` (768px) para la vista de escritorio — no se justifican breakpoints intermedios para 2 usuarios y un catálogo de pantallas pequeño.
-
-<br>
-
-<img src="assets/styles/typography.png" alt="Styles La Canchita de Carlos" width="600"/>
-
-<br>
 
 ---
  
@@ -773,99 +798,292 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca (3.4.
 ## 4.0. Patrón de Arquitectura
 
 El sistema combina dos niveles de arquitectura, uno de despliegue y otro de organización interna del código:
- 
-**Nivel de despliegue — Arquitectura de tres capas:**
+
+## Arquitectura de tres capas:
+
 - **Presentación:** PWA en React (lo que el administrador ve y usa).
+
 - **Aplicación:** API en Node.js/Express (lógica de negocio y reglas del dominio).
+
 - **Datos:** PostgreSQL (persistencia).
-Se eligió tres capas y no monolito simple ni microservicios: el negocio es pequeño (2 administradores, 5 canchas, sin tráfico masivo), por lo que microservicios agregaría complejidad de despliegue injustificada para el plazo de 2 semanas; y separar en tres capas ya da independencia suficiente entre frontend, backend y base de datos para desplegar y escalar cada una por separado si el negocio crece (ver Propuesta 2).
+
+Se eligió tres capas y no una arquitectura monolitica simple ni microservicios: el negocio es pequeño (2 administradores, 5 canchas, sin tráfico masivo), por lo que microservicios agregaría complejidad de despliegue injustificada para el plazo de 2 semanas; y separar en tres capas ya da independencia suficiente entre frontend, backend y base de datos para desplegar y escalar cada una por separado si el negocio crece.
+
  
-**Nivel de código — Arquitectura Hexagonal (Puertos y Adaptadores) dentro de la capa de Aplicación:**
-El backend no se organiza como un Express típico con todo en controladores, sino en 3 anillos:
+## Arquitectura Hexagonal dentro de la capa de Aplicación:
+
+El backend no se organiza como un framework Express típico con todo en controladores, sino en 3 anillos:
+
 - **Dominio (núcleo):** entidades y reglas de negocio puras de cada bounded context (`Alquiler`, `Cancha`, `Cliente`, `Pago`), sin dependencias de Express, Prisma ni ninguna librería externa.
+
 - **Aplicación (casos de uso):** orquesta el dominio para cumplir una acción concreta (ej. `RegistrarAlquiler`, `CancelarAlquiler`, `RegistrarPago`), define **puertos** (interfaces) que necesita, como `AlquilerRepository`.
+
 - **Infraestructura (adaptadores):** implementaciones concretas de esos puertos — el adaptador de entrada es Express (controladores/rutas que reciben HTTP y llaman a los casos de uso), el adaptador de salida es Prisma/PostgreSQL (implementa `AlquilerRepository` contra la base de datos real).
-**Por qué combinarlas:** la arquitectura de tres capas resuelve *dónde* corre cada cosa (despliegue); la hexagonal resuelve *cómo* se organiza el código *dentro* de la capa de Aplicación, alineado a los bounded contexts definidos en DDD (sección 4.2). La ventaja concreta para este proyecto: la lógica de negocio (ej. "no permitir doble reserva") queda aislada y testeable sin levantar servidor ni base de datos, y si en la Propuesta 2 cambian de Prisma a otro ORM o agregan una pasarela de pagos, solo se reemplaza el adaptador correspondiente sin tocar las reglas de negocio.
+
+<br>
+
+**Por qué combinarlas:** 
+
+La arquitectura de tres capas resuelve *dónde* corre cada cosa (despliegue); la hexagonal resuelve *cómo* se organiza el código *dentro* de la capa de Aplicación, alineado a los bounded contexts definidos en DDD. La ventaja concreta para este proyecto: la lógica de negocio (ej. "no permitir doble reserva") queda aislada y testeable sin levantar servidor ni base de datos, y si en la Propuesta 2 cambian de Prisma a otro ORM o agregan una pasarela de pagos, solo se reemplaza el adaptador correspondiente sin tocar las reglas de negocio.
+
+<br>
+
+**Diagrama de arquitectura de capas**
  
+Al ser una PWA desplegada 100% en servicios cloud administrados (PaaS/Serverless), no hay un servidor físico a mantener: el "Sistema Operativo" y el "Hardware" están abstraídos por el proveedor, pero igual se documentan para que quede explícito sobre qué corre cada capa.
+
+<br>
+
+<img src="assets/arquitectura/diagrama.png" alt="Diagrama de Arquitectura de tres capas" width="650"/>
+
+La matriz cruza las tres capas de la arquitectura de despliegue (Presentación, Aplicación, Datos) contra los tres niveles técnicos que las sostienen (Software, Sistema Operativo, Hardware), mostrando qué corre concretamente en cada intersección:
+
+- **Presentación:** el software es la PWA (React + TypeScript + Vite); el sistema operativo y el hardware son los del dispositivo del administrador — Android o iOS en un celular, o el sistema operativo del laptop/PC desde donde también puede administrarse. No hay servidor propio en esta capa: el navegador del dispositivo interpreta directamente los archivos de la PWA.
+
+- **Aplicación:** el software es la API (Node.js + Express + TypeScript), con Resend integrado para el envío de correos de confirmación. Corre sobre un contenedor Linux (Ubuntu) administrado por Render, que es también el proveedor de hardware/cómputo de esta capa — sin servidor físico propio ni configuración manual del sistema operativo.
+
+- **Datos:** el software es PostgreSQL junto con Prisma como ORM, y Docker como herramienta para levantar una instancia local de Postgres en desarrollo. En producción, corre sobre Linux (Ubuntu) administrado por Supabase, que también actúa como proveedor de hardware/almacenamiento de esta capa.
+
+<br>
+
+**Proyección de crecimiento de datos**
+ 
+Uso diario del sistema no implica los mismos riesgos de escala para la base de datos relacional que para el almacenamiento de imágenes — crecen a ritmos muy distintos:
+ 
+- **Filas en PostgreSQL (`Alquiler`, `Pago`, `Cliente`):** techo teórico de ~60 alquileres/día si las ~5 canchas estuvieran ocupadas 12 horas diarias sin excepción → ~21,900 filas/año → ~219,000 en 10 años. A unos cientos de bytes por fila, esto representa apenas 40-50 MB acumulados en una década, en el escenario más exagerado posible. PostgreSQL maneja sin esfuerzo tablas de millones de filas — la base relacional no es un cuello de botella ni con uso diario sostenido por años.
+
+- **Imágenes (comprobantes de pago, fotos de canchas):** en el mismo escenario de uso intenso, con una imagen de ~300-800 KB por comprobante, el volumen anual ronda los 10-15 GB. Un plan de storage gratuito (usualmente ~1 GB) se quedaría corto en meses, no en años — este es el recurso que realmente hay que vigilar, no la base de datos.
+
+- **Mitigación preventiva (documentada para no volverse un problema en 1-2 años):** índices en `Alquiler` sobre `(canchaId, fecha, hora)` — ya necesarios para prevenir doble reserva y que de paso aceleran las consultas del calendario aunque la tabla crezca; compresión/resize de imágenes en el cliente antes de subir (ej. máx. 1000px de ancho, suficiente para verificar un comprobante); y una eventual política de retención de comprobantes antiguos a definir con Carlos (decisión de negocio, no técnica) si no necesita conservarlos indefinidamente por temas contables.
+
+<br>
+
 ## 4.1. Event Storming (Diseño)
-Eventos de dominio identificados (ej. "Alquiler Registrado", "Alquiler Cancelado", "Pago Registrado", "Horario Bloqueado") y los comandos/actores que los disparan.
  
+Para definir la arquitectura de "La Canchita de Carlos" orientada al dominio (DDD), se realizó un proceso iterativo de Design-Level Event Storming siguiendo la metodología de 10 pasos, tomando como base los flujos operativos reales del negocio (alquiler de canchas, registro de pagos, gestión de clientes y autorización de administradores). A continuación, se detalla la evolución del modelo:
+
+<br>
+
+**Step 1: Unstructured Exploration**
+
+Se identificaron y representaron todos los eventos que modifican el estado del sistema, escritos en tiempo pasado (post-its naranjas): desde `BookingRegistered` y `PaymentRegistered` hasta `RegistrationRequestCreated` y `ConfirmationEmailSent`, entre otros eventos relevantes del dominio.
+ 
+<br>
+
+![Step 1 - Unstructured Exploration](event-storming-step1.png)
+
+<br>
+
+**Step 2: Timelines**
+
+Se ordenaron los eventos de forma cronológica de izquierda a derecha, estableciendo el flujo de vida del negocio: primero el onboarding de administradores (`RegistrationRequestCreated` → `AdminAuthorized`/`AdminRejected`), luego la configuración inicial de canchas (`CourtRegistered` → `CourtPriceUpdated`), y finalmente el ciclo operativo diario (`BookingRegistered`/`BookingEdited`/`BookingCancelled` → `PaymentRegistered`/`PartialPaymentRegistered` → `ConfirmationEmailSent`).
+
+<br>
+
+![Step 2 - Timelines](event-storming-step2.png)
+
+<br>
+
+**Step 3: Hotspots**
+
+Se identificaron los puntos críticos del sistema y riesgos técnicos del negocio (marcados con rombos rojos):
+- Condición de carrera al registrar dos alquileres simultáneos sobre la misma franja horaria (mitigado con constraints a nivel de base de datos, no solo validación en el backend).
+
+- Un fallo en el envío del correo de confirmación (Resend) no debe revertir ni bloquear el `BookingRegistered` ya persistido (RF24).
+- El "cold start" del backend en un plan gratuito podría retrasar la primera acción del día — mitigado eligiendo el plan Starter de pago en Render.
+
+- Crecimiento del almacenamiento de imágenes (comprobantes de pago, fotos de canchas) en el mediano plazo si el negocio crece a más administradores o mayor volumen diario.
+
+<br>
+
+![Step 3 - Hotspots](event-storming-step3.png)
+
+<br>
+
+**Step 4: Pivotal Events**
+
+Se definieron eventos pivote que segmentan el flujo en fases funcionales: `AdminAuthorized` marca el paso de "solicitante" a "administrador operativo"; `CourtRegistered` marca el paso de "negocio sin configurar" a "negocio operativo"; `BookingRegistered` marca el paso de "franja disponible" a "franja ocupada"; y `PaymentRegistered`/`PartialPaymentRegistered` marca el cierre financiero de un alquiler.
+
+<br>
+
+![Step 4 - Pivotal Events](event-storming-step4.png)
+
+<br>
+
+**Step 5: Commands & Actors**
+
+Se definieron los commands (post-its azules) que disparan los eventos, y los actores (íconos amarillos) responsables de ejecutarlos: el **Administrador** (rol operativo estándar), el **Administrador dueño** (único con permiso para autorizar/rechazar nuevos administradores, RF21), el **Solicitante** (sin sesión, antes de ser autorizado) y el propio **sistema** (para eventos de integración como `ConfirmationEmailSent`).
+
+<br>
+
+![Step 5 - Commands & Actors](event-storming-step5.png)
+
+<br>
+
+**Step 6: Policies**
+
+Se incorporaron las business policies (post-its lilas), reglas reactivas que automatizan el comportamiento del sistema:
+
+- Cuando se intenta `RegisterBooking` sobre una franja ya ocupada o bloqueada → se emite `DoubleBookingRejected` en vez de `BookingRegistered`.
+
+- Cuando ocurre `BookingRegistered` y el `Customer` asociado tiene correo registrado → se dispara `ConfirmationEmailSent`, sin revertir el alquiler si el envío falla.
+
+- Cuando ocurre `AdminAuthorized` o `AdminRejected` → se notifica por correo al solicitante.
+
+<br>
+
+![Step 6 - Policies](event-storming-step6.png)
+
+<br>
+
+**Step 7: Read Models**
+
+Se mapearon los read models (post-its verdes), las vistas que el administrador necesita consultar antes de ejecutar un comando: el **Calendario de disponibilidad** (antes de `RegisterBooking`), el **Panel principal** con los alquileres e ingresos del día, el **Historial de cliente** (antes de reutilizar un cliente existente en un nuevo alquiler), y el **Panel de solicitudes de acceso** (solo para el administrador dueño, antes de `AuthorizeAdmin`/`RejectAdmin`).
+
+<br>
+
+![Step 7 - Read Models](event-storming-step7.png)
+
+<br>
+
+**Step 8: External Systems**
+
+Se identificaron los sistemas externos (post-its rosados) que interactúan con el sistema: **Resend** (envío de correos de confirmación), **Supabase Storage** (almacenamiento de imágenes de comprobantes y fotos de canchas, fuera de la base de datos relacional) y **WhatsApp** (acceso directo vía enlace `wa.me` al contacto del cliente, no es una integración de API, solo un enlace externo).
+
+<br>
+ 
+![Step 8 - External Systems](event-storming-step8.png)
+
+<br>
+
+**Step 9: Aggregates**
+
+Se incrementó el nivel de abstracción agrupando comandos y eventos alrededor de las entidades principales del dominio (Aggregates, post-its amarillos grandes): `Booking`, `Court`, `Customer`, `Payment`, `User` y `ScheduleBlock`, cada uno encapsulando la consistencia de sus propias reglas de negocio e invariantes.
+
+<br>
+
+![Step 9 - Aggregates](event-storming-step9.png)
+
+<br>
+
+**Step 10: Bounded Contexts**
+
+Finalmente, se delimitaron los límites semánticos y transaccionales del dominio agrupando los aggregates en bloques coherentes e independientes, consolidando la arquitectura en seis subdominios: **Bookings** (núcleo), **Payments** y **Customers** (soporte), **Identity & Access**, **Infrastructure & Observability** y **Notifications**.
+
+<br>
+ 
+![Step 10 - Bounded Contexts](event-storming-step10.png)
+
+<br>
+
+El proceso de Design-Level Event Storming permitió profundizar en el comportamiento técnico del sistema a partir de los flujos operativos reales del negocio de Carlos. En esta etapa se definieron los límites transaccionales (Bounded Contexts) y se incorporaron elementos de diseño táctico como Comandos, Aggregates y Policies, cuyo detalle tabular se documenta a continuación.
+
+<br>
+
+*Ver tablero interactivo en Miro:*
+
+<br>
+
+### 4.1.1. Tabla de Comandos, Aggregates y Eventos
+
+Eventos de dominio identificados por subdominio, con el comando/actor que los dispara. Estos eventos son la base para los aggregates raíz y para los criterios de aceptación Gherkin de las User Stories.
+
+<br>
+
+| Comando (actor: Administrador) | Aggregate | Evento de dominio | Invariante protegida |
+|---|---|---|---|
+| RegisterBooking | `Booking` | `BookingRegistered` | No puede existir otro `Booking` activo para la misma `Court` + franja horaria. |
+| — (rechazo del comando anterior) | `Booking` | `DoubleBookingRejected` | Se emite en vez de `BookingRegistered` cuando la franja ya está ocupada o bloqueada. |
+| EditBooking | `Booking` | `BookingEdited` | El nuevo horario/cancha tampoco puede colisionar con otro alquiler activo. |
+| CancelBooking | `Booking` | `BookingCancelled` | Libera la franja horaria inmediatamente para nuevas reservas. |
+| BlockSchedule | `ScheduleBlock` | `ScheduleBlocked` | No puede bloquearse una franja con un `Booking` activo. |
+| UnblockSchedule | `ScheduleBlock` | `ScheduleUnblocked` | — |
+| RegisterCourt | `Court` | `CourtRegistered` | Nombre de cancha único dentro del negocio. |
+| UpdateCourtPrice | `Court` | `CourtPriceUpdated` | El precio no puede ser negativo ni cero. |
+| RegisterCustomer | `Customer` | `CustomerRegistered` | — |
+| UpdateCustomer | `Customer` | `CustomerUpdated` | — |
+| RegisterPayment | `Payment` | `PaymentRegistered` | El monto pagado no puede exceder el total del alquiler asociado. |
+| RegisterPartialPayment | `Payment` | `PartialPaymentRegistered` | El saldo pendiente se recalcula y nunca puede ser negativo. |
+| StartSession | `User` | `SessionStarted` | Credenciales inválidas no generan sesión. |
+| CloseSession | `User` | `SessionClosed` | — |
+| RequestAdminRegistration (actor: solicitante, sin sesión) | `User` | `RegistrationRequestCreated` | El `User` se crea en estado `PENDIENTE`, sin acceso al sistema hasta ser autorizado. |
+| AuthorizeAdmin (actor: administrador dueño) | `User` | `AdminAuthorized` | Solo un `User` con rol dueño puede ejecutar este comando (RF21). |
+| RejectAdmin (actor: administrador dueño) | `User` | `AdminRejected` | El `User` rechazado no puede iniciar sesión ni volver a autorizarse sin una nueva solicitud. |
+| — (efecto de `BookingRegistered`) | `Payment`/`Customer` (evento de integración) | `ConfirmationEmailSent` | Solo se dispara si el `Customer` asociado tiene correo registrado (RF23); un fallo de envío no revierte el `Booking` (RF24). |
+ 
+<br>
+
 ## 4.2. Bounded Contexts y Context Map
-Propuesta de bounded contexts, por ejemplo:
-- **Gestión de Reservas** (alquileres, calendario, bloqueos)
-- **Gestión de Clientes**
-- **Gestión de Canchas y Precios**
-- **Gestión de Pagos**
-- **Identidad y Acceso** (usuarios/autenticación)
-Relaciones entre contextos (quién depende de quién, integraciones internas).
+
+<br>
+
+| Subdominio | Tipo | Alcance / entidades | Justificación |
+|---|---|---|---|
+| **Bookings** | Núcleo | `Court`, `Booking`, `ScheduleBlock`, disponibilidad, precios | Es donde vive la regla de negocio crítica (no permitir doble reserva) y la razón de ser del sistema. Aquí no cabe una solución genérica: la lógica de disponibilidad es propia de "La Canchita de Carlos". |
+| **Payments** | Soporte | `Payment`, estado (pagado/pendiente/parcial), método de pago, asociado a un `Booking` | Necesario para el negocio y con reglas propias (pagos parciales), pero no es el diferenciador del sistema; podría evolucionar de forma relativamente independiente (ej. integrarse con una pasarela en la Propuesta 2) sin afectar la lógica de Bookings. |
+| **Customers** | Soporte | `Customer`, historial básico de alquileres | Registro de datos de contacto e historial; simple hoy, pero se mantiene separado porque en la Propuesta 2 evoluciona a un contexto con más peso (cuentas de cliente, reservas propias). |
+| **Identity & Access (IAM)** | Genérico | `User` administrador, autenticación, sesión | No aporta valor diferencial al negocio — es un problema resuelto miles de veces (login/JWT). Se trata como subdominio genérico, candidato a simplificarse al máximo o reemplazarse por una solución de terceros si el proyecto creciera. |
+| **Infrastructure Healt** | Genérico | Health checks, logging, disponibilidad del backend/BD | No es negocio, es soporte operativo: necesario porque el backend corre en un plan gratuito (Render) que "duerme" tras inactividad. Se resuelve con un endpoint `/health` y logs básicos, sin necesidad de herramientas de monitoreo dedicadas en esta fase. |
+| **Notifications** *(alcance mínimo en Propuesta 1)* | Genérico | Correo de confirmación puntual al registrar un `Booking` (RF23–RF24) y correo de resultado de autorización de cuenta (RF22). **No incluye** recordatorios recurrentes, WhatsApp, ni notificaciones dentro de la app — eso permanece en la Propuesta 2. | Se implementa como reacción a `BookingRegistered` y a `AdminAuthorized`/`AdminRejected` (4.1), sin lógica de negocio propia — solo dispara un envío de correo transaccional. Al ser un subdominio genérico desacoplado (reacciona a eventos, no los modifica), ampliar su alcance en la Propuesta 2 (recordatorios, WhatsApp) no requiere tocar Bookings ni Payments. |
+
+<br>
+
+`Court` deja de tratarse como contexto propio ("Gestión de Canchas y Precios") y pasa a ser una entidad **dentro** de Bookings: no tiene comportamiento ni reglas de negocio independientes de la disponibilidad y los alquileres.
+
+<br>
+
+**Relaciones entre contextos (Context Map):**
+
+- **Bookings → Customers** (relación *Customer/Supplier*): un alquiler referencia a un cliente existente; Bookings consume datos de Customers pero no los modifica.
+
+- **Bookings → Payments** (relación *Customer/Supplier*): un pago siempre pertenece a un alquiler; Payments depende del identificador de Booking generado por Bookings.
+
+- **Identity & Access → Bookings / Payments / Customers** (relación *Shared Kernel* mínimo): los tres contextos consumen la identidad del administrador autenticado para saber quién realizó cada acción, sin compartir más modelo que eso.
+
+- **Bookings → Notifications** (relación *Published Language / eventos*): Notifications escucha `BookingRegistered` y reacciona enviando el correo de confirmación (RF23); no tiene forma de escribir de vuelta en Bookings.
+
+- **Identity & Access → Notifications** (relación *Published Language / eventos*): Notifications escucha `AdminAuthorized`/`AdminRejected` para avisar por correo al solicitante (RF22).
+
+<br>
+
+**Diagrama visual del Context Map:**
  
+![Context Map - La Canchita de Carlos](context-map-la-canchita.png)
+ 
+*Diagrama: seis cajas (una por subdominio) agrupadas visualmente por tipo — Reservas destacado como núcleo (caja central, mayor tamaño); Pagos y Clientes como soporte alrededor; Identidad y Acceso, Infraestructura y Observabilidad y Notificaciones como genéricos en los bordes. Flechas etiquetadas con el tipo de relación (Customer/Supplier, Shared Kernel, Published Language) según el listado anterior.*
+ 
+Este mapa es el que después se traduce, a nivel de código, en los "anillos" de la arquitectura hexagonal (4.0): cada subdominio núcleo/soporte tiene su propio dominio + casos de uso, y el subdominio genérico (Identidad y Acceso) se mantiene deliberadamente simple.
+
+<br>
+
 ## 4.3. Diagrama de Contexto (C4 - Nivel 1)
-Vista general: administradores ↔ sistema PWA ↔ servicios externos (proveedor de autenticación, base de datos en la nube).
+<br>
  
 ## 4.4. Diagrama de Contenedores (C4 - Nivel 2)
-Frontend PWA, API/Backend, Base de datos, servicio de autenticación, almacenamiento en la nube.
+<br>
  
 ## 4.5. Diagrama de Componentes (C4 - Nivel 3)
-Desglose interno del backend (controladores, servicios de dominio por bounded context, repositorios) y del frontend (módulos/páginas, servicios de estado, capa de acceso a API).
+<br>
  
 ## 4.6. Arquitectura en la Nube (PWA)
 **Stack definido para este proyecto:**
  
-| Capa | Tecnología | Motivo |
-|---|---|---|
-| Frontend | React + Vite + `vite-plugin-pwa` + Tailwind CSS | Ya dominado, build rápido, soporte PWA (manifest + service worker) de fábrica. |
-| Estado / datos | React Query (o similar) + React Router | Manejo simple de llamadas a la API y cacheo, sin over-engineering. |
-| Backend | Node.js + Express + TypeScript | Stack que ya manejas: mayor velocidad de desarrollo en 2 semanas frente a aprender NestJS o Firebase desde cero. |
-| ORM | Prisma | Migraciones automáticas y modelos tipados, acelera el diseño de BD del Capítulo VI. |
-| Base de datos | PostgreSQL gestionado (Neon o Supabase, plan gratuito) | Relacional, soporta transacciones/constraints para evitar doble reserva (clave para RF06). |
-| Autenticación | JWT + bcrypt implementado en Express | Solo 2 usuarios administradores; no se justifica un proveedor de auth externo todavía. |
-| Hosting Frontend | Vercel (plan gratuito) | Despliegue automático desde GitHub, HTTPS y CDN incluidos, soporta PWA sin configuración extra. |
-| Hosting Backend | Render o Railway (plan gratuito/bajo costo) | Despliegue simple de un servicio Node/Express, variables de entorno fáciles de configurar. |
-| Repositorio | GitHub | Integración directa con Vercel/Render para despliegue continuo. |
- 
-Diagrama de despliegue: Administrador (celular/PC) → PWA en Vercel → API Express en Render/Railway → PostgreSQL en Neon/Supabase. Todo con capas gratuitas o de bajo costo, alineado al presupuesto de S/ 1,700 y al plazo de 2 semanas. Esta base también deja el camino abierto para escalar a la Propuesta 2 (agregar pasarela de pagos y notificaciones) sin rehacer la arquitectura.
+
+
  
 ## 4.7. Análisis Técnico-Económico de la Infraestructura
-Para cada componente de infraestructura se evaluaron alternativas bajo criterios técnicos (rendimiento, disponibilidad, facilidad de configuración) y económicos (costo bajo el volumen esperado: 2 administradores, sin tráfico masivo), siguiendo el mismo enfoque comparativo usado en proyectos anteriores (evaluación de alternativas + justificación de la opción elegida).
- 
-**Base de datos (capa de datos)**
- 
-| Alternativa | Tipo | Costo (plan inicial) | Ventaja principal | Limitación |
-|---|---|---|---|---|
-| **Neon (elegido)** | PostgreSQL gestionado, serverless | Gratuito para este volumen | Auto-suspende cuando no hay uso (ideal para negocio con horario definido), ramas de BD para pruebas | Cold start leve tras inactividad |
-| Supabase | PostgreSQL gestionado + extras (auth, storage) | Gratuito para este volumen | Incluye panel de administración visual, útil si más adelante se necesita backend adicional | Más funcionalidades de las que este alcance requiere (riesgo de sobre-ingeniería) |
-| Instancia propia (VPS + Docker) | PostgreSQL autoadministrado | Bajo pero no gratuito, + tiempo de mantenimiento | Control total de configuración | Requiere administrar parches de seguridad, backups y disponibilidad manualmente — inviable en 2 semanas con 1 desarrolladora |
- 
-*Justificación:* se eligió Neon por ser gratuito bajo este volumen de uso, no requerir administración de servidor y soportar transacciones/constraints necesarios para evitar la doble reserva. Supabase queda como alternativa válida si en la Propuesta 2 se necesitara autenticación o storage integrados.
- 
-**Backend (capa de aplicación)**
- 
-| Alternativa | Costo (plan inicial) | Ventaja principal | Limitación |
-|---|---|---|---|
-| **Render (elegido)** | Gratuito (con suspensión por inactividad) o plan bajo costo sin suspensión | Despliegue directo desde GitHub, configuración simple de variables de entorno | Plan gratuito "duerme" el servicio tras inactividad (primer request lento) |
-| Railway | Gratuito con créditos limitados, luego de pago | Muy buena experiencia de desarrollador, despliegue rápido | Créditos gratuitos se agotan más rápido que el plan free de Render |
-| VPS propio (DigitalOcean, etc.) | Bajo costo mensual fijo | Control total | Requiere configurar servidor, proxy, SSL y monitoreo manualmente — no viable en el plazo |
- 
-*Justificación:* Render por el balance entre costo (compatible con el presupuesto de S/ 1,700) y simplicidad de despliegue continuo, priorizando velocidad de entrega sobre control total de infraestructura.
- 
-**Frontend / PWA (capa de presentación)**
- 
-| Alternativa | Costo | Ventaja principal | Limitación |
-|---|---|---|---|
-| **Vercel (elegido)** | Gratuito para este uso | CDN global, HTTPS y despliegue automático desde GitHub, soporte nativo para PWA | Límites de uso no relevantes para este volumen |
-| Netlify | Gratuito para este uso | Equivalente a Vercel en funcionalidad | Sin ventaja diferencial sobre Vercel para este caso |
- 
-*Justificación:* Vercel y Netlify son equivalentes para este proyecto; se eligió Vercel por mayor familiaridad y su excelente integración con proyectos Vite.
+
+
  
 ---
  
 # Capítulo V: Diseño Orientado a Objetos
  
 ## 5.1. Diagrama de Clases — Backend
-Entidades y relaciones: `Usuario`, `Cancha`, `Alquiler`, `Cliente`, `Pago`, `BloqueoHorario`, con atributos, métodos y relaciones (asociación, composición) según los bounded contexts definidos.
+
  
 ## 5.2. Diagrama de Clases — Frontend
-Componentes/estructuras principales del frontend (según framework elegido): modelos de datos en cliente, servicios de consumo de API, stores/estado global, componentes de página.
+
  
 ---
  
@@ -885,43 +1103,33 @@ Tabla por entidad: nombre de campo, tipo de dato, restricciones (NOT NULL, UNIQU
 # Capítulo VII: Gestión del Proyecto (Scrum, 2 semanas)
  
 ## 7.1. Plan de Sprints
-Dado el plazo real de 2 semanas para todo (documentación, prototipo, desarrollo, pruebas y despliegue), se plantean **2 sprints de 1 semana cada uno**:
- 
-| Sprint | Duración | Enfoque principal |
-|---|---|---|
-| Sprint 1 | Semana 1 (días 1-7) | Documentación, arquitectura, diagramas, prototipo Figma, setup de proyecto, backend base (auth + modelos) |
-| Sprint 2 | Semana 2 (días 8-14) | Frontend + integración con backend, pruebas, despliegue en la nube, ajustes con feedback de Carlos |
+<br>
  
 ## 7.2. Sprint 1 — Documentación, Diseño y Base del Sistema
-Objetivo del sprint, historias comprometidas (backlog priorizado), entregables: documento de arquitectura, prototipo Figma, backend base desplegado en entorno de desarrollo.
+<br>
  
 ## 7.3. Sprint 2 — Desarrollo, Integración, Pruebas y Despliegue
-Objetivo del sprint, historias comprometidas, entregables: frontend conectado al backend, pruebas ejecutadas, sistema desplegado en producción, capacitación breve a Carlos y su trabajador.
+<br>
  
 ## 7.4. Definition of Done
-Criterios mínimos para considerar una historia "terminada" (ej. código revisado, probado manualmente, sin bloqueos de doble reserva, desplegado en ambiente de pruebas).
+<br>
  
 ---
  
 # Capítulo VIII: Implementación
  
 ## 8.1. Configuración del Entorno de Desarrollo
-**Stack:** React + Vite (frontend PWA) · Node.js + Express + TypeScript (backend) · Prisma ORM · PostgreSQL (ver detalle y justificación en 4.6).
- 
-Requisitos locales: Node.js LTS, npm, cuenta de GitHub, cliente de PostgreSQL (o acceso a la instancia de Neon/Supabase), variables de entorno (`.env`) para conexión a BD y secreto JWT.
- 
+<br>
+
 ## 8.2. Gestión de Código Fuente
-Repositorio, estrategia de ramas (ej. main + feature branches dado el plazo corto y equipo de 1 persona).
+<br>
  
 ## 8.3. Convenciones de Código
-Nomenclatura, estructura de carpetas por bounded context/capa, linters/formatters usados.
+<br>
  
 ## 8.4. Configuración de Despliegue
-- **Frontend:** despliegue automático en Vercel al hacer push a `main` (build de Vite).
-- **Backend:** despliegue automático en Render/Railway conectado al repo de GitHub.
-- **Base de datos:** instancia gestionada en Neon o Supabase (plan gratuito), string de conexión como variable de entorno en el backend.
-- **Variables de entorno:** `DATABASE_URL`, `JWT_SECRET`, `PORT`, URL del backend expuesta al frontend como `VITE_API_URL`.
-- Sin pipeline de CI complejo dado el plazo: el despliegue continuo de Vercel/Render (deploy on push) cumple el rol de CI/CD básico para este proyecto.
+<br>
+
 ## 8.5. Avance por Sprint
 Registro de lo entregado en cada sprint (screenshots, funcionalidades completadas, desviaciones del plan).
  
@@ -930,7 +1138,7 @@ Registro de lo entregado en cada sprint (screenshots, funcionalidades completada
 # Capítulo IX: Pruebas y Validación
  
 ## 9.1. Estrategia de Pruebas
-Qué se prueba y cómo, dado el plazo: pruebas manuales de flujos críticos (doble reserva, registro de pago) + pruebas unitarias mínimas en lógica de negocio sensible (bloqueo de horarios).
+<br>
  
 ## 9.2. Casos de Prueba Clave
 Lista de casos: no permitir doble reserva, cancelar alquiler libera el horario, pago parcial se refleja correctamente, panel del día muestra cifras correctas.

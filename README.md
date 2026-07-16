@@ -775,19 +775,101 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca (3.4.
 
 **Desktop Web Browser**
 
-![Mockup Desktop](brandradar-report/assets/ux-design/landing-page/mockups/landingmockup-desktop.png)
+![Mockup Desktop](assets/mockups/desktop/login.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/register.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/home.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/calendario.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/registrar-reserva.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/reservas.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/clientes.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/canchas.png)
+
+
+![Mockup Desktop](assets/mockups/desktop/nueva-cancha.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/ajustes.png)
+
+<br>
+
+![Mockup Desktop](assets/mockups/desktop/solicitudes.png)
 
 <br>
 
 **Mobile Web Browser**
 
-![Mockup Mobile](brandradar-report/assets/ux-design/landing-page/mockups/landingmockup-mobile.png)
+![Mockup Mobile](assets/mockups/mobile/login.png)
 
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/register.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/home.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/calendario.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/registrar-reserva.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/reservas.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/clientes.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/canchas.png)
+
+
+![Mockup Mobile](assets/mockups/mobile/nueva-cancha.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/ajustes.png)
+
+<br>
+
+![Mockup Mobile](assets/mockups/mobile/solicitudes.png)
 </div>
 
 <br>
 
 ### 3.3.1. Web Applications User Flow Diagrams
+
+<br>
+
+![UserFlow](assets/user-flow/flows.png)
+
 
 <br>
 
@@ -801,20 +883,19 @@ En esta sección se presenta el prototipo interactivo de la aplicación web de *
 
 **Desktop Prototyping**
 
-![Desktop Video Prototype](brandradar-report/assets/ux-design/desktop-prototyping.png)
+![Desktop Video Prototype](assets/prototyping/web-desktop.png)
 
-[Ver video de prototipo Desktop](https://)
+[Ver video de prototipo Desktop](https://youtu.be/GsqSs8i3ie0?si=EHo-VCSI3bgVMJ9i)
 
 <br>
 
 **Mobile Prototyping**
 
-![Mobile Video Prototype](brandradar-report/assets/ux-design/mobile-prototyping.png)
+![Mobile Video Prototype](assets/prototyping/web-mobile.png)
 
-[Ver video de prototipo Mobile](https://)
+[Ver video de prototipo Mobile](https://youtu.be/-rHLBf5RT-o?si=CWCItbbgryfW5kmE)
 
 </div>
-
 
 <br>
 

@@ -1217,8 +1217,8 @@ TypeScript de punta a punta (frontend + backend) permite compartir contratos de 
 
 | Alternativa | Descripción | Elegido |
 |---|---|---|
-| Android / iOS (celular) | Dispositivo principal de uso diario de Carlos y su trabajador en campo. | ✅ (uso principal) |
-| Windows / macOS / Linux (laptop) | Uso secundario, para configuración inicial o revisión desde escritorio. | ✅ (uso secundario) |
+| Android / iOS (celular) | Dispositivo principal de uso diario de Carlos y su trabajador en campo. | ✅ |
+| Windows / macOS / Linux (laptop) | Uso secundario, para configuración inicial o revisión desde escritorio. | ✅ |
 
 <br>
 
@@ -1232,7 +1232,7 @@ No hay elección real que hacer — el sistema debe funcionar en los dispositivo
 
 | Alternativa | Descripción | Elegido |
 |---|---|---|
-| Dispositivo propio del administrador | Celular/laptop personal de Carlos y su trabajador, sin costo adicional para el proyecto. | ✅ Elegido |
+| Dispositivo propio del administrador | Celular/laptop personal de Carlos y su trabajador, sin costo adicional para el proyecto. | ✅ |
 | Hardware dedicado (tablet fija en el local) | Mayor consistencia de experiencia, pero implica un costo de compra no contemplado en Propuesta 1. | — |
 
 <br>

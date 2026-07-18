@@ -882,10 +882,6 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 <br>
 
-**Nota de revisión (mockups vs. alcance documentado):** al validar los mockups contra este documento se identificaron ajustes pendientes antes del cierre de Sprint 1: (1) unificar la moneda a S/ en todas las pantallas (algunos mockups muestran `$`); (2) el catálogo de canchas mostrado (Pádel/Tenis/Fútbol 11, etc.) es solo data de ejemplo del mockup, no define el catálogo real de Carlos (RF11 ya contempla un catálogo administrable); (3) quitar el copy de tono comercial en las pantallas de Login y Solicitar Acceso (ver); (4) revisar si "Eliminar Cuenta" de administrador y el toggle "Activa/En Mantenimiento" a nivel de cancha completa (visto en el mockup de Gestión de Canchas) deben formalizarse como RF nuevos o quedar fuera de alcance de Propuesta 1 — pendiente de decisión con Carlos.
-
-<br>
-
 ### 3.3.1. Web Applications User Flow Diagrams
 
 <br>

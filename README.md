@@ -690,27 +690,47 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 <br>
 
-![Login](mockup-login.png)
+![Wireframe Web Desktop](assets/wireframes/desktop/login.png)
 
 <br>
 
-![Panel del día](mockup-panel.png)
+![Wireframe Web Desktop](assets/wireframes/desktop/register.png)
 
 <br>
 
-![Calendario de disponibilidad](mockup-calendario.png)
+![Wireframe Web Desktop](assets/wireframes/desktop/home.png)
 
 <br>
 
-![Ficha de cliente](mockup-cliente.png)
+![Wireframe Web Desktop](assets/wireframes/desktop/calendario.png)
 
 <br>
 
-![Ficha de cancha](mockup-cancha.png)
+![Wireframe Web Desktop](assets/wireframes/desktop/registrar-alquiler.png)
 
 <br>
 
-![Registro de pago](mockup-pago.png)
+![Wireframe Web Desktop](assets/wireframes/desktop/clientes.png)
+
+<br>
+
+![Wireframe Web Desktop](assets/wireframes/desktop/reservas.png)
+
+<br>
+
+![Wireframe Web Desktop](assets/wireframes/desktop/canchas.png)
+
+<br>
+
+![Wireframe Web Desktop](assets/wireframes/desktop/registrar-cancha.png)
+
+<br>
+
+![Wireframe Web Desktop](assets/wireframes/desktop/ajustes.png)
+
+<br>
+
+![Wireframe Web Desktop](assets/wireframes/desktop/solicitudes.png)
 
 <br>
 
@@ -718,28 +738,49 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 <br>
 
-![Login](mockup-login.png)
+![Wireframe Mobile Web](assets/wireframes/mobile/login.png)
 
 <br>
 
-![Panel del día](mockup-panel.png)
+![Wireframe Mobile Web](assets/wireframes/mobile/register.png)
 
 <br>
 
-![Calendario de disponibilidad](mockup-calendario.png)
+![Wireframe Mobile Web](assets/wireframes/mobile/home.png)
 
 <br>
 
-![Ficha de cliente](mockup-cliente.png)
+![Wireframe Mobile Web](assets/wireframes/mobile/calendario.png)
 
 <br>
 
-![Ficha de cancha](mockup-cancha.png)
+![Wireframe Mobile Web](assets/wireframes/mobile/registrar-alquiler.png)
 
 <br>
 
-![Registro de pago](mockup-pago.png)
+![Wireframe Mobile Web](assets/wireframes/mobile/clientes.png)
 
+<br>
+
+![Wireframe Mobile Web](assets/wireframes/mobile/reservas.png)
+
+<br>
+
+![Wireframe Mobile Web](assets/wireframes/mobile/canchas.png)
+
+<br>
+
+![Wireframe Mobile Web](assets/wireframes/mobile/registrar-cancha.png)
+
+<br>
+
+![Wireframe Mobile Web](assets/wireframes/mobile/ajustes.png)
+
+<br>
+
+![Wireframe Mobile Web](assets/wireframes/mobile/solicitudes.png)
+
+<br>
 </div>
 
 ## Mockups
@@ -767,7 +808,7 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 <br>
 
-![Mockup Desktop](assets/mockups/desktop/registrar-reserva.png)
+![Mockup Desktop](assets/mockups/desktop/nuevo-alquiler.png)
 
 <br>
 
@@ -780,6 +821,8 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 <br>
 
 ![Mockup Desktop](assets/mockups/desktop/canchas.png)
+
+<br>
 
 ![Mockup Desktop](assets/mockups/desktop/nueva-cancha.png)
 
@@ -811,7 +854,7 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 <br>
 
-![Mockup Mobile](assets/mockups/mobile/registrar-reserva.png)
+![Mockup Mobile](assets/mockups/mobile/registrar-alquiler.png)
 
 <br>
 
@@ -825,7 +868,7 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 ![Mockup Mobile](assets/mockups/mobile/canchas.png)
 
-![Mockup Mobile](assets/mockups/mobile/nueva-cancha.png)
+![Mockup Mobile](assets/mockups/mobile/registrar-cancha.png)
 
 <br>
 
@@ -1303,7 +1346,7 @@ Node.js tiene la mayor compatibilidad probada con Express + Prisma + Render, sin
 
 *Justificación:* 
 
-WebStorm ya es la herramienta de trabajo habitual de la desarrolladora — no hay curva de adaptación en un proyecto de 2 semanas.
+WebStorm ya es la herramienta de trabajo habitual.
 
 <br>
 

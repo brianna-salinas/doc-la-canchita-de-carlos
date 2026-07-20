@@ -259,6 +259,7 @@ Requisitos derivados del alcance definido, agrupados por módulo (bounded contex
 | RF20 | El sistema debe permitir que una persona registre una solicitud de cuenta de administrador (nombre, correo), quedando en estado pendiente sin acceso al sistema. | Media |
 | RF21 | El sistema debe permitir que únicamente el administrador dueño visualice, autorice o rechace solicitudes de cuenta pendientes. | Media |
 | RF22 | El sistema debe notificar (correo simple) al solicitante si su cuenta fue autorizada o rechazada. | Baja |
+| RF27 | El sistema debe permitir que el administrador dueño vea el listado de cuentas de administrador activas (no solo las pendientes de autorizar). | Baja |
 
 <br>
 
@@ -268,7 +269,6 @@ Requisitos derivados del alcance definido, agrupados por módulo (bounded contex
 |---|---|---|
 | RF23 | El sistema debe enviar automáticamente un correo de confirmación al cliente cuando se registra un `Booking`, siempre que el cliente tenga un correo registrado (RF09). | Media |
 | RF24 | Si el envío de correo falla, el sistema no debe bloquear ni revertir el registro del `Booking` — el correo es una notificación adicional, no una condición del negocio. | Media |
-| RF27 | El sistema debe permitir que el administrador dueño vea el listado de cuentas de administrador activas (no solo las pendientes de autorizar). | Baja |
 
 <br>
 
@@ -290,7 +290,7 @@ Requisitos de calidad del sistema, con criterio medible cuando aplica, alineados
 | ID | Categoría | Descripción | Criterio de aceptación |
 |---|---|---|---|
 | RNF01 | Seguridad | Autenticación de administradores y protección de rutas de datos. | Contraseñas hasheadas con bcrypt; sesión mediante JWT con expiración; todo el tráfico servido por HTTPS. |
-| RNF02 | Disponibilidad | El sistema debe estar operativo durante el horario de alquiler del negocio (tardes, noches y fines de semana). | Se acepta latencia de "arranque en frío" del backend (Render free tier) tras inactividad prolongada; no se exige SLA formal en esta fase. |
+| RNF02 | Disponibilidad | El sistema debe estar operativo durante el horario de alquiler del negocio (tardes, noches y fines de semana). | El backend corre en el plan Starter de Render (de pago, ver 4.7.2), sin "arranque en frío" tras inactividad; no se exige SLA formal en esta fase. |
 | RNF03 | Usabilidad | Interfaz optimizada para uso desde celular, principal dispositivo del administrador en campo. | Diseño responsive validado en al menos una resolución móvil real antes del despliegue (ver). |
 | RNF04 | Instalabilidad | La app debe poder instalarse como PWA sin pasar por tienda de aplicaciones. | Manifest + service worker configurados; prompt de instalación funcional en Chrome/Android como mínimo. |
 | RNF05 | Rendimiento | Tiempos de respuesta aceptables para el volumen de uso real (2 administradores, decenas de alquileres/día). | Registro de un alquiler y carga del panel del día responden en menos de 3 segundos con backend "caliente". |
@@ -300,8 +300,7 @@ Requisitos de calidad del sistema, con criterio medible cuando aplica, alineados
 | RNF09 | Compatibilidad | La PWA debe funcionar en los navegadores/dispositivos reales que usan Carlos y su trabajador. | Verificada en Chrome (Android) y un navegador de escritorio como mínimo. |
 
 <br>
-
-## 2.3. Lenguaje Ubicuo
+## 2.3. Lenguaje Ubicuo (Glosario del Dominio)
 
 Términos consensuados organizados por bounded context, para que el vocabulario del negocio y el vocabulario del código sean el mismo.
 
@@ -392,7 +391,6 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | **EP09** | **Ajustes de Cuenta** | Capacidad de negocio que permite a cada administrador mantener actualizados sus propios datos de acceso (correo, contraseña), sin depender de soporte técnico externo. | US24, US25 |
 
 <br>
-
 ### User Stories
 
 | **ID** | **Título** | **Descripción** | **Criterios de Aceptación** | **Epic ID** |
@@ -517,7 +515,7 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 
 **Herramienta utilizada:** `Jira`
 
-**URL del Product Backlog:** * *
+**URL del Product Backlog:** *(pendiente — se agrega el link al tablero una vez creado)*
 
 </div>
 <br>
@@ -679,7 +677,7 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 
 ## 3.3. Wireframes y Mockups
 
-## Wireframes
+### Wireframes
 
 >*Los wireframes representan la estructura base del diseño de la aplicación, permitiendo definir la organización de contenidos, la jerarquía visual y el flujo de navegación antes del diseño visual final. Se desarrollaron versiones para escritorio (desktop web browser) y dispositivos móviles (mobile web browser):*
 
@@ -783,7 +781,7 @@ Sistema de dos niveles, para que la interfaz se sienta alineada a la marca sin s
 <br>
 </div>
 
-## Mockups
+### Mockups
 
 > *Los mock-ups representan la versión visual final de la aplicación, incorporando los elementos definidos en el Design System, como la paleta de colores, la tipografía, la iconografía y los estilos de componentes.*
 
@@ -1154,9 +1152,9 @@ Este mapa es el que después se traduce, a nivel de código, en los "anillos" de
 
 | Capa | Tecnología | Motivo |
 |---|---|---|
-| Frontend | React + Vite + TypeScript + `vite-plugin-pwa` + Tailwind CSS | Ya dominado, build rápido, soporte PWA (manifest + service worker) de fábrica. TypeScript comparte tipos con el backend (vía Prisma) para detectar errores antes de producción. |
+| Frontend | React + Vite + TypeScript + `vite-plugin-pwa` + Tailwind CSS | Build rápido en desarrollo (HMR de Vite) y soporte PWA (manifest + service worker) de fábrica, sin configurar herramientas adicionales. TypeScript comparte tipos con el backend (vía Prisma) para detectar errores antes de producción. |
 | Estado / datos | React Query (o similar) + React Router | Manejo simple de llamadas a la API y cacheo, sin over-engineering. |
-| Backend | Node.js + Express + TypeScript | Stack que ya manejas: mayor velocidad de desarrollo en 2 semanas frente a aprender NestJS o Firebase desde cero. |
+| Backend | Node.js + Express + TypeScript | Framework minimalista sin convenciones forzadas, adecuado para una API con alcance acotado (Capítulo II); reduce la curva de aprendizaje frente a frameworks más opinados como NestJS y evita el vendor lock-in de una plataforma BaaS como Firebase. |
 | ORM | Prisma | Migraciones automáticas y modelos tipados, acelera el diseño de BD del Capítulo VI. |
 | Base de datos | PostgreSQL gestionado (Supabase, plan gratuito) | Relacional, soporta transacciones/constraints para evitar doble reserva (clave para RF06). |
 | Autenticación | JWT + bcrypt implementado en Express | Solo 2 usuarios administradores; no se justifica un proveedor de auth externo todavía. |
@@ -1188,7 +1186,7 @@ La matriz cruza las tres capas de la arquitectura de despliegue (Presentación, 
 
 ## 4.7. Análisis Técnico-Económico de la Infraestructura
  
-Análisis comparativo de tres alternativas por elemento técnico, organizado por capa de la arquitectura — Presentación, Aplicación, Datos — evaluando en cada una las categorías de Software/Hardware/Sistema Operativo aplicables, con justificación de la opción elegida (retomando y detallando las decisiones ya adelantadas en el stack de 4.6). Los servicios de integración y el presupuesto de inversión total se documentan de forma transversal al final, por ser decisiones que aplican a todo el proyecto y no a una capa específica.
+Análisis comparativo de tres alternativas por elemento técnico, organizado por capa de la arquitectura (Presentación, Aplicación, Datos) evaluando en cada una las categorías de Software/Hardware/Sistema Operativo aplicables, con justificación de la opción elegida (retomando y detallando las decisiones ya adelantadas en el stack. Los servicios de integración y el presupuesto de inversión total se documentan de forma transversal al final, por ser decisiones que aplican a todo el proyecto y no a una capa específica.
  
 <br>
 
@@ -1494,13 +1492,19 @@ El modelo tiene 9 entidades, agrupadas en 4 categorías según el módulo del si
 
 <br>
 
-## 6.2. Diagrama de entidad-relación físico
+## 6.2. Diagrama de Base de Datos
 
 Diagrama de Base de Datos entidad-relación físico de La canchita de Carlos, con llaves primarias (PK), foráneas (FK) y únicas (UK):
 
 <br>
 
-![Database Diagram](assets/database-diagram/diagrama_db.png)
+![Database Diagram](assets/database-diagram/diagrama-db.png)
+
+<br>
+
+### Diagrama de la base de datos en Prisma
+
+![Supabase Database Diagram](assets/database-diagram/supabase-db.png)
 
 <br>
 
@@ -1662,8 +1666,7 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 <br>
 
 ---
-
-# Capítulo VII: Gestión del Proyecto
+# Capítulo VII: Gestión del Proyecto (Scrum, 2 semanas)
 
 ## 7.1. Plan de Sprints
 
@@ -1684,7 +1687,7 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
  
 <br>
 
-## 7.2. Sprint 1
+## 7.2. Sprint 1 — Documentación, Diseño y Base del Sistema
  
 ### 7.2.1. Sprint Planning 1
  
@@ -1710,10 +1713,6 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
 **Sprint Goal:** *Carlos puede navegar el flujo completo de reservas, canchas y clientes sobre datos de prueba, y validar que la interfaz cubre lo que necesita antes de que exista backend real.*
  
 **Story Points comprometidos: 63 SP | Duración: 1 semana | Stack: React / Vite / TypeScript / Tailwind / json-server**
- 
-<br>
-
-**Work-Items del Sprint 1:**
  
 <br>
 
@@ -1829,8 +1828,7 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 ![JSON Fake API](assets/sprints/sprint-1/services06.png)
  
 <br>
-
-## 7.3. Sprint 2
+## 7.3. Sprint 2 — Desarrollo, Integración, Pruebas y Despliegue
  
 ### 7.3.1. Sprint Planning 2
  
@@ -1870,31 +1868,31 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 | **Sprint 2** | **User Story** | | **Work-Item / Task** | | | | |
 | **ID** | **Título** | **SP** | **ID** | **Título** | **Descripción** | **Estimación** | **Status** |
 | — | Setup del proyecto | — | T-01 | Configuración inicial del backend | Express + TypeScript + Prisma, migraciones aplicadas contra Supabase — base para todos los endpoints que siguen. | 3h | Done |
-| — | Setup del proyecto | — | T-02 | Endpoint de login (TS02) + JWT | Autenticación real y `AuthService` en el frontend, reemplazando el login contra `json-server`. | 4h | Done |
+| — | Setup del proyecto | — | T-02 | Endpoint de login (TS02) + JWT | Autenticación real y `AuthService` en el frontend, reemplazando el login contra `json-server`. | 4h | En progreso |
 | — | Setup del proyecto | — | T-03 | Endpoint `/health` (TS04) | Verificación de backend y base de datos operativos, según el contrato diseñado en el Sprint 1 (T-26). | 1h | Done |
-| TS03 | Endpoint de pagos con recálculo de saldo | 3 | T-04 | `POST /payments` (total y parcial) | Registra el pago, recalcula el saldo pendiente del `Booking` en una misma transacción y actualiza su estado de pago. | 4h | Done |
-| US14 | Registrar estado de pago de un alquiler | 3 | T-05 | Conectar UI de pago total/pendiente | `ReservasPage` conectada al endpoint real; rechaza montos que excedan el total. | 2h | Done |
-| US15 | Registrar pagos parciales | 5 | T-06 | Conectar UI de pago parcial | Formulario de pago parcial mostrando el saldo pendiente recalculado en tiempo real. | 3h | Done |
-| US16 | Registrar método de pago | 1 | T-07 | Selector de método de pago | Campo efectivo/Yape/otro persistido junto al `Payment`. | 1h | Done |
-| TS08 | Endpoint de carga de comprobante con almacenamiento en la nube | 5 | T-08 | `POST /payments/{id}/comprobante` | Sube la imagen a Supabase Storage y guarda la URL en el `Payment`; rechaza archivos inválidos. | 4h | Done |
-| US27 | Adjuntar comprobante de pago | 3 | T-09 | Conectar carga de comprobante | Selector de imagen en el formulario de pago conectado al endpoint real, envío opcional. | 2h | Done |
-| US17 | Ver alquileres del día | 2 | T-10 | `GET /panel/alquileres-del-dia` + `PanelPage` | Endpoint y conexión de la tarjeta de alquileres del día, excluyendo cancelados. | 2h | Done |
-| US18 | Ver ingreso total del día | 2 | T-11 | `GET /panel/ingreso-del-dia` + tarjeta de ingreso | Suma de pagos reales del día, sin incluir montos aún no pagados. | 2h | Done |
-| US19 | Ver pagos pendientes del día | 2 | T-12 | `GET /panel/pendientes-del-dia` + lista de pendientes | Alquileres `PENDIENTE`/`PARCIAL` del día con su saldo, excluyendo los ya pagados. | 2h | Done |
-| US20 | Solicitar registro de nueva cuenta de administrador | 3 | T-13 | `POST /solicitudes` + pantalla conectada | `RequestAccessPage` conectada; rechaza correos ya registrados sin crear duplicado. | 3h | Done |
-| US21 | Autorizar o rechazar solicitudes de acceso | 3 | T-14 | `PATCH /solicitudes/{id}/autorizar` y `/rechazar` | Restringido al administrador dueño (TS05); rechaza con 403 si quien lo intenta no es el dueño. | 3h | Done |
-| TS05 | Endpoints de solicitud y autorización de cuentas | 3 | T-15 | Conectar `SolicitudesAccesoPage` | Listado de solicitudes pendientes conectado a los endpoints reales de T-13/T-14. | 2h | Done |
-| US26 | Ver administradores activos | 2 | T-16 | `GET /users?estado=ACTIVO` + listado | Listado de administradores activos en `AjustesPage`, sin exponer pendientes ni rechazados. | 2h | Done |
-| US22 | Recibir correo de confirmación al registrar un alquiler | 3 | T-17 | Listener de `BookingRegistered` → Resend | Envío de correo de confirmación sin bloquear la respuesta HTTP del registro; no revierte el alquiler si falla (RF24). | 3h | Done |
-| TS06 | Listener de correo de confirmación sobre `BookingRegistered` | 3 | T-18 | Prueba end-to-end del correo | Verificación del caso feliz y del caso de fallo del proveedor de correo. | 2h | Done |
-| US23 | Recibir correo con el resultado de mi solicitud de acceso | 2 | T-19 | Listener de `AdminAuthorized`/`AdminRejected` → Resend | Correo de autorización o rechazo al solicitante, sin exponer el motivo interno. | 2h | Done |
-| US24 | Actualizar mi correo | 2 | T-20 | `PATCH /users/me/correo` | Valida que el nuevo correo no esté en uso; rechaza con 409 si ya existe. | 2h | Done |
-| TS07 | Endpoints de ajustes de cuenta (correo y contraseña) | 3 | T-21 | `PATCH /users/me/contrasena` | Valida la contraseña actual antes de aplicar el cambio; invalida sesiones activas en otros dispositivos. | 3h | Done |
-| US25 | Cambiar mi contraseña | 2 | T-22 | Conectar `AjustesPage` a correo y contraseña | Formularios de ajustes conectados a T-20/T-21 con manejo de errores (409/401). | 2h | Done |
-| US30 | Registrar WhatsApp del cliente con acceso directo | 2 | T-23 | WhatsApp en ficha de cliente | Campo de WhatsApp + enlace `wa.me` en la ficha del cliente y en el detalle de sus alquileres. | 2h | Done |
-| — | Conexión frontend-backend | — | T-24 | Apagar `json-server` y conectar la API real | Cambio de `VITE_API_URL` y ajustes en las pantallas del Sprint 1 para consumir datos reales. | 4h | Done |
-| — | Pruebas de integración | — | T-25 | QA end-to-end sobre el sistema conectado | Validación de los casos clave de punta a punta y revisión con Carlos. | 4h | Done |
-| — | Preparación de despliegue | — | T-26 | Despliegue en Render + Supabase | Configuración de Static Site, Web Service y variables de entorno; verificación de PWA instalable en un celular real. | 3h | Done |
+| TS03 | Endpoint de pagos con recálculo de saldo | 3 | T-04 | `POST /payments` (total y parcial) | Registra el pago, recalcula el saldo pendiente del `Booking` en una misma transacción y actualiza su estado de pago. | 4h | Pendiente |
+| US14 | Registrar estado de pago de un alquiler | 3 | T-05 | Conectar UI de pago total/pendiente | `ReservasPage` conectada al endpoint real; rechaza montos que excedan el total. | 2h | Pendiente |
+| US15 | Registrar pagos parciales | 5 | T-06 | Conectar UI de pago parcial | Formulario de pago parcial mostrando el saldo pendiente recalculado en tiempo real. | 3h | Pendiente |
+| US16 | Registrar método de pago | 1 | T-07 | Selector de método de pago | Campo efectivo/Yape/otro persistido junto al `Payment`. | 1h | Pendiente |
+| TS08 | Endpoint de carga de comprobante con almacenamiento en la nube | 5 | T-08 | `POST /payments/{id}/comprobante` | Sube la imagen a Supabase Storage y guarda la URL en el `Payment`; rechaza archivos inválidos. | 4h | Pendiente |
+| US27 | Adjuntar comprobante de pago | 3 | T-09 | Conectar carga de comprobante | Selector de imagen en el formulario de pago conectado al endpoint real, envío opcional. | 2h | Pendiente |
+| US17 | Ver alquileres del día | 2 | T-10 | `GET /panel/alquileres-del-dia` + `PanelPage` | Endpoint y conexión de la tarjeta de alquileres del día, excluyendo cancelados. | 2h | Pendiente |
+| US18 | Ver ingreso total del día | 2 | T-11 | `GET /panel/ingreso-del-dia` + tarjeta de ingreso | Suma de pagos reales del día, sin incluir montos aún no pagados. | 2h | Pendiente |
+| US19 | Ver pagos pendientes del día | 2 | T-12 | `GET /panel/pendientes-del-dia` + lista de pendientes | Alquileres `PENDIENTE`/`PARCIAL` del día con su saldo, excluyendo los ya pagados. | 2h | Pendiente |
+| US20 | Solicitar registro de nueva cuenta de administrador | 3 | T-13 | `POST /solicitudes` + pantalla conectada | `RequestAccessPage` conectada; rechaza correos ya registrados sin crear duplicado. | 3h | Pendiente |
+| US21 | Autorizar o rechazar solicitudes de acceso | 3 | T-14 | `PATCH /solicitudes/{id}/autorizar` y `/rechazar` | Restringido al administrador dueño (TS05); rechaza con 403 si quien lo intenta no es el dueño. | 3h | Pendiente |
+| TS05 | Endpoints de solicitud y autorización de cuentas | 3 | T-15 | Conectar `SolicitudesAccesoPage` | Listado de solicitudes pendientes conectado a los endpoints reales de T-13/T-14. | 2h | Pendiente |
+| US26 | Ver administradores activos | 2 | T-16 | `GET /users?estado=ACTIVO` + listado | Listado de administradores activos en `AjustesPage`, sin exponer pendientes ni rechazados. | 2h | Pendiente |
+| US22 | Recibir correo de confirmación al registrar un alquiler | 3 | T-17 | Listener de `BookingRegistered` → Resend | Envío de correo de confirmación sin bloquear la respuesta HTTP del registro; no revierte el alquiler si falla (RF24). | 3h | Pendiente |
+| TS06 | Listener de correo de confirmación sobre `BookingRegistered` | 3 | T-18 | Prueba end-to-end del correo | Verificación del caso feliz y del caso de fallo del proveedor de correo. | 2h | Pendiente |
+| US23 | Recibir correo con el resultado de mi solicitud de acceso | 2 | T-19 | Listener de `AdminAuthorized`/`AdminRejected` → Resend | Correo de autorización o rechazo al solicitante, sin exponer el motivo interno. | 2h | Pendiente |
+| US24 | Actualizar mi correo | 2 | T-20 | `PATCH /users/me/correo` | Valida que el nuevo correo no esté en uso; rechaza con 409 si ya existe. | 2h | Pendiente |
+| TS07 | Endpoints de ajustes de cuenta (correo y contraseña) | 3 | T-21 | `PATCH /users/me/contrasena` | Valida la contraseña actual antes de aplicar el cambio; invalida sesiones activas en otros dispositivos. | 3h | Pendiente |
+| US25 | Cambiar mi contraseña | 2 | T-22 | Conectar `AjustesPage` a correo y contraseña | Formularios de ajustes conectados a T-20/T-21 con manejo de errores (409/401). | 2h | Pendiente |
+| US30 | Registrar WhatsApp del cliente con acceso directo | 2 | T-23 | WhatsApp en ficha de cliente | Campo de WhatsApp + enlace `wa.me` en la ficha del cliente y en el detalle de sus alquileres. | 2h | Pendiente |
+| — | Conexión frontend-backend | — | T-24 | Apagar `json-server` y conectar la API real | Cambio de `VITE_API_URL` y ajustes en las pantallas del Sprint 1 para consumir datos reales. | 4h | Pendiente |
+| — | Pruebas de integración | — | T-25 | QA end-to-end sobre el sistema conectado | Validación de los casos clave de punta a punta y revisión con Carlos. | 4h | Pendiente |
+| — | Preparación de despliegue | — | T-26 | Despliegue en Render + Supabase | Configuración de Static Site, Web Service y variables de entorno; verificación de PWA instalable en un celular real. | 3h | Pendiente |
  
 <br>
 
@@ -1991,237 +1989,270 @@ Un sprint se considera terminado cuando todas sus historias comprometidas cumple
 <br>
 
 ---
- 
 # Capítulo VIII: Implementación
- 
-## 8.1. Gestión de Configuración de Software
- 
+
+## 8.1. Configuración del Entorno de Desarrollo
+
 ### 8.1.1. Herramientas del Ciclo de Vida del Producto
- 
-En esta sección se describen las herramientas de software seleccionadas para dar soporte a las distintas fases del ciclo de vida de "La Canchita de Carlos", incluyendo su objetivo específico dentro del proyecto y su enlace de acceso.
- 
+
 <br>
-<div align="center">
 
 **Gestión de Requisitos**
- 
-| Herramienta | Uso principal | Enlace |
-|:---|:---|:---|
-| ![Jira](https://img.shields.io/badge/Jira-0052CC?style=for-the-badge&logo=jira&logoColor=white) | Product Backlog, User Stories y seguimiento de los 2 sprints (Capítulo VII). | [atlassian.com/software/jira](https://www.atlassian.com/software/jira) |
-| ![Gherkin](https://img.shields.io/badge/Gherkin-23D96C?style=for-the-badge&logo=cucumber&logoColor=white) | Definición de criterios de aceptación de las User Stories en formato Given/When/Then. | — |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white) | Documentación de requisitos funcionales y no funcionales, historias de usuario y backlog. |
+| ![Miro](https://img.shields.io/badge/Miro-050038?style=for-the-badge&logo=miro&logoColor=white) | Event Storming y mapeo de bounded contexts. |
+
 <br>
 
 **Diseño de Experiencia y UI/UX**
- 
-| Herramienta | Uso principal | Enlace |
-|:---|:---|:---|
-| ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) | Wireframes, mockups de alta fidelidad y prototipo navegable (3.3, 3.4). | [figma.com](https://figma.com) |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) | Wireframes, mockups y prototipo navegable. |
+
 <br>
 
 **Desarrollo de Software**
- 
-| Herramienta / Tecnología | Uso principal | Enlace |
-|:---|:---|:---|
-| ![WebStorm](https://img.shields.io/badge/WebStorm-000000?style=for-the-badge&logo=webstorm&logoColor=white) | IDE principal para escribir, editar y depurar el código de frontend y backend. | [jetbrains.com/webstorm](https://www.jetbrains.com/webstorm/) |
-| ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) | Librería principal del frontend, con componentes reutilizables organizados por bounded context. | [react.dev](https://react.dev) |
-| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) | Build tool del frontend, con `vite-plugin-pwa` para el manifest y service worker de la PWA. | [vitejs.dev](https://vitejs.dev) |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) | Lenguaje tipado usado de punta a punta (frontend y backend). | [typescriptlang.org](https://www.typescriptlang.org) |
-| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) | Framework de estilos del frontend, con variante `dark:` para modo oscuro. | [tailwindcss.com](https://tailwindcss.com) |
-| ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) | Runtime del backend. | [nodejs.org](https://nodejs.org) |
-| ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white) | Framework del backend, organizado con arquitectura hexagonal (4.0). | [expressjs.com](https://expressjs.com) |
-| ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white) | ORM del backend, migraciones automáticas y tipos compartidos con el frontend. | [prisma.io](https://www.prisma.io) |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) | Librería de UI del frontend. |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) | Tipado estático en frontend y backend. |
+| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) | Bundler y servidor de desarrollo del frontend. |
+| ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) | Estilos utilitarios del frontend. |
+| ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) | Runtime del backend. |
+| ![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white) | Framework HTTP del backend. |
+| ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white) | ORM y migraciones sobre PostgreSQL. |
+
 <br>
 
 **Pruebas de Software**
- 
-| Herramienta | Uso principal | Enlace |
-|:---|:---|:---|
-| ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) | Pruebas manuales de endpoints REST (Definition of Done, 7.4). | [postman.com](https://www.postman.com) |
-| ![Gherkin](https://img.shields.io/badge/Gherkin-23D96C?style=for-the-badge&logo=cucumber&logoColor=white) | Verificación manual de escenarios de aceptación (Given/When/Then) de cada User Story. | — |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) | Pruebas manuales de endpoints del backend. |
+
 <br>
 
 **Diseño de Arquitectura y Base de Datos**
- 
-| Herramienta | Uso principal | Enlace |
-|:---|:---|:---|
-| ![Mermaid](https://img.shields.io/badge/Mermaid-FF3670?style=for-the-badge&logo=mermaid&logoColor=white) | Diagrama entidad-relación lógico y demás diagramas embebidos en el documento (Capítulo VI). | [mermaid.js.org](https://mermaid.js.org) |
-| ![dbdiagram.io](https://img.shields.io/badge/dbdiagram.io-1E88E5?style=for-the-badge&logoColor=white) | Versión interactiva del diagrama físico de base de datos (`schema.dbml`, Anexos). | [dbdiagram.io](https://dbdiagram.io) |
-| ![pgAdmin](https://img.shields.io/badge/pgAdmin-336791?style=for-the-badge&logo=postgresql&logoColor=white) | Cliente de PostgreSQL usado para crear la base de datos y generar el ERD físico (6.2). | [pgadmin.org](https://www.pgadmin.org) |
-| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) | Motor de base de datos relacional (4.7.3). | [postgresql.org](https://www.postgresql.org) |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) | Motor de base de datos relacional. |
+| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) | Hosting de base de datos y almacenamiento de archivos. |
+
 <br>
 
 **Control de Versiones y Colaboración**
- 
-| Herramienta | Uso principal | Enlace |
-|:---|:---|:---|
-| ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) | Sistema de control de versiones del código fuente. | [git-scm.com](https://git-scm.com) |
-| ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) | Repositorios remotos de frontend y backend, integrados con el despliegue continuo en Render. | [github.com](https://github.com) |
-| ![GitFlow](https://img.shields.io/badge/GitFlow-F05032?style=for-the-badge&logo=git&logoColor=white) | Modelo de ramificación simplificado (`main` + `feature/*`), adaptado a una sola desarrolladora. | [nvie.com](https://nvie.com/posts/a-successful-git-branching-model) |
-| ![Conventional Commits](https://img.shields.io/badge/Conventional_Commits-FE5196?style=for-the-badge&logo=conventionalcommits&logoColor=white) | Convención de mensajes de commit para trazabilidad. | [conventionalcommits.org](https://www.conventionalcommits.org) |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) | Control de versiones. |
+| ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) | Repositorios remotos del frontend y backend. |
+
 <br>
 
 **Despliegue de Software**
- 
-| Herramienta / Plataforma | Uso principal | Enlace |
-|:---|:---|:---|
-| ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white) | Hosting del frontend (Static Site) y del backend (Web Service, plan Starter), con despliegue continuo desde GitHub (4.6). | [render.com](https://render.com) |
-| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) | Base de datos PostgreSQL gestionada y Storage de archivos (comprobantes, fotos de canchas) en producción. | [supabase.com](https://supabase.com) |
-| ![Resend](https://img.shields.io/badge/Resend-000000?style=for-the-badge&logoColor=white) | Envío de correos transaccionales de confirmación (RF23-RF24). | [resend.com](https://resend.com) |
- 
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white) | Hosting del frontend (Static Site) y backend (Web Service, plan Starter). |
+
 <br>
 
 **Documentación de Software**
- 
-| Herramienta / Recurso | Uso principal | Enlace |
-|:---|:---|:---|
-| ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) | Repositorio central de este documento y del código, mediante `README.md`. | [github.com](https://github.com) |
-| ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white) | Formato de este documento de producto. | [daringfireball.net/projects/markdown](https://daringfireball.net/projects/markdown) |
- 
-</div>
+
+<br>
+
+| Herramienta | Uso |
+|---|---|
+| ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white) | Redacción de este documento. |
+
 <br>
 
 ### 8.1.2. Configuración del Entorno de Desarrollo Local
+
+<br>
+
+**Sistema operativo:** Windows 11 (desarrollo local)
  
-**Sistema operativo local:** Ubuntu (Linux), para que el entorno de desarrollo coincida con el sistema operativo del contenedor donde corre el backend en producción (Render), evitando discrepancias entre "funciona en mi máquina" y producción.
- 
-**Requisitos previos:**
+**Prerrequisitos:**
+- Node.js (v18 o superior)
+- npm
+- Git
+- Cuenta de Supabase (base de datos + storage)
+- Cuenta de Render (despliegue)
 
-- Node.js (versión LTS) y npm.
-- Docker, usado exclusivamente para levantar PostgreSQL en local (no para el frontend ni el backend):
- `docker run --name canchita-db -e POSTGRES_PASSWORD=canchita123 -e POSTGRES_DB=canchita -p 5432:5432 -v canchita-data:/var/lib/postgresql/data -d postgres:16`
-- WebStorm como IDE.
-- Git y una cuenta de GitHub con acceso a ambos repositorios.
+<br>
 
-**Pasos de configuración:**
+**Pasos de configuración (backend):**
 
-1. Clonar los repositorios de frontend y backend.
-2. Backend: `npm install`, configurar `.env` con la cadena de conexión a Postgres local, ejecutar las migraciones de Prisma (`npx prisma migrate dev`) y levantar el servidor (`npm run dev`).
-3. Frontend: `npm install`, configurar `.env.local` con la URL del backend local, levantar con `npm run dev` (Vite).
-4. Verificar que el endpoint `/health` (TS04) responde `200 ok` antes de empezar a desarrollar sobre él.
+```bash
+git clone https://github.com/brianna-salinas/la-canchita-de-carlos-backend.git
+cd la-canchita-de-carlos-backend
+npm install
+cp .env.example .env
+# completar DATABASE_URL, DIRECT_URL, JWT_SECRET, RESEND_API_KEY
+npx prisma migrate dev
+npm run dev
+```
+
+<br>
+
+**Pasos de configuración (frontend):**
+
+```bash
+git clone https://github.com/brianna-salinas/la-canchita-de-carlos-frontend.git
+cd la-canchita-de-carlos-frontend
+npm install
+cp .env.example .env
+# completar VITE_API_URL
+npm run dev
+```
 
 <br>
 
 ## 8.2. Gestión de Código Fuente
- 
-Git como sistema de control de versiones y GitHub como plataforma centralizada. Al ser una sola desarrolladora, no hay contribuciones de terceros que rastrear, pero se mantiene la misma disciplina de ramas y commits que se usaría en equipo, para dejar un historial claro y reproducible.
- 
+
 <br>
 
-**Repositorios del proyecto:**
- 
-| Producto | Repositorio GitHub |
-|:---|:---|
-| Frontend (PWA) | https://github.com/brianna-salinas/la-canchita-de-carlos-frontend.git |
-| Backend (API) | *[URL del repositorio de backend]* |
-| Reporte / Documentación | https://github.com/brianna-salinas/doc-la-canchita-de-carlos.git |
- 
+| Repositorio | URL | Descripción |
+|---|---|---|
+| Frontend | https://github.com/brianna-salinas/la-canchita-de-carlos-frontend.git | React + Vite + TypeScript + Tailwind CSS. |
+| Backend | https://github.com/brianna-salinas/la-canchita-de-carlos-backend.git | Express + TypeScript + Prisma + Supabase. |
+
 <br>
 
-**Modelo de Ramificación**
- 
-Cada repositorio (frontend y backend) se despliega de forma independiente en Render (Static Site y Web Service respectivamente). Al ser una sola desarrolladora en un plazo de 2 semanas, se usa una versión simplificada de GitFlow: `main` como única rama protegida que dispara despliegue automático, y ramas `feature/*` de corta duración solo para cambios grandes.
- 
+**Modelo de ramas (GitFlow simplificado para desarrollo individual):**
+
 <br>
 
-| Tipo de rama | Uso principal | Convención de nombres | Ejemplo |
-|:---|:---|:---|:---|
-| main | Rama protegida; dispara el despliegue automático en Render. Recibe commits directos para cambios pequeños ya verificados en local. | `main` | `main` |
-| feature | Cambios más grandes (ej. un endpoint completo con su UI), fusionados a `main` una vez probados. | `feature/<nombre-descriptivo>` | `feature/reservas-multidia` |
- 
+| Rama | Propósito |
+|---|---|
+| `main` | Código estable, desplegable en cualquier momento. |
+| `feature/*` | Una rama por funcionalidad o módulo, integrada a `main` una vez verificada. |
+
 <br>
 
-**Convención de Commits**
- 
-Mensajes de commit en español, formato corto y descriptivo, indicando el módulo afectado — inspirado en Conventional Commits pero sin exigir el prefijo en inglés, dado que el resto del código y la documentación de negocio están en español:
- 
+**Convención de commits (inspirada en Conventional Commits, en español):**
+
 <br>
 
-| Tipo | Uso |
-|:---|:---|
-| **feat:** | Nueva funcionalidad (ej. `feat: registrar bloqueo de horario con motivo (RF32)`) |
-| **fix:** | Corrección de errores |
-| **docs:** | Cambios en documentación |
-| **style:** | Ajustes de formato, sin cambio de lógica |
-| **refactor:** | Cambios internos sin alterar el comportamiento |
-| **chore:** | Tareas de mantenimiento (dependencias, configuración) |
- 
+| Prefijo | Uso |
+|---|---|
+| `feat:` | Nueva funcionalidad. |
+| `fix:` | Corrección de un error. |
+| `docs:` | Cambios de documentación. |
+| `refactor:` | Cambios internos sin alterar comportamiento. |
+| `chore:` | Tareas de mantenimiento (dependencias, configuración). |
+
 <br>
 
-## 8.3. Guía de Estilo y Convenciones de Código
- 
-**Convenciones Generales**
-- Nomenclatura de clases, tablas, variables y endpoints en inglés, alineada al Lenguaje Ubicuo del glosario (2.3) y a los aggregates del Event Storming: `Booking`, `Court`, `Customer`, `Payment`, `User`, `ScheduleBlock`.
-- Se evitan abreviaciones innecesarias y nombres genéricos (`data1`, `temp`, `info`).
-- Se prioriza la claridad del código sobre soluciones complejas, dado que es mantenido por una sola desarrolladora sin red de code review.
+## 8.3. Convenciones de Código
+
 <br>
 
-**Estructura de Carpetas**
- 
-Ambos repositorios se organizan por bounded context (no por tipo de archivo técnico), reflejando la arquitectura hexagonal (4.0):
- 
-- **Backend:** cada contexto (`bookings/`, `payments/`, `customers/`, `identity/`, `notifications/`) con sus propias carpetas `domain/`, `application/` e `infrastructure/`.
-- **Frontend:** organizado también por bounded context bajo `src/` (`bookings/`, `customers/`, `courts/`, `payments/`, `auth/`), más una carpeta `shared/` para componentes, hooks y cliente de API comunes.
+**General:**
+- Nombres de variables y funciones en inglés; textos visibles al usuario en español.
+- Indentación de 2 espacios.
+- Punto y coma obligatorio en TypeScript.
+
 <br>
 
-**TypeScript (frontend y backend)**
- 
-Nombres y sintaxis:
-- `camelCase` para variables, funciones y parámetros.
-- `PascalCase` para clases, interfaces, enums, tipos y componentes React.
-- Constantes globales en `UPPER_CASE_WITH_UNDERSCORES`.
-Tipado:
-- `strict: true` en ambos repositorios.
-- Tipar explícitamente parámetros y valores de retorno.
-- Evitar `any` excepto cuando sea estrictamente necesario.
-- Los tipos de los modelos de datos se derivan del schema de Prisma para evitar duplicación entre frontend y backend.
-Buenas prácticas:
-- Preferir `const` sobre `let`, evitar `var`.
-- Separar lógica de negocio (dominio/casos de uso) de la capa de presentación (componentes React / controladores Express).
-- Mantener funciones pequeñas y reutilizables.
+**Estructura de carpetas (backend):**
+
+```
+src/
+  routes/
+  services/
+  middlewares/
+  db.ts
+  index.ts
+prisma/
+  schema.prisma
+  prisma.config.ts
+```
+
 <br>
 
-**React (frontend)**
- 
-- Componentes en `PascalCase` con sufijo del tipo de pantalla cuando aplica (ej. `NuevaReservaPage`, `ReservasPage`).
-- Hooks personalizados con prefijo `use` (ej. `usePanelData`, `useClientes`).
-- Sin lógica de negocio dentro de los componentes: se delega a hooks y al cliente de API en `shared/`.
-- Estilos con Tailwind CSS únicamente — sin CSS-in-JS ni hojas de estilo sueltas, para mantener un solo sistema de estilos.
+**Estructura de carpetas (frontend):**
+
+```
+src/
+  pages/
+  components/
+  services/
+  hooks/
+  types/
+```
+
 <br>
 
-**Linting y formato**
- 
-ESLint + Prettier en ambos repositorios, ejecutados antes de cada commit relevante.
- 
+**TypeScript:**
+- Tipado explícito en las firmas de funciones públicas.
+- Se evita `any`; se prefieren tipos generados por Prisma en el backend.
+
+<br>
+
+**React:**
+- Componentes funcionales con Hooks.
+- Un componente por archivo.
+
+<br>
+
+**Linting:** ESLint + Prettier en ambos repositorios, ejecutado antes de cada commit relevante.
+
 <br>
 
 ## 8.4. Configuración de Despliegue
- 
-**Frontend**
- 
-Render (Static Site), conectado al repositorio de GitHub del frontend. Build automático (`npm run build`) en cada push a `main`. `VITE_API_URL` apunta a la URL pública del backend en producción.
- 
+
 <br>
 
-**Backend**
- 
-Render (Web Service, plan Starter), conectado al repositorio de GitHub del backend. Build y arranque automático (`npm run build && npm start`) en cada push a `main`. Variables de entorno configuradas en el dashboard de Render: cadena de conexión a Supabase, JWT secret, API key de Resend, credenciales de Supabase Storage.
- 
+**Frontend (Render — Static Site):**
+- Build Command: `npm run build`
+- Publish Directory: `dist`
+- Variable de entorno: `VITE_API_URL`
+
 <br>
 
-**Base de Datos**
- 
-Supabase (PostgreSQL gestionado), con las migraciones de Prisma (`npx prisma migrate deploy`) aplicadas contra la instancia de producción antes del primer despliegue del backend.
- 
+**Backend (Render — Web Service, plan Starter):**
+- Build Command: `npm install && npx prisma generate`
+- Start Command: `npm run start`
+- Variables de entorno: `DATABASE_URL`, `DIRECT_URL`, `JWT_SECRET`, `RESEND_API_KEY`
+
 <br>
 
-**Variables de entorno sensibles** (JWT secret, credenciales de Supabase, API key de Resend) nunca se versionan en el repositorio; se configuran directamente en el dashboard de Render y en el archivo `.env` local (excluido vía `.gitignore`).
- 
+**Base de datos (Supabase):**
+- PostgreSQL gestionado, con conexión pooled (`DATABASE_URL`) para la aplicación y conexión directa (`DIRECT_URL`) para migraciones.
+- Supabase Storage para comprobantes de pago.
+
+<br>
+
+## 8.5. Avance por Sprint
+
+<br>
+
+| Sprint | Estado real de avance |
+|---|---|
+| Sprint 1 | Completado. Documentación de Capítulos I-IV, diseño (wireframes, mockups, prototipo Figma) y frontend completo en React contra `json-server`, validado navegacionalmente. |
+| Sprint 2 | En progreso. Backend configurado (Express + TypeScript + Prisma + migraciones aplicadas contra Supabase) y endpoint `/health` funcionando (T-01, T-03 Done). El endpoint de login y su conexión al frontend (T-02) están parcialmente hechos: el código del backend está escrito, falta conectar el `AuthService` del frontend. El resto de los Work-Items del Sprint 2 (pagos, panel, solicitudes de acceso, correos, ajustes de cuenta, WhatsApp, conexión frontend-backend, QA y despliegue) todavía no se han construido. |
+
 <br>
 
 ---
@@ -2230,50 +2261,43 @@ Supabase (PostgreSQL gestionado), con las migraciones de Prisma (`npx prisma mig
 
 ## 9.1. Estrategia de Pruebas
 
-Dado el plazo de 2 semanas y una sola desarrolladora, la estrategia prioriza pruebas manuales dirigidas por riesgo de negocio, en vez de una suite de pruebas automatizadas completa:
+<br>
 
-- **Pruebas manuales de API (Postman):** cada endpoint se prueba con su escenario exitoso y al menos un escenario de error definido en sus criterios de aceptación Gherkin, antes de darlo por terminado (Definition of Done).
+Dado que se trata de un desarrollo individual, la estrategia de pruebas se centra en:
 
-- **Pruebas de invariantes de dominio:** foco especial en RF06 (no doble reserva) por ser la regla crítica del negocio — se prueba tanto a nivel de validación en el backend como del constraint único en base de datos, incluyendo el caso de dos solicitudes casi simultáneas sobre la misma franja.
-
-- **Pruebas manuales de interfaz:** cada pantalla se revisa visualmente en al menos una resolución móvil real (RNF03) antes de cerrarse, dado que el celular es el dispositivo principal de uso.
-
-- **Pruebas exploratorias con datos reales:** antes del cierre del Sprint 2, se cargan datos de prueba que se acerquen al uso real de Carlos (5 canchas, alquileres con pagos totales/parciales/pendientes) para detectar comportamientos no cubiertos por las historias individuales.
-
-- No se automatizan pruebas end-to-end ni se configura CI de testing en esta fase — se documenta como posible mejora para la Propuesta 2, una vez que el sistema tenga uso real y una base de código más estable sobre la cual escribir pruebas automatizadas con sentido.
+- **Pruebas manuales guiadas por Postman** sobre cada endpoint del backend, cubriendo el caso exitoso y al menos un caso de error por endpoint.
+- **Pruebas de integración de punta a punta**, verificando el flujo completo desde la interfaz hasta la base de datos, una vez el frontend se conecta a la API real (Sprint 2).
+- **Validación con el cliente (Carlos)**, mostrando el sistema desplegado y confirmando que los flujos cubren su operación real.
+- **Revisión de invariantes de dominio** identificadas en el Event Storming (4.1), en particular el rechazo de doble reserva (RF06).
 
 <br>
 
 ## 9.2. Casos de Prueba Clave
 
-| # | Caso de prueba | Resultado esperado | Historia relacionada |
-|---|---|---|---|
-| 1 | Registrar un alquiler sobre una franja ya ocupada por otro alquiler activo | El sistema rechaza el registro y emite `DoubleBookingRejected`, sin crear un nuevo `Booking`. | US06 |
-| 2 | Cancelar un alquiler y luego registrar uno nuevo en la misma franja | El sistema acepta el nuevo registro; la franja cancelada queda disponible de inmediato. | US05, US06 |
-| 3 | Bloquear por mantenimiento una franja con un alquiler activo | El sistema rechaza el bloqueo; el alquiler existente no se modifica. | US07 |
-| 4 | Registrar un pago parcial menor al saldo pendiente | El `Booking` transita a estado `PARCIAL` y el saldo se recalcula correctamente. | US15 |
-| 5 | Registrar un pago que complete el saldo pendiente | El `Booking` transita automáticamente a `PAGADO`. | US15 |
-| 6 | Intentar registrar un pago mayor al monto total del alquiler | El sistema rechaza el registro. | US14 |
-| 7 | Consultar el panel principal con alquileres, pagos e ingresos del día | Las cifras mostradas coinciden exactamente con los `Booking` y `Payment` reales de esa fecha. | US17, US18, US19 |
-| 8 | Un administrador no dueño intenta autorizar una solicitud de acceso | El sistema rechaza la acción; el `User` pendiente no cambia de estado. | US21 |
-| 9 | Registrar un cliente nuevo desde el formulario de alquiler | El `Customer` y el `Booking` quedan creados y asociados en una sola operación. | US28 |
-| 10 | Falla el envío del correo de confirmación (proveedor caído) | El `Booking` permanece registrado sin cambios; el fallo queda en logs, sin bloquear al administrador. | US22 |
-| 11 | Instalar la PWA en un celular Android real | La app se instala sin pasar por tienda de aplicaciones y funciona offline para las pantallas ya cargadas. | RNF04 |
-| 12 | Backend tras un período de inactividad (verificación de plan Starter) | El sistema responde sin latencia de arranque en frío perceptible. | RNF02 |
+<br>
+
+| # | Caso de Prueba | Precondición | Pasos | Resultado Esperado |
+|---|---|---|---|---|
+| 1 | Registrar un alquiler sin solapamiento | Cancha y horario disponibles | Completar formulario de reserva y confirmar | Se crea el `Booking`, se emite `BookingRegistered` |
+| 2 | Rechazar doble reserva | Ya existe un `Booking` activo en ese horario y cancha | Intentar registrar otro alquiler en el mismo horario | Sistema rechaza con mensaje claro, se emite `DoubleBookingRejected` |
+| 3 | Bloquear horario con motivo | Horario disponible | Registrar bloqueo con motivo obligatorio | Se crea `ScheduleBlock`, se emite `ScheduleBlocked` |
+| 4 | Registrar pago total | Alquiler con saldo pendiente | Registrar pago por el monto total | Estado de pago pasa a `PAGADO`, saldo en 0 |
+| 5 | Registrar pago parcial | Alquiler con saldo pendiente | Registrar pago menor al total | Estado pasa a `PARCIAL`, saldo recalculado |
+| 6 | Rechazar pago que excede el saldo | Alquiler con saldo pendiente | Intentar pagar un monto mayor al saldo | Sistema rechaza la operación |
+| 7 | Solicitar acceso de administrador | Correo no registrado previamente | Completar formulario de solicitud | Se crea `RegistrationRequestCreated`, solicitud queda pendiente |
+| 8 | Rechazar solicitud con correo duplicado | Correo ya registrado | Intentar solicitar acceso con ese correo | Sistema rechaza sin crear duplicado |
+| 9 | Autorizar solicitud de acceso | Solicitud pendiente, usuario autenticado es el dueño | Autorizar la solicitud | Se emite `AdminAuthorized`, se envía correo al solicitante |
+| 10 | Rechazar autorización por usuario no dueño | Solicitud pendiente, usuario autenticado no es el dueño | Intentar autorizar | Sistema responde 403 |
+| 11 | Enviar correo de confirmación sin bloquear el registro | Proveedor de correo (Resend) caído | Registrar un alquiler | El alquiler se registra igual; el envío de correo falla de forma aislada (RF24) |
+| 12 | Verificar ausencia de arranque en frío | Backend desplegado en Render, plan Starter | Realizar una solicitud después de un período de inactividad | El backend responde sin demora perceptible por arranque en frío, según RNF02 y la decisión de infraestructura de 4.7.2 |
 
 <br>
 
 ## 9.3. Validación con el Cliente
 
-Sesión de validación presencial o remota con Carlos antes del cierre del Sprint 2, con el sistema ya desplegado en producción (o en un ambiente equivalente):
+<br>
 
-- **Qué se revisó:** flujo completo de un día de operación simulado — login, registro de un alquiler, bloqueo de una franja por mantenimiento, registro de un pago parcial y uno total, y lectura del panel principal.
-
-- **Formato:** Carlos y su trabajador prueban el sistema directamente desde sus propios celulares, con guía de la desarrolladora pero sin que ella opere la app por ellos — para detectar fricciones reales de uso.
-
-- **Feedback recibido y ajustes aplicados:** se documentan aquí una vez ocurrida la sesión (pendiente al momento de escribir este documento).
-
-- **Criterio de cierre:** el Sprint 2 no se da por cerrado hasta que Carlos confirma explícitamente que el flujo de registro de alquiler y pago — el corazón del sistema — funciona como él lo necesita en su operación diaria.
+La validación con Carlos Maldonado se realiza al cierre de cada sprint, mostrando el sistema en funcionamiento (Sprint 1: navegación y pantallas contra datos de prueba; Sprint 2: sistema completo desplegado con datos reales) y recogiendo su conformidad o los ajustes solicitados antes de continuar.
 
 <br>
 
@@ -2283,46 +2307,49 @@ Sesión de validación presencial o remota con Carlos antes del cierre del Sprin
 
 ## 10.1. Ambiente de Producción
 
-| Componente | Detalle |
-|---|---|
-| Frontend | Render Static Site — dominio provisto por Render (`*.onrender.com`) en esta fase; dominio propio queda como upgrade opcional, no incluido en Propuesta 1. |
-| Backend | Render Web Service, plan Starter — expone la API REST consumida por el frontend. |
-| Base de datos | Supabase (PostgreSQL gestionado), instancia de producción separada de cualquier entorno de desarrollo local. |
-| Almacenamiento de archivos | Supabase Storage — buckets para comprobantes de pago (RF25) y fotos de canchas (RF31). |
-| Correo transaccional | Resend, plan gratuito, dominio de envío verificado. |
-| Certificado SSL | HTTPS incluido automáticamente por Render en ambos servicios (Static Site y Web Service), sin configuración manual. |
+<br>
+
+| Componente | Proveedor | Detalle |
+|---|---|---|
+| Frontend | Render (Static Site) | React + Vite, servido como sitio estático. |
+| Backend | Render (Web Service, plan Starter) | Express + TypeScript, sin arranque en frío. |
+| Base de datos | Supabase | PostgreSQL gestionado. |
+| Almacenamiento | Supabase Storage | Comprobantes de pago y fotos de cancha. |
+| Correo transaccional | Resend | Confirmaciones y notificaciones de autorización. |
 
 <br>
 
 ## 10.2. Checklist de Despliegue
 
-- [ ] Variables de entorno de producción configuradas en Render (cadena de conexión a Supabase, JWT secret, API key de Resend, credenciales de Supabase Storage).
-- [ ] Migraciones de Prisma aplicadas contra la base de datos de producción en Supabase.
-- [ ] Backups automáticos habilitados en Supabase (RNF08).
-- [ ] Endpoint `/health` (TS04) verificado en producción, respondiendo `200 ok`.
-- [ ] PWA instalable verificada en un celular Android real (RNF04).
-- [ ] Al menos una cuenta de administrador dueño creada manualmente en producción (Carlos), para poder autorizar futuras solicitudes (RF21).
-- [ ] Datos de prueba/mock eliminados de la base de datos de producción.
-- [ ] Prueba end-to-end manual del flujo completo (login → registrar alquiler → registrar pago → panel) ejecutada directamente sobre producción.
-- [ ] Validación con el cliente completada y confirmada por Carlos.
+<br>
+
+- [ ] Migraciones de Prisma aplicadas contra la base de datos de producción.
+- [ ] Variables de entorno configuradas en Render (frontend y backend).
+- [ ] `VITE_API_URL` del frontend apuntando al backend de producción.
+- [ ] Endpoint `/health` respondiendo correctamente en producción.
+- [ ] PWA instalable verificada en un celular real.
+- [ ] Flujo completo (reserva → pago → confirmación por correo) probado de punta a punta en producción.
+- [ ] Validación final con Carlos.
 
 <br>
 
 ## 10.3. Plan de Rollback
 
-- **Backend:** Render mantiene el historial de despliegues anteriores; ante una falla crítica tras un despliegue, se revierte al último despliegue estable directamente desde el dashboard de Render (rollback en un clic, sin necesidad de un nuevo build).
+<br>
 
-- **Frontend:** mismo mecanismo — Render Static Site permite revertir al build anterior desde el dashboard.
-
-- **Base de datos:** antes de aplicar cualquier migración de Prisma en producción, se toma un respaldo manual adicional en Supabase (más allá de los backups automáticos de RNF08); si una migración introduce un problema, se restaura ese respaldo antes de revertir el código.
-
-- **Comunicación:** si el sistema queda no disponible durante un rollback, se avisa directamente a Carlos y su trabajador (llamada o WhatsApp) dado que es una herramienta de uso diario — no hay usuarios finales externos a los que notificar en el alcance de Propuesta 1.
+- Mantener la versión anterior desplegada identificada por su commit en `main` antes de cada despliegue nuevo.
+- Ante un fallo crítico detectado después del despliegue, revertir el Web Service y el Static Site en Render al commit anterior conocido como estable.
+- Si el fallo involucra una migración de base de datos, evaluar si requiere una migración de reversa antes de volver a un commit anterior del backend.
+- Comunicar a Carlos cualquier interrupción del servicio y el tiempo estimado de resolución.
 
 <br>
 
 ---
 
 # Anexos
-- Propuesta de Desarrollo original (Propuesta 1 y 2, comparativa y decisión firmada por el cliente).
-- Capturas del prototipo Figma.
-- Actas de reuniones/validación con el cliente.
+
+<br>
+
+- Repositorio del frontend: https://github.com/brianna-salinas/la-canchita-de-carlos-frontend.git
+- Repositorio del backend: https://github.com/brianna-salinas/la-canchita-de-carlos-backend.git
+- Prototipo navegable en Figma (3.4).

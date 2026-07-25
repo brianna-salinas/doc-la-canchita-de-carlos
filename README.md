@@ -951,13 +951,13 @@ El backend no se organiza como un framework Express típico con todo en controla
 
 - **Infraestructura (adaptadores):** implementaciones concretas de esos puertos — el adaptador de entrada es Express (controladores/rutas que reciben HTTP y llaman a los casos de uso), el adaptador de salida es Prisma/PostgreSQL (implementa `BookingRepository` contra la base de datos real).
 
-Además de estos 6 contextos de negocio, existe una capa transversal `platform/` (autenticación JWT, hash de contraseñas, manejo centralizado de errores, validación de entrada, adaptador de Supabase Storage, endpoint `/health`) — no es un bounded context con su propio lenguaje de negocio, sino infraestructura técnica compartida que cualquier contexto puede usar (ver 4.2).
+Además de estos 6 contextos de negocio, existe una capa transversal `platform/` (autenticación JWT, hash de contraseñas, manejo centralizado de errores, validación de entrada, adaptador de Supabase Storage, endpoint `/health`) — no es un bounded context con su propio lenguaje de negocio, sino infraestructura técnica compartida que cualquier contexto puede usar.
 
 <br>
 
 **Por qué combinarlas:**
 
-La arquitectura de tres capas resuelve *dónde* corre cada cosa (despliegue); la hexagonal resuelve *cómo* se organiza el código *dentro* de la capa de Aplicación, alineado a los bounded contexts definidos en DDD (ver 4.2). La ventaja concreta para este proyecto: la lógica de negocio (ej. "no permitir doble reserva") queda aislada y testeable sin levantar servidor ni base de datos, y si en la Propuesta 2 cambian de Prisma a otro ORM o agregan una pasarela de pagos, solo se reemplaza el adaptador correspondiente sin tocar las reglas de negocio.
+La arquitectura de tres capas resuelve *dónde* corre cada cosa (despliegue); la hexagonal resuelve *cómo* se organiza el código *dentro* de la capa de Aplicación, alineado a los bounded contexts definidos en DDD. La ventaja concreta para este proyecto: la lógica de negocio (ej. "no permitir doble reserva") queda aislada y testeable sin levantar servidor ni base de datos, y si en la Propuesta 2 cambian de Prisma a otro ORM o agregan una pasarela de pagos, solo se reemplaza el adaptador correspondiente sin tocar las reglas de negocio.
 
 <br>
 
@@ -1139,25 +1139,117 @@ Eventos de dominio identificados por subdominio, con el comando/actor que los di
 - **Bookings → Notifications** (relación *Published Language / eventos*): Notifications escucha `BookingRegistered` y reacciona enviando el correo de confirmación (RF23); no tiene forma de escribir de vuelta en Bookings.
 - **Identity & Access → Notifications** (relación *Published Language / eventos*): Notifications escucha `AdminAuthorized`/`AdminRejected` para avisar por correo al solicitante (RF22) y disparar el correo de verificación de correo (US34).
 
-<br>
-
-**Diagrama visual del Context Map:**
-
-![Context Map - La Canchita de Carlos](context-map-la-canchita.png)
-
-*Diagrama: seis cajas (una por subdominio) agrupadas visualmente por tipo — Bookings destacado como núcleo (caja central, mayor tamaño); Payments y Customers como soporte alrededor; Identity & Access, Panel y Notifications como genéricos en los bordes. Flechas etiquetadas con el tipo de relación (Customer/Supplier, Shared Kernel, Published Language) según el listado anterior.*
-
-Este mapa es el que después se traduce, a nivel de código, en los "anillos" de la arquitectura hexagonal (4.0): cada subdominio núcleo/soporte tiene su propio dominio + casos de uso, y los subdominios genéricos (Identity & Access, Panel) se mantienen deliberadamente simples.
 
 <br>
 
 ## 4.3. Software Architecture Context Diagram
+
+<br>
+
+![Context Diagram](assets/C4-level/context-diagram.png)
+
+El diagrama de contexto ubica a "La Canchita de Carlos" como una única caja frente a los actores humanos y los sistemas externos con los que se integra, sin entrar todavía en cómo está construido internamente.
+
+Cuatro actores interactúan con el sistema: el **Administrador** (rol operativo estándar, registra alquileres, pagos, clientes y canchas), el **Administrador Dueño** (único con permiso para autorizar o rechazar nuevas solicitudes de acceso, RF21), el **Solicitante** (una persona sin cuenta todavía que pide acceso como administrador) y el **Cliente del negocio** (quien alquila una cancha; no usa el sistema directamente, pero recibe el correo de confirmación y puede ser contactado por WhatsApp).
+
+El sistema se integra con tres sistemas externos: **Resend**, que envía los correos transaccionales (confirmación de alquiler, resultado de una solicitud de acceso, verificación de correo y reseteo de contraseña); **Supabase Storage**, donde se suben y firman las fotos de canchas/perfil y los comprobantes de pago (RF25, RF31); y **WhatsApp**, no como una integración de API sino como un enlace directo (`wa.me`) que el sistema genera para que el administrador abra un chat con el cliente sin copiar el número a mano (RF30).
+
 <br>
 
 ## 4.4. Software Architecture Container Diagram
+
+<br>
+
+![Container Diagram](assets/C4-level/container-diagram.png)
+
+El diagrama de contenedores abre la caja del sistema y muestra las tres piezas desplegables de forma independiente, correspondientes a la arquitectura de tres capas definida:
+
+- **Frontend PWA** (React + TypeScript + Vite + `vite-plugin-pwa`): las pantallas de calendario, canchas, clientes, pagos, panel y ajustes, instalable sin tienda de aplicaciones (RNF04). Es lo único con lo que interactúan directamente el Administrador, el Administrador Dueño y el Solicitante.
+- **Backend API** (Node.js + Express + TypeScript, empaquetado en una imagen Docker): expone la API REST que consume el frontend y contiene los 6 bounded contexts de negocio en arquitectura hexagonal.
+- **Base de Datos** (PostgreSQL 16, gestionado por Supabase sobre AWS): persiste usuarios, solicitudes de acceso, canchas, bloqueos, clientes, alquileres, pagos y notificaciones.
+
+El Frontend PWA llama al Backend API por HTTPS/JSON; el Backend API lee y escribe en la Base de Datos vía Prisma, y es el único contenedor que se comunica con los sistemas externos (Resend y Supabase Storage) — el frontend nunca les habla directamente. Esta separación es la que permite desplegar y escalar cada contenedor por separado (frontend en un Static Site, backend en un Web Service, base de datos en un servicio gestionado aparte).
+
 <br>
 
 ## 4.5. Software Architecture Components Diagrams
+
+<br>
+
+Los diagramas de componentes muestran a cada uno de los 6 bounded contexts definidos, sus componentes internos siguiendo los 3 anillos de la arquitectura hexagonal: controladores REST (adaptador de entrada), casos de uso (aplicación) y repositorios + dominio (adaptador de salida y núcleo). Se documenta un diagrama por bounded context, porque cada contexto es un límite transaccional independiente con su propio lenguaje, y mezclarlos en un único diagrama perdería esa separación. Los componentes de `platform/` (autenticación JWT, hash de contraseñas, validación, adaptador de Supabase Storage) no son un bounded context propio, son infraestructura técnica compartida y por eso aparecen repetidos, cuando corresponde, en más de un diagrama de contexto en vez de tener uno propio.
+
+<br>
+
+### 4.5.1. Components — Bookings (núcleo)
+
+<br>
+
+![Components Diagram](assets/C4-level/components-bookings.png)
+
+<br>
+
+Contiene los tres aggregates que concentran la regla de negocio más crítica del sistema: `Booking`, `Court` y `ScheduleBlock`. El **Bookings Controller** expone las rutas de alquileres (crear, editar, cancelar, buscar historial, disponibilidad consolidada) y el **Courts Controller** las de canchas (alta, edición, precio, fotos, bloqueos por mantenimiento); ambos protegidos por el `Auth Middleware` compartido. Los casos de uso (`registerBooking`, `editBooking`, `cancelBooking`, `blockSchedule(Series)`, `registerCourt`, `updateCourtPrice`, entre otros) operan sobre el `Booking Repository`, que implementa el constraint que impide la doble reserva (RF06) directamente contra PostgreSQL, y sobre el `Court Repository`/`ScheduleBlock Repository`. Este contexto es el único que depende de `Customer Repository` (para crear un cliente embebido al registrar un alquiler, TS09) y del `Supabase File Storage` compartido (para subir fotos de cancha), y dispara el `Resend Notification Sender` cuando se registra un alquiler nuevo.
+
+<br>
+
+### 4.5.2. Components — Customers
+
+<br>
+
+![Components Diagram](assets/C4-level/components-customers.png)
+
+<br>
+
+El contexto más simple del sistema: el **Customers Controller** expone alta, edición, historial y desactivación de clientes; los casos de uso (`registerCustomer`, `updateCustomer`, `deactivateCustomer`, `getCustomerHistory`, `listCustomers`) operan sobre el aggregate `Customer` a través de su repositorio. No tiene dependencias salientes hacia otros contextos es consumido por Bookings.
+
+<br>
+
+### 4.5.3. Components — Payments
+
+<br>
+
+![Components Diagram](assets/C4-level/components-payments.png)
+
+<br>
+
+El **Payments Controller** expone el registro de pagos (total o parcial), adjuntar comprobante y listar los pagos de un alquiler. Los casos de uso (`registerPayment`, `attachReceipt`, `getReceiptSignedUrl`, `listPaymentsForBooking`) aplican la invariante del aggregate `Payment` (el monto pagado nunca excede el total adeudado) y dependen de dos elementos fuera de su propio contexto: el `Booking Repository` de Bookings, para recalcular el saldo pendiente del alquiler asociado, y el `Supabase File Storage` compartido, para subir y firmar la URL del comprobante.
+
+<br>
+
+### 4.5.4. Components — Identity & Access
+
+<br>
+
+![Components Diagram](assets/C4-level/components-identity.png)
+
+<br>
+
+El contexto con más componentes del sistema, porque cubre dos aggregates (`User` y `AccessRequest`) y todo el ciclo de identidad: el **Auth Controller** expone login, logout y reseteo de contraseña; el **Users Controller** expone solicitudes de acceso, autorizar/rechazar, verificación de correo y ajustes de cuenta. Los casos de uso se apoyan en cinco repositorios distintos (`User`, `AccessRequest`, `Session`, `EmailVerificationToken`, `PasswordResetToken`) y en cuatro componentes compartidos de `platform/`: `JWT Service` (firma y verifica tokens), `Password Hasher` (bcrypt), `Token Generator` (tokens de un solo uso hasheados) y `Owner-Only Middleware` (restringe autorizar/rechazar solicitudes al administrador dueño, RF21). También sube la foto de perfil vía `Supabase File Storage` y dispara los tres correos del ciclo de identidad (resultado de solicitud, verificación de correo, reseteo de contraseña) a través del `Resend Notification Sender` de Notifications.
+
+<br>
+
+### 4.5.5. Components — Panel
+
+<br>
+
+![Components Diagram](assets/C4-level/components-panel.png)
+
+<br>
+
+El único contexto sin aggregate propio: el **Panel Controller** expone los tres read models del día operativo (alquileres del día, ingreso total, pagos pendientes, EP06). Sus casos de uso (`getBookingsToday`, `getIncomeToday`, `getPendingPaymentsToday`) no contienen reglas de negocio — solo consultan en solo lectura, a través del `Panel Repository`, las tablas de `Booking` y `Payment` que pertenecen a otros contextos.
+
+<br>
+
+### 4.5.6. Components — Notifications
+
+<br>
+
+![Components Diagram](assets/C4-level/components-notifications.png)
+
+<br>
+
+El **Notifications Controller** expone las notificaciones internas del sistema (listar mis notificaciones, marcar como leída) sobre el aggregate `Notification`, a través de sus casos de uso (`listMyNotifications`, `markNotificationRead`) y su repositorio. El componente distinto de este contexto es el **Resend Notification Sender**: un adaptador que implementa el puerto `NotificationSender` y es invocado desde Bookings (confirmación de alquiler) e Identity & Access (resultado de solicitud, verificación de correo, reseteo de contraseña) para enviar los correos vía Resend — es el único punto de salida hacia ese sistema externo, aunque el evento que lo dispara nazca en otro contexto.
+
 <br>
 
 ## 4.6. Cloud Architecture (PWA)

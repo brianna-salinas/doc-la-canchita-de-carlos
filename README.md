@@ -44,9 +44,9 @@
 * [1.4. Usuarios del sistema](#14-usuarios-del-sistema)
 
 [Capítulo II: Especificación de Requisitos](#capítulo-ii-especificación-de-requisitos)
-* [2.1. Requisitos Funcionales (RF)](#21-requisitos-funcionales-rf)
-* [2.2. Requisitos No Funcionales (RNF)](#22-requisitos-no-funcionales-rnf)
-* [2.3. Lenguaje Ubicuo (Glosario del Dominio)](#23-lenguaje-ubicuo-glosario-del-dominio)
+* [2.1. Requisitos Funcionales](#21-requisitos-funcionales)
+* [2.2. Requisitos No Funcionales](#22-requisitos-no-funcionales)
+* [2.3. Lenguaje Ubicuo](#23-lenguaje-ubicuo)
 * [2.4. User Stories](#24-user-stories)
 * [2.5. Product Backlog](#25-product-backlog)
 
@@ -58,7 +58,7 @@
 
 [Capítulo IV: Arquitectura de Software (Domain-Driven Design)](#capítulo-iv-arquitectura-de-software-domain-driven-design)
 * [4.0. Patrón de Arquitectura](#40-patrón-de-arquitectura)
-* [4.1. Event Storming (Diseño)](#41-event-storming-diseño)
+* [4.1. Event Storming](#41-event-storming)
 * [4.2. Bounded Contexts y Context Map](#42-bounded-contexts-y-context-map)
 * [4.3. Diagrama de Contexto (C4 - Nivel 1)](#43-diagrama-de-contexto-c4---nivel-1)
 * [4.4. Diagrama de Contenedores (C4 - Nivel 2)](#44-diagrama-de-contenedores-c4---nivel-2)
@@ -67,18 +67,18 @@
 * [4.7. Análisis Técnico-Económico de la Infraestructura](#47-análisis-técnico-económico-de-la-infraestructura)
 
 [Capítulo V: Diseño Orientado a Objetos](#capítulo-v-diseño-orientado-a-objetos)
-* [5.1. Diagrama de Clases — Backend](#51-diagrama-de-clases--backend)
-* [5.2. Diagrama de Clases — Frontend](#52-diagrama-de-clases--frontend)
+* [5.1. Diagrama de Clases - Backend](#51-diagrama-de-clases--backend)
+* [5.2. Diagrama de Clases - Frontend](#52-diagrama-de-clases--frontend)
 
 [Capítulo VI: Diseño de Base de Datos](#capítulo-vi-diseño-de-base-de-datos)
 * [6.1. Modelo Entidad-Relación](#61-modelo-entidad-relación)
 * [6.2. Diagrama de Base de Datos](#62-diagrama-de-base-de-datos)
 * [6.3. Diccionario de Datos](#63-diccionario-de-datos)
 
-[Capítulo VII: Gestión del Proyecto (Scrum, 2 semanas)](#capítulo-vii-gestión-del-proyecto-scrum-2-semanas)
+[Capítulo VII: Gestión del Proyecto](#capítulo-vii-gestión-del-proyecto)
 * [7.1. Plan de Sprints](#71-plan-de-sprints)
-* [7.2. Sprint 1 — Documentación, Diseño y Base del Sistema](#72-sprint-1--documentación-diseño-y-base-del-sistema)
-* [7.3. Sprint 2 — Desarrollo, Integración, Pruebas y Despliegue](#73-sprint-2--desarrollo-integración-pruebas-y-despliegue)
+* [7.2. Sprint 1](#72-sprint-1)
+* [7.3. Sprint 2](#73-sprint-2)
 * [7.4. Definition of Done](#74-definition-of-done)
 
 [Capítulo VIII: Implementación](#capítulo-viii-implementación)
@@ -179,7 +179,7 @@ No existe un rol de "cliente" dentro del sistema en esta fase los clientes de Ca
 
 # Capítulo II: Especificación de Requisitos
 
-## 2.1. Requisitos Funcionales (RF)
+## 2.1. Requisitos Funcionales
 
 Requisitos derivados del alcance definido, agrupados por módulo (bounded context), con prioridad asignada según su criticidad para resolver el problema central del negocio: la doble reserva y la falta de visibilidad de ingresos.
 
@@ -281,7 +281,7 @@ Requisitos derivados del alcance definido, agrupados por módulo (bounded contex
 
 <br>
 
-## 2.2. Requisitos No Funcionales (RNF)
+## 2.2. Requisitos No Funcionales
 
 Requisitos de calidad del sistema, con criterio medible cuando aplica, alineados a la infraestructura definida en la documentación.
 
@@ -300,7 +300,8 @@ Requisitos de calidad del sistema, con criterio medible cuando aplica, alineados
 | RNF09 | Compatibilidad | La PWA debe funcionar en los navegadores/dispositivos reales que usan Carlos y su trabajador. | Verificada en Chrome (Android) y un navegador de escritorio como mínimo. |
 
 <br>
-## 2.3. Lenguaje Ubicuo (Glosario del Dominio)
+
+## 2.3. Lenguaje Ubicuo
 
 Términos consensuados organizados por bounded context, para que el vocabulario del negocio y el vocabulario del código sean el mismo.
 
@@ -372,7 +373,7 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 
 ## 2.4. User Stories
 
->*Las User Stories expresan necesidades reales del negocio de Carlos, no funcionalidades de pantalla. Cada historia describe una capacidad operacional con impacto concreto en la gestión de "La Canchita de Carlos". Los criterios de aceptación siguen la estructura Gherkin (Given/When/Then) y validan **comportamiento del dominio**: estados que cambian, **invariantes que se protegen**, y eventos que se emiten — no lo que muestra la pantalla. Los aggregates raíz (`Booking`, `Court`, `Customer`, `Payment`, `User`) y los Domain Events utilizados en estas historias fueron derivados del Event Storming (sección). Los criterios de aceptación se redactan en tiempo presente y tercera persona, sin referencias a detalles de interfaz.*
+>*Las User Stories expresan necesidades reales del negocio de Carlos, no funcionalidades de pantalla. Cada historia describe una capacidad operacional con impacto concreto en la gestión de "La Canchita de Carlos". Los criterios de aceptación siguen la estructura Gherkin (Given/When/Then) y validan **comportamiento del dominio**: estados que cambian, **invariantes que se protegen**, y eventos que se emiten — no lo que muestra la pantalla. Los aggregates raíz (`Booking`, `Court`, `Customer`, `Payment`, `User`, `AccessRequest`) y los Domain Events utilizados en estas historias fueron derivados del Event Storming (sección). Los criterios de aceptación se redactan en tiempo presente y tercera persona, sin referencias a detalles de interfaz.*
 
 <br>
 
@@ -386,13 +387,13 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | **EP04** | **Gestión de Canchas** | Capacidad de negocio que permite mantener actualizado el inventario de canchas del colegio (catálogo administrable, no un número fijo), sus precios y su identificación visual con fotos, base para calcular y comunicar correctamente cada alquiler. | US11, US12, US13, US29 |
 | **EP05** | **Gestión de Pagos** | Capacidad de negocio que permite registrar y trazar el dinero cobrado por cada alquiler, incluyendo pagos parciales y el respaldo visual del comprobante. | US14, US15, US16, US27 |
 | **EP06** | **Panel Operativo del Día** | Capacidad de negocio que da a Carlos visibilidad inmediata de la operación diaria: qué se alquiló, cuánto se cobró y qué falta cobrar. | US17, US18, US19 |
-| **EP07** | **Registro y Autorización de Administradores** | Capacidad de negocio que permite a Carlos incorporar nuevos administradores de forma controlada, sin crear cada cuenta manualmente ni ceder acceso sin verificación, y ver quién tiene acceso activo. | US20, US21, US26 |
+| **EP07** | **Registro y Autorización de Administradores** | Capacidad de negocio que permite a Carlos incorporar nuevos administradores de forma controlada, sin crear cada cuenta manualmente ni ceder acceso sin verificación, y ver quién tiene acceso activo. | US20, US21, US26, US34 |
 | **EP08** | **Confirmación por Correo** | Capacidad de negocio que da respaldo automático por correo de las acciones clave (reserva registrada, cuenta autorizada/rechazada), sin construir un sistema de notificaciones completo. | US22, US23 |
 | **EP09** | **Ajustes de Cuenta** | Capacidad de negocio que permite a cada administrador mantener actualizados sus propios datos de acceso (correo, contraseña), sin depender de soporte técnico externo. | US24, US25 |
 
 <br>
-### User Stories
 
+### User Stories
 | **ID** | **Título** | **Descripción** | **Criterios de Aceptación** | **Epic ID** |
 |---|---|---|---|---|
 | **EP01 – Identidad y Acceso** |||||
@@ -427,12 +428,13 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | **US18** | Ver ingreso total del día | Como administrador, quiero ver el ingreso total del día, para llevar control diario sin sacar cuentas manualmente. | **Escenario 1 – Ingreso calculado desde pagos reales:** <br> **Given:** existen uno o más `Payment` (totales y/o parciales) registrados en la fecha actual <br> **When:** el administrador consulta el panel <br> **Then:** el sistema retorna la suma exacta de esos `Payment`, sin incluir montos de alquileres aún no pagados. | EP06 |
 | **US19** | Ver pagos pendientes del día | Como administrador, quiero ver los pagos pendientes del día, para hacer seguimiento a los clientes que aún deben. | **Escenario 1 – Pendientes correctamente identificados:** <br> **Given:** existen `Booking` del día con estado de pago `PENDIENTE` o `PARCIAL` <br> **When:** el administrador consulta el panel <br> **Then:** el sistema retorna esos `Booking` junto con su saldo pendiente, excluyendo los que ya están en estado `PAGADO`. | EP06 |
 | **EP07 – Registro y Autorización de Administradores** |||||
-| **US20** | Solicitar registro de nueva cuenta de administrador | Como persona autorizada por Carlos para operar el negocio (ej. un nuevo trabajador), quiero registrar mi solicitud de cuenta, para que Carlos pueda autorizarme sin que él tenga que crear la cuenta manualmente. | **Escenario 1 – Solicitud creada en estado pendiente:** <br> **Given:** el solicitante completa nombre y correo válidos en el formulario de registro <br> **When:** confirma el envío <br> **Then:** se crea el aggregate `User` en estado `PENDIENTE`, se emite `RegistrationRequestCreated`, y el solicitante no obtiene ningún acceso al sistema todavía. <br><br> **Escenario 2 – Correo ya registrado:** <br> **Given:** el correo ingresado ya pertenece a un `User` existente (activo o pendiente) <br> **When:** se intenta enviar la solicitud <br> **Then:** el sistema rechaza la solicitud sin crear un duplicado. | EP07 |
-| **US21** | Autorizar o rechazar solicitudes de acceso | Como administrador dueño, quiero revisar y autorizar o rechazar las solicitudes de cuenta pendientes, para controlar quién tiene acceso al negocio. | **Escenario 1 – Autorización exitosa:** <br> **Given:** existe un `User` en estado `PENDIENTE` y quien ejecuta la acción es el administrador dueño <br> **When:** autoriza la solicitud <br> **Then:** el `User` transita a estado `ACTIVO`, se emite `AdminAuthorized`, y desde ese momento puede iniciar sesión (US01). <br><br> **Escenario 2 – Rechazo:** <br> **Given:** existe un `User` en estado `PENDIENTE` <br> **When:** el administrador dueño lo rechaza <br> **Then:** el `User` transita a estado `RECHAZADO`, se emite `AdminRejected`, y no puede iniciar sesión. <br><br> **Escenario 3 – Un administrador no dueño intenta autorizar:** <br> **Given:** quien intenta autorizar es un `User` con rol `ADMINISTRADOR` (no dueño) <br> **When:** intenta ejecutar la acción <br> **Then:** el sistema la rechaza y el `User` pendiente no cambia de estado. | EP07 |
-| **US26** | Ver administradores activos | Como administrador dueño, quiero ver el listado de cuentas de administrador activas, para saber en todo momento quién tiene acceso al negocio. | **Escenario 1 – Listado correcto:** <br> **Given:** existen `User` en distintos estados (`ACTIVO`, `PENDIENTE`, `RECHAZADO`) <br> **When:** el administrador dueño consulta el listado de activos <br> **Then:** el sistema retorna únicamente los `User` en estado `ACTIVO`, sin exponer las solicitudes pendientes o rechazadas en esa misma vista (esas viven en US21). | EP07 |
+| **US20** | Solicitar registro de nueva cuenta de administrador | Como persona autorizada por Carlos para operar el negocio (ej. un nuevo trabajador), quiero registrar mi solicitud de cuenta, para que Carlos pueda autorizarme sin que él tenga que crear la cuenta manualmente. | **Escenario 1 – Solicitud creada en estado pendiente:** <br> **Given:** el solicitante completa nombre y correo válidos en el formulario de registro <br> **When:** confirma el envío <br> **Then:** se crea el aggregate `AccessRequest` en estado `PENDING`, se emite `RegistrationRequestCreated`, y el solicitante no obtiene ningún acceso al sistema todavía (no existe `User` hasta que se apruebe). <br><br> **Escenario 2 – Correo ya registrado o con solicitud en curso:** <br> **Given:** el correo ingresado ya pertenece a un `User` existente o a un `AccessRequest` en estado `PENDING` <br> **When:** se intenta enviar la solicitud <br> **Then:** el sistema rechaza la solicitud sin crear un duplicado. | EP07 |
+| **US21** | Autorizar o rechazar solicitudes de acceso | Como administrador dueño, quiero revisar y autorizar o rechazar las solicitudes de cuenta pendientes, para controlar quién tiene acceso al negocio. | **Escenario 1 – Autorización exitosa:** <br> **Given:** existe un `AccessRequest` en estado `PENDING` y quien ejecuta la acción es el administrador dueño <br> **When:** autoriza la solicitud <br> **Then:** el `AccessRequest` transita a estado `APPROVED`, se emite `AdminAuthorized`, se crea un nuevo `User` en estado `PENDING_VERIFICATION` y se envía un correo de verificación — el solicitante aún no puede iniciar sesión hasta confirmar su correo (US34). <br><br> **Escenario 2 – Rechazo:** <br> **Given:** existe un `AccessRequest` en estado `PENDING` <br> **When:** el administrador dueño lo rechaza <br> **Then:** el `AccessRequest` transita a estado `REJECTED`, se emite `AdminRejected`, y no se crea ningún `User`. <br><br> **Escenario 3 – Un administrador no dueño intenta autorizar:** <br> **Given:** quien intenta autorizar es un `User` con rol `ADMINISTRADOR` (no dueño) <br> **When:** intenta ejecutar la acción <br> **Then:** el sistema la rechaza y el `AccessRequest` pendiente no cambia de estado. | EP07 |
+| **US26** | Ver administradores activos | Como administrador dueño, quiero ver el listado de cuentas de administrador activas, para saber en todo momento quién tiene acceso al negocio. | **Escenario 1 – Listado correcto:** <br> **Given:** existen `User` en distintos estados (`ACTIVO`, `PENDING_VERIFICATION`, `INACTIVO`) y `AccessRequest` en distintos estados (`PENDING`, `APPROVED`, `REJECTED`) <br> **When:** el administrador dueño consulta el listado de activos <br> **Then:** el sistema retorna únicamente los `User` en estado `ACTIVO`, sin exponer las solicitudes pendientes o rechazadas en esa misma vista (esas viven en US21). | EP07 |
+| **US34** | Verificar mi correo antes de acceder al sistema | Como solicitante de una cuenta de administrador ya autorizada por el dueño, quiero confirmar la propiedad de mi correo mediante un enlace de verificación, para evitar quedar con una cuenta activa pero inaccesible si escribí mal mi correo al solicitar acceso. | **Escenario 1 – Verificación exitosa:** <br> **Given:** la cuenta fue autorizada (`AdminAuthorized`) y el `User` fue creado en estado `PENDING_VERIFICATION`, con un correo de verificación enviado <br> **When:** el solicitante abre el enlace dentro del plazo de validez <br> **Then:** el `User` pasa a estado `ACTIVO` y puede iniciar sesión (US01). <br><br> **Escenario 2 – Enlace expirado o inválido:** <br> **Given:** el enlace de verificación expiró o ya fue usado <br> **When:** el solicitante intenta abrirlo <br> **Then:** el sistema rechaza la verificación y ofrece reenviar un nuevo enlace, sin activar la cuenta. | EP07 |
 | **EP08 – Confirmación por Correo** |||||
 | **US22** | Recibir correo de confirmación al registrar un alquiler | Como cliente del negocio, quiero recibir un correo de confirmación cuando se registra mi alquiler, para tener un respaldo del acuerdo sin depender solo de la palabra del administrador. | **Escenario 1 – Correo enviado con cliente con correo registrado:** <br> **Given:** un `Booking` se registra (`BookingRegistered`) y el `Customer` asociado tiene correo registrado <br> **When:** el subdominio Notifications procesa el evento <br> **Then:** se envía un correo de confirmación con los datos del alquiler y se emite `ConfirmationEmailSent`. <br><br> **Escenario 2 – Cliente sin correo registrado:** <br> **Given:** el `Customer` asociado al `Booking` no tiene correo registrado <br> **When:** se procesa `BookingRegistered` <br> **Then:** no se intenta ningún envío y el `Booking` se registra con normalidad, sin errores visibles para el administrador. <br><br> **Escenario 3 – Fallo de envío no revierte el alquiler:** <br> **Given:** el proveedor de correo (Resend) no responde o falla <br> **When:** el sistema intenta enviar la confirmación <br> **Then:** el `Booking` permanece registrado sin cambios (RF24); el fallo queda registrado en logs para revisión posterior, no bloquea al administrador. | EP08 |
-| **US23** | Recibir correo con el resultado de mi solicitud de acceso | Como solicitante de una cuenta de administrador, quiero recibir un correo cuando mi solicitud sea autorizada o rechazada, para saber si ya puedo ingresar al sistema. | **Escenario 1 – Correo de autorización:** <br> **Given:** se emite `AdminAuthorized` para un `User` <br> **When:** el subdominio Notifications procesa el evento <br> **Then:** se envía un correo al solicitante indicando que su cuenta fue autorizada. <br><br> **Escenario 2 – Correo de rechazo:** <br> **Given:** se emite `AdminRejected` <br> **When:** el subdominio Notifications procesa el evento <br> **Then:** se envía un correo indicando que la solicitud fue rechazada, sin exponer el motivo interno de la decisión. | EP08 |
+| **US23** | Recibir correo con el resultado de mi solicitud de acceso | Como solicitante de una cuenta de administrador, quiero recibir un correo cuando mi solicitud sea autorizada o rechazada, para saber si ya puedo ingresar al sistema. | **Escenario 1 – Correo de autorización:** <br> **Given:** se emite `AdminAuthorized` para un `AccessRequest` <br> **When:** el subdominio Notifications procesa el evento <br> **Then:** se envía un correo al solicitante indicando que su cuenta fue autorizada, junto con el enlace de verificación de correo (US34). <br><br> **Escenario 2 – Correo de rechazo:** <br> **Given:** se emite `AdminRejected` <br> **When:** el subdominio Notifications procesa el evento <br> **Then:** se envía un correo indicando que la solicitud fue rechazada, sin exponer el motivo interno de la decisión. | EP08 |
 | **EP09 – Ajustes de Cuenta** |||||
 | **US24** | Actualizar mi correo | Como administrador autenticado, quiero actualizar mi propio correo, para mantenerlo vigente sin depender de soporte técnico. | **Escenario 1 – Correo actualizado:** <br> **Given:** el administrador está autenticado <br> **When:** ingresa un nuevo correo válido y no usado por otro `User` <br> **Then:** el `User` actualiza su correo y este queda disponible de inmediato para el próximo inicio de sesión. <br><br> **Escenario 2 – Correo ya en uso:** <br> **Given:** el nuevo correo ya pertenece a otro `User` <br> **When:** intenta guardar el cambio <br> **Then:** el sistema rechaza la actualización y el correo original se mantiene sin cambios. | EP09 |
 | **US25** | Cambiar mi contraseña | Como administrador autenticado, quiero cambiar mi propia contraseña, para mantener segura mi cuenta. | **Escenario 1 – Cambio exitoso:** <br> **Given:** el administrador ingresa su contraseña actual correctamente y una nueva contraseña válida <br> **When:** confirma el cambio <br> **Then:** la contraseña se actualiza (hasheada con bcrypt) y las sesiones activas en otros dispositivos se invalidan. <br><br> **Escenario 2 – Contraseña actual incorrecta:** <br> **Given:** el administrador ingresa mal su contraseña actual <br> **When:** intenta confirmar el cambio <br> **Then:** el sistema rechaza la operación y la contraseña original no se modifica. | EP09 |
@@ -447,20 +449,23 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | **TS02** | Endpoint de login y emisión de JWT | Como Developer, quiero implementar el endpoint de autenticación en Express para emitir un JWT a los administradores válidos. | **Escenario 1 – Login exitoso (200):** <br> **Given:** POST `/api/auth/login` con credenciales válidas de un `User` <br> **When:** el servidor valida el hash de la contraseña <br> **Then:** retorna 200 con JWT y expiración. <br><br> **Escenario 2 – Credenciales inválidas (401):** <br> **Given:** contraseña incorrecta <br> **When:** el servidor valida <br> **Then:** retorna 401 sin emitir token. | EP01 |
 | **TS03** | Endpoint de registro de pagos con recálculo de saldo | Como Developer, quiero implementar el endpoint de registro de `Payment` en Express, recalculando el saldo pendiente del `Booking` asociado en una misma transacción. | **Escenario 1 – Pago parcial registrado (201):** <br> **Given:** POST `/api/payments` con monto menor al saldo pendiente del `Booking` <br> **When:** el servidor procesa <br> **Then:** crea el `Payment`, actualiza el estado del `Booking` a `PARCIAL`, emite `PartialPaymentRegistered` y retorna 201 con el nuevo saldo. <br><br> **Escenario 2 – Monto excede saldo pendiente (400):** <br> **Given:** el monto enviado es mayor al saldo pendiente <br> **When:** el servidor valida <br> **Then:** retorna 400 y no persiste el pago. | EP05 |
 | **TS04** | Endpoint de health check | Como Developer, quiero implementar un endpoint `/health` en Express para verificar que el backend y la conexión a base de datos estén operativos, dado que Render suspende el servicio por inactividad. | **Escenario 1 – Sistema operativo (200):** <br> **Given:** el backend está corriendo y la conexión a PostgreSQL responde <br> **When:** se consulta GET `/health` <br> **Then:** retorna 200 con estado `ok`. <br><br> **Escenario 2 – Base de datos no disponible (503):** <br> **Given:** la conexión a PostgreSQL falla <br> **When:** se consulta GET `/health` <br> **Then:** retorna 503, permitiendo detectar el problema antes de que Carlos reporte que "la app no funciona". | EP02 |
-| **TS05** | Endpoints de solicitud y autorización de cuentas de administrador | Como Developer, quiero implementar los endpoints de registro de solicitud y de autorización/rechazo, restringiendo la autorización al rol de administrador dueño. | **Escenario 1 – Solicitud creada (201):** <br> **Given:** POST `/api/users/solicitudes` con nombre y correo no registrados <br> **When:** el servidor procesa <br> **Then:** crea `User` en estado `PENDIENTE`, emite `RegistrationRequestCreated` y retorna 201. <br><br> **Escenario 2 – Autorización restringida al dueño (200/403):** <br> **Given:** PATCH `/api/users/{id}/autorizar` <br> **When:** el token del solicitante no corresponde a un administrador con rol dueño <br> **Then:** retorna 403 y el `User` pendiente no cambia de estado; si el rol es correcto, retorna 200 y emite `AdminAuthorized`. | EP07 |
+| **TS05** | Endpoints de solicitud y autorización de cuentas de administrador | Como Developer, quiero implementar los endpoints de registro de solicitud y de autorización/rechazo, restringiendo la autorización al rol de administrador dueño. | **Escenario 1 – Solicitud creada (201):** <br> **Given:** POST `/api/access-requests` con nombre y correo no registrados <br> **When:** el servidor procesa <br> **Then:** crea `AccessRequest` en estado `PENDING`, emite `RegistrationRequestCreated` y retorna 201. <br><br> **Escenario 2 – Autorización restringida al dueño (200/403):** <br> **Given:** PATCH `/api/access-requests/{id}/autorizar` <br> **When:** el token del solicitante no corresponde a un administrador con rol dueño <br> **Then:** retorna 403 y el `AccessRequest` no cambia de estado; si el rol es correcto, retorna 200, crea el `User` en `PENDING_VERIFICATION` y emite `AdminAuthorized`. | EP07 |
 | **TS06** | Listener de correo de confirmación sobre `BookingRegistered` | Como Developer, quiero implementar un listener desacoplado del endpoint de alquiler que reaccione a `BookingRegistered` y envíe el correo de confirmación vía Resend, sin bloquear la respuesta HTTP del registro del alquiler. | **Escenario 1 – Envío asíncrono exitoso:** <br> **Given:** se emite `BookingRegistered` para un `Booking` con `Customer` con correo <br> **When:** el listener procesa el evento <br> **Then:** llama a la API de Resend, y en caso de éxito emite `ConfirmationEmailSent`; el endpoint TS01 ya respondió 201 antes de que esto ocurra. <br><br> **Escenario 2 – Fallo del proveedor no afecta el alquiler (RF24):** <br> **Given:** la API de Resend retorna error <br> **When:** el listener lo captura <br> **Then:** registra el error en logs, no reintenta de forma bloqueante y el `Booking` permanece intacto. | EP08 |
 | **TS07** | Endpoints de ajustes de cuenta (correo y contraseña) | Como Developer, quiero implementar los endpoints de actualización de correo y cambio de contraseña, validando la identidad del `User` autenticado. | **Escenario 1 – Cambio de correo (200/409):** <br> **Given:** PATCH `/api/users/me/correo` con correo no usado <br> **When:** el servidor procesa <br> **Then:** retorna 200; si el correo ya existe, retorna 409 sin modificar el `User`. <br><br> **Escenario 2 – Cambio de contraseña (200/401):** <br> **Given:** PATCH `/api/users/me/contrasena` con la contraseña actual y una nueva <br> **When:** el servidor valida el hash actual <br> **Then:** retorna 200 y actualiza el hash; si la contraseña actual no coincide, retorna 401 sin cambios. | EP09 |
 | **TS08** | Endpoint de carga de comprobante de pago con almacenamiento en la nube | Como Developer, quiero implementar el endpoint que recibe una imagen de comprobante, la sube a un servicio de almacenamiento de archivos y guarda la referencia en el `Payment`. | **Escenario 1 – Comprobante subido (201):** <br> **Given:** POST `/api/payments/{id}/comprobante` con una imagen válida (jpg/png, tamaño razonable) <br> **When:** el servidor sube la imagen al servicio de almacenamiento <br> **Then:** guarda la URL resultante en el `Payment` y retorna 201. <br><br> **Escenario 2 – Archivo inválido (400):** <br> **Given:** el archivo no es una imagen o excede el tamaño máximo permitido <br> **When:** el servidor valida <br> **Then:** retorna 400 y no persiste ninguna referencia en el `Payment`. | EP05 |
 | **TS09** | Endpoint de alquiler con creación de cliente embebida | Como Developer, quiero extender el endpoint de registro de `Booking` (TS01) para aceptar opcionalmente los datos de un cliente nuevo y crearlo en la misma transacción antes de asociarlo. | **Escenario 1 – Alquiler y cliente creados en una sola operación (201):** <br> **Given:** POST `/api/bookings` incluye un bloque `clienteNuevo` en vez de un `clienteId` existente <br> **When:** el servidor procesa dentro de una transacción <br> **Then:** crea el `Customer`, emite `CustomerRegistered`, crea el `Booking` asociado, emite `BookingRegistered` y retorna 201 con ambos identificadores. <br><br> **Escenario 2 – Conflicto de horario revierte también al cliente (rollback, 409):** <br> **Given:** la franja solicitada ya está ocupada <br> **When:** el servidor detecta el conflicto dentro de la misma transacción <br> **Then:** revierte la creación del `Customer` también (no debe quedar un cliente huérfano de un alquiler fallido) y retorna 409. | EP02 |
 | **TS10** | Endpoint de carga de fotos de cancha | Como Developer, quiero implementar el endpoint que recibe una o más imágenes de una `Court`, las sube a Supabase Storage (mismo servicio que TS08) y guarda las URLs resultantes. | **Escenario 1 – Fotos subidas (201):** <br> **Given:** POST `/api/courts/{id}/fotos` con una o más imágenes válidas <br> **When:** el servidor las sube al bucket de Storage <br> **Then:** guarda el arreglo de URLs en la `Court` y retorna 201. <br><br> **Escenario 2 – Archivo inválido (400):** <br> **Given:** un archivo no es imagen o excede el tamaño máximo <br> **When:** el servidor valida <br> **Then:** retorna 400 sin modificar las fotos existentes de la `Court`. | EP04 |
+| **TS11** | Endpoint de verificación de correo con token de confirmación | Como Developer, quiero implementar el endpoint que valida el token de verificación enviado por correo y activa la cuenta del `User` solo si el token es válido y no ha expirado. | **Escenario 1 – Verificación exitosa (200):** <br> **Given:** GET `/api/users/verificar?token=...` con un token válido y vigente <br> **When:** el servidor lo valida <br> **Then:** el `User` pasa a estado `ACTIVO`, se invalida el token usado, y retorna 200. <br><br> **Escenario 2 – Token inválido o expirado (400):** <br> **Given:** el token no existe, ya fue usado o expiró <br> **When:** el servidor lo valida <br> **Then:** retorna 400 sin activar ninguna cuenta. | EP07 |
 
 <br>
 
 ## 2.5. Product Backlog
 
->*El Product Backlog consolida las funcionalidades priorizadas por valor operacional para el negocio de "La Canchita de Carlos". Las historias están estimadas en Story Points (escala Fibonacci) y ordenadas por impacto operacional y dependencias funcionales: el subdominio núcleo (Bookings) precede a los subdominios de soporte (Customers, Canchas, Payments, Panel), porque ahí se concentra el riesgo de negocio más alto — la doble reserva. Las Technical Stories se listan al final para no contaminar la priorización por valor de negocio. Los aggregates raíz y Domain Events referenciados en las historias fueron derivados del Event Storming: los comandos identificados se tradujeron en comportamientos de dominio encapsulados en `Booking`, `Court`, `Customer`, `Payment` y `User`.*
+>*El Product Backlog consolida las funcionalidades priorizadas por valor operacional para el negocio de "La Canchita de Carlos". Las historias están estimadas en Story Points (escala Fibonacci) y ordenadas por impacto operacional y dependencias funcionales: el subdominio núcleo (Bookings) precede a los subdominios de soporte (Customers, Canchas, Payments, Panel), porque ahí se concentra el riesgo de negocio más alto — la doble reserva. Las Technical Stories se listan al final para no contaminar la priorización por valor de negocio. Los aggregates raíz y Domain Events referenciados en las historias fueron derivados del Event Storming: los comandos identificados se tradujeron en comportamientos de dominio encapsulados en `Booking`, `Court`, `Customer`, `Payment`, `AccessRequest` y `User`.*
 
-**Total de Story Points: 117 | Total de historias: 42 (32 User Stories + 10 Technical Stories)**
+<br>
+
+**Total de Story Points: 122 | Total de historias: 44 (33 User Stories + 11 Technical Stories)**
 
 <br>
 
@@ -508,14 +513,14 @@ Términos consensuados organizados por bounded context, para que el vocabulario 
 | 40 | **TS10** | EP04 – Gestión de Canchas | Endpoint de carga de fotos de cancha | Como Developer, quiero implementar el endpoint que recibe una o más imágenes de una `Court`, las sube a Supabase Storage (mismo servicio que TS08) y guarda las URLs resultantes. | 3 |
 | 41 | **US31** | EP02 – Gestión de Reservas | Registrar y ver el motivo de un bloqueo por mantenimiento | Como administrador, quiero registrar un motivo o nota al bloquear una franja por mantenimiento, para que cualquier administrador entienda por qué está bloqueada sin tener que preguntar. | 3 |
 | 42 | **US32** | EP02 – Gestión de Reservas | Registrar tipo de reserva y nombre de equipo | Como administrador, quiero registrar el tipo de reserva y el nombre del equipo o grupo que juega, para diferenciar reservas cuando el cliente que paga no es quien juega. | 2 |
+| 43 | **US34** | EP07 – Registro y Autorización de Administradores | Verificar mi correo antes de acceder al sistema | Como solicitante de una cuenta ya autorizada, quiero confirmar la propiedad de mi correo mediante un enlace de verificación, para evitar quedar con una cuenta activa pero inaccesible si escribí mal mi correo. | 3 |
+| 44 | **TS11** | EP07 – Registro y Autorización de Administradores | Endpoint de verificación de correo con token de confirmación | Como Developer, quiero implementar el endpoint que valida el token de verificación enviado por correo y activa la cuenta del `User` solo si el token es válido y no ha expirado. | 2 |
 
 <br>
 
 <div align="center">
 
-**Herramienta utilizada:** `Jira`
-
-**URL del Product Backlog:** *(pendiente — se agrega el link al tablero una vez creado)*
+**Herramienta de gestión utilizada:** `Jira`
 
 </div>
 <br>
@@ -923,162 +928,168 @@ En esta sección se presenta el prototipo interactivo de la aplicación web de *
 # Capítulo IV: Arquitectura de Software (Domain-Driven Design)
 
 ## 4.0. Patrón de Arquitectura
- 
+
 El sistema combina dos niveles de arquitectura, uno de despliegue y otro de organización interna del código:
- 
+
 ## Arquitectura de tres capas:
- 
+
 - **Presentación:** PWA en React (lo que el administrador ve y usa).
 
 - **Aplicación:** API en Node.js/Express (lógica de negocio y reglas del dominio).
 
 - **Datos:** PostgreSQL (persistencia).
-Se eligió tres capas y no una arquitectura monolitica simple ni microservicios: el negocio es pequeño (2 administradores, 5 canchas, sin tráfico masivo), por lo que microservicios agregaría complejidad de despliegue injustificada para el plazo de 2 semanas; y separar en tres capas ya da independencia suficiente entre frontend, backend y base de datos para desplegar y escalar cada una por separado si el negocio crece.
- 
-## Arquitectura Hexagonal dentro de la capa de Aplicación:
- 
-El backend no se organiza como un framework Express típico con todo en controladores, sino en 3 anillos:
- 
-- **Dominio (núcleo):** entidades y reglas de negocio puras de cada bounded context (`Booking`, `Court`, `Customer`, `Payment`), sin dependencias de Express, Prisma ni ninguna librería externa.
 
-- **Aplicación (casos de uso):** orquesta el dominio para cumplir una acción concreta (ej. `RegisterBooking`, `CancelBooking`, `RegisterPayment`), define **puertos** (interfaces) que necesita, como `BookingRepository`.
+Se eligió tres capas y no una arquitectura monolítica simple ni microservicios: el negocio es pequeño (2 administradores, 5 canchas, sin tráfico masivo), por lo que microservicios agregaría complejidad de despliegue injustificada para el plazo de 2 semanas; y separar en tres capas ya da independencia suficiente entre frontend, backend y base de datos para desplegar y escalar cada una por separado si el negocio crece.
+
+## Arquitectura Hexagonal dentro de la capa de Aplicación:
+
+El backend no se organiza como un framework Express típico con todo en controladores, sino en 3 anillos, repetidos dentro de cada uno de los 6 bounded contexts (`bookings`, `customers`, `identity`, `notifications`, `panel`, `payments`):
+
+- **Dominio (núcleo):** entidades y reglas de negocio puras de cada bounded context (`Booking`, `Court`, `ScheduleBlock`, `Customer`, `Payment`, `User`, `AccessRequest`, `Notification`), sin dependencias de Express, Prisma ni ninguna librería externa.
+
+- **Aplicación (casos de uso):** orquesta el dominio para cumplir una acción concreta (ej. `registerBooking`, `cancelBooking`, `registerPayment`), define **puertos** (interfaces) que necesita, como `BookingRepository`.
 
 - **Infraestructura (adaptadores):** implementaciones concretas de esos puertos — el adaptador de entrada es Express (controladores/rutas que reciben HTTP y llaman a los casos de uso), el adaptador de salida es Prisma/PostgreSQL (implementa `BookingRepository` contra la base de datos real).
+
+Además de estos 6 contextos de negocio, existe una capa transversal `platform/` (autenticación JWT, hash de contraseñas, manejo centralizado de errores, validación de entrada, adaptador de Supabase Storage, endpoint `/health`) — no es un bounded context con su propio lenguaje de negocio, sino infraestructura técnica compartida que cualquier contexto puede usar (ver 4.2).
 
 <br>
 
 **Por qué combinarlas:**
- 
+
 La arquitectura de tres capas resuelve *dónde* corre cada cosa (despliegue); la hexagonal resuelve *cómo* se organiza el código *dentro* de la capa de Aplicación, alineado a los bounded contexts definidos en DDD (ver 4.2). La ventaja concreta para este proyecto: la lógica de negocio (ej. "no permitir doble reserva") queda aislada y testeable sin levantar servidor ni base de datos, y si en la Propuesta 2 cambian de Prisma a otro ORM o agregan una pasarela de pagos, solo se reemplaza el adaptador correspondiente sin tocar las reglas de negocio.
- 
+
 <br>
 
-## 4.1. Event Storming (Diseño)
- 
+## 4.1. Design-Level Event Storming
+
 Para definir la arquitectura de "La Canchita de Carlos" orientada al dominio (DDD), se realizó un proceso iterativo de Design-Level Event Storming siguiendo la metodología de 10 pasos, tomando como base los flujos operativos reales del negocio (alquiler de canchas, registro de pagos, gestión de clientes y autorización de administradores). A continuación, se detalla la evolución del modelo:
- 
+
 <br>
 
 **Step 1: Unstructured Exploration**
- 
+
 Se identificaron y representaron todos los eventos que modifican el estado del sistema, escritos en tiempo pasado (post-its naranjas): desde `BookingRegistered` y `PaymentRegistered` hasta `RegistrationRequestCreated` y `ConfirmationEmailSent`, entre otros eventos relevantes del dominio.
- 
+
 <br>
 
 ![Step 1 - Unstructured Exploration](event-storming-step1.png)
- 
+
 <br>
 
 **Step 2: Timelines**
- 
-Se ordenaron los eventos de forma cronológica de izquierda a derecha, estableciendo el flujo de vida del negocio: primero el onboarding de administradores (`RegistrationRequestCreated` → `AdminAuthorized`/`AdminRejected`), luego la configuración inicial de canchas (`CourtRegistered` → `CourtPriceUpdated`), y finalmente el ciclo operativo diario (`BookingRegistered`/`BookingEdited`/`BookingCancelled` → `PaymentRegistered`/`PartialPaymentRegistered` → `ConfirmationEmailSent`).
- 
+
+Se ordenaron los eventos de forma cronológica de izquierda a derecha, estableciendo el flujo de vida del negocio: primero el onboarding de administradores (`RegistrationRequestCreated` → `AdminAuthorized`/`AdminRejected` → `EmailVerified`), luego la configuración inicial de canchas (`CourtRegistered` → `CourtPriceUpdated`), y finalmente el ciclo operativo diario (`BookingRegistered`/`BookingEdited`/`BookingCancelled` → `PaymentRegistered`/`PartialPaymentRegistered` → `ConfirmationEmailSent`).
+
 <br>
 
 ![Step 2 - Timelines](event-storming-step2.png)
- 
+
 <br>
 
 **Step 3: Hotspots**
- 
+
 Se identificaron los puntos críticos del sistema y riesgos técnicos del negocio (marcados con rombos rojos):
 - Condición de carrera al registrar dos alquileres simultáneos sobre la misma franja horaria (mitigado con constraints a nivel de base de datos, no solo validación en el backend).
 - Un fallo en el envío del correo de confirmación (Resend) no debe revertir ni bloquear el `BookingRegistered` ya persistido (RF24).
-- El "cold start" del backend en un plan gratuito podría retrasar la primera acción del día — mitigado eligiendo el plan Starter de pago en Render.
+- El "cold start" del backend en el plan gratuito de Render (elegido para mantener el costo recurrente en US$0) retrasa la primera acción del día tras un período de inactividad — se decidió no eliminarlo con un plan de pago por costo, y en su lugar se implementó el endpoint `/health` para monitorear el estado del servicio en vez de eliminar la latencia.
 - Crecimiento del almacenamiento de imágenes (comprobantes de pago, fotos de canchas) en el mediano plazo si el negocio crece a más administradores o mayor volumen diario.
+
 <br>
 
 ![Step 3 - Hotspots](event-storming-step3.png)
- 
+
 <br>
 
 **Step 4: Pivotal Events**
- 
-Se definieron eventos pivote que segmentan el flujo en fases funcionales: `AdminAuthorized` marca el paso de "solicitante" a "administrador operativo"; `CourtRegistered` marca el paso de "negocio sin configurar" a "negocio operativo"; `BookingRegistered` marca el paso de "franja disponible" a "franja ocupada"; y `PaymentRegistered`/`PartialPaymentRegistered` marca el cierre financiero de un alquiler.
- 
+
+Se definieron eventos pivote que segmentan el flujo en fases funcionales: `AdminAuthorized` marca el paso de "solicitud" a "cuenta creada pero pendiente de verificar"; `EmailVerified` marca el paso de "cuenta creada" a "administrador operativo"; `CourtRegistered` marca el paso de "negocio sin configurar" a "negocio operativo"; `BookingRegistered` marca el paso de "franja disponible" a "franja ocupada"; y `PaymentRegistered`/`PartialPaymentRegistered` marca el cierre financiero de un alquiler.
+
 <br>
 
 ![Step 4 - Pivotal Events](event-storming-step4.png)
- 
+
 <br>
 
 **Step 5: Commands & Actors**
- 
-Se definieron los commands (post-its azules) que disparan los eventos, y los actores (íconos amarillos) responsables de ejecutarlos: el **Administrador** (rol operativo estándar), el **Administrador dueño** (único con permiso para autorizar/rechazar nuevos administradores, RF21), el **Solicitante** (sin sesión, antes de ser autorizado) y el propio **sistema** (para eventos de integración como `ConfirmationEmailSent`).
- 
+
+Se definieron los commands (post-its azules) que disparan los eventos, y los actores (íconos amarillos) responsables de ejecutarlos: el **Administrador** (rol operativo estándar), el **Administrador dueño** (único con permiso para autorizar/rechazar nuevas solicitudes de acceso, RF21), el **Solicitante** (sin sesión, antes de ser autorizado) y el propio **sistema** (para eventos de integración como `ConfirmationEmailSent`).
+
 <br>
 
 ![Step 5 - Commands & Actors](event-storming-step5.png)
- 
+
 <br>
 
 **Step 6: Policies**
- 
+
 Se incorporaron las business policies (post-its lilas), reglas reactivas que automatizan el comportamiento del sistema:
- 
+
 - Cuando se intenta `RegisterBooking` sobre una franja ya ocupada o bloqueada → se emite `DoubleBookingRejected` en vez de `BookingRegistered`.
 - Cuando ocurre `BookingRegistered` y el `Customer` asociado tiene correo registrado → se dispara `ConfirmationEmailSent`, sin revertir el alquiler si el envío falla.
-- Cuando ocurre `AdminAuthorized` o `AdminRejected` → se notifica por correo al solicitante.
+- Cuando ocurre `AdminAuthorized` → se crea el `User` (en estado `PENDING_VERIFICATION`) y se disparan dos correos: el de resultado de la solicitud y el de verificación de correo.
+- Cuando ocurre `AdminRejected` → se notifica por correo al solicitante, sin crear ningún `User`.
+
 <br>
 
 ![Step 6 - Policies](event-storming-step6.png)
- 
+
 <br>
 
 **Step 7: Read Models**
- 
-Se mapearon los read models (post-its verdes), las vistas que el administrador necesita consultar antes de ejecutar un comando: el **Calendario de disponibilidad** (antes de `RegisterBooking`), el **Panel principal** con los alquileres e ingresos del día, el **Historial de cliente** (antes de reutilizar un cliente existente en un nuevo alquiler), y el **Panel de solicitudes de acceso** (solo para el administrador dueño, antes de `AuthorizeAdmin`/`RejectAdmin`).
- 
+
+Se mapearon los read models (post-its verdes), las vistas que el administrador necesita consultar antes de ejecutar un comando: el **Calendario de disponibilidad** (antes de `RegisterBooking`), el **Panel principal** con los alquileres, ingresos y pagos pendientes del día (subdominio `panel`, EP06), el **Historial de cliente** (antes de reutilizar un cliente existente en un nuevo alquiler), y el **Panel de solicitudes de acceso** (solo para el administrador dueño, antes de `AuthorizeAdmin`/`RejectAdmin`).
+
 <br>
 
 ![Step 7 - Read Models](event-storming-step7.png)
- 
+
 <br>
 
 **Step 8: External Systems**
- 
-Se identificaron los sistemas externos (post-its rosados) que interactúan con el sistema: **Resend** (envío de correos de confirmación), **Supabase Storage** (almacenamiento de imágenes de comprobantes y fotos de canchas, fuera de la base de datos relacional) y **WhatsApp** (acceso directo vía enlace `wa.me` al contacto del cliente, no es una integración de API, solo un enlace externo).
- 
+
+Se identificaron los sistemas externos (post-its rosados) que interactúan con el sistema: **Resend** (envío de correos de confirmación y de identidad), **Supabase Storage** (almacenamiento de imágenes de comprobantes y fotos de canchas, fuera de la base de datos relacional) y **WhatsApp** (acceso directo vía enlace `wa.me` al contacto del cliente, no es una integración de API, solo un enlace externo).
+
 <br>
 
 ![Step 8 - External Systems](event-storming-step8.png)
- 
+
 <br>
 
 **Step 9: Aggregates**
- 
-Se incrementó el nivel de abstracción agrupando comandos y eventos alrededor de las entidades principales del dominio (Aggregates, post-its amarillos grandes): `Booking`, `Court`, `Customer`, `Payment`, `User` y `ScheduleBlock`, cada uno encapsulando la consistencia de sus propias reglas de negocio e invariantes.
- 
+
+Se incrementó el nivel de abstracción agrupando comandos y eventos alrededor de las entidades principales del dominio (Aggregates, post-its amarillos grandes): `Booking`, `Court`, `ScheduleBlock`, `Customer`, `Payment`, `User`, `AccessRequest` y `Notification`, cada uno encapsulando la consistencia de sus propias reglas de negocio e invariantes.
+
 <br>
 
 ![Step 9 - Aggregates](event-storming-step9.png)
- 
+
 <br>
 
 **Step 10: Bounded Contexts**
- 
-Finalmente, se delimitaron los límites semánticos y transaccionales del dominio agrupando los aggregates en bloques coherentes e independientes, consolidando la arquitectura en seis subdominios: **Bookings** (núcleo), **Payments** y **Customers** (soporte), **Identity & Access**, **Infrastructure & Observability** y **Notifications**.
- 
+
+Finalmente, se delimitaron los límites semánticos y transaccionales del dominio agrupando los aggregates en bloques coherentes e independientes, consolidando la arquitectura en seis subdominios: **Bookings** (núcleo, incluye `Court` y `ScheduleBlock`), **Payments** y **Customers** (soporte), **Identity & Access** (incluye `User` y `AccessRequest`), **Panel** (lectura consolidada del día operativo) y **Notifications**.
+
 <br>
 
 ![Step 10 - Bounded Contexts](event-storming-step10.png)
- 
+
 <br>
 El proceso de Design-Level Event Storming permitió profundizar en el comportamiento técnico del sistema a partir de los flujos operativos reales del negocio de Carlos. En esta etapa se definieron los límites transaccionales (Bounded Contexts) y se incorporaron elementos de diseño táctico como Comandos, Aggregates y Policies, cuyo detalle tabular se documenta a continuación.
- 
-<br>
-
-*Ver tablero interactivo en Miro: (pendiente — se agrega el link una vez publicado el board).*
 
 <br>
 
-### 4.1.1. Tabla de Comandos, Aggregates y Eventos
- 
+*Ver tablero interactivo en Miro:*
+
+<br>
+
+### 4.1.1. Tabla de Comands, Aggregates y Events
+
 Eventos de dominio identificados por subdominio, con el comando/actor que los dispara. Estos eventos son la base para los aggregates raíz y para los criterios de aceptación Gherkin de las User Stories.
- 
+
 <br>
 
-| Comando (actor: Administrador) | Aggregate | Evento de dominio | Invariante protegida |
+| Comands (actor: Administrador) | Aggregate | Domain event | Invariante protegida |
 |---|---|---|---|
 | RegisterBooking | `Booking` | `BookingRegistered` | No puede existir otro `Booking` activo para la misma `Court` + franja horaria. |
 | — (rechazo del comando anterior) | `Booking` | `DoubleBookingRejected` | Se emite en vez de `BookingRegistered` cuando la franja ya está ocupada o bloqueada. |
@@ -1094,15 +1105,16 @@ Eventos de dominio identificados por subdominio, con el comando/actor que los di
 | RegisterPartialPayment | `Payment` | `PartialPaymentRegistered` | El saldo pendiente se recalcula y nunca puede ser negativo. |
 | StartSession | `User` | `SessionStarted` | Credenciales inválidas no generan sesión. |
 | CloseSession | `User` | `SessionClosed` | — |
-| RequestAdminRegistration (actor: solicitante, sin sesión) | `User` | `RegistrationRequestCreated` | El `User` se crea en estado `PENDIENTE`, sin acceso al sistema hasta ser autorizado. |
-| AuthorizeAdmin (actor: administrador dueño) | `User` | `AdminAuthorized` | Solo un `User` con rol dueño puede ejecutar este comando (RF21). |
-| RejectAdmin (actor: administrador dueño) | `User` | `AdminRejected` | El `User` rechazado no puede iniciar sesión ni volver a autorizarse sin una nueva solicitud. |
+| RequestAdminRegistration (actor: solicitante, sin sesión) | `AccessRequest` | `RegistrationRequestCreated` | El `AccessRequest` se crea en estado `PENDING`; no existe ningún `User` todavía, por lo que el solicitante no tiene acceso al sistema. |
+| AuthorizeAdmin (actor: administrador dueño) | `AccessRequest` | `AdminAuthorized` | Solo un `User` con rol dueño puede ejecutar este comando (RF21). El `AccessRequest` pasa a `APPROVED` y, como efecto, se crea un `User` en estado `PENDING_VERIFICATION` (aún sin poder iniciar sesión). |
+| RejectAdmin (actor: administrador dueño) | `AccessRequest` | `AdminRejected` | El `AccessRequest` pasa a `REJECTED`; no se crea ningún `User`, y una nueva solicitud del mismo correo requiere un nuevo `AccessRequest`. |
+| VerifyEmail (actor: solicitante ya autorizado) | `User` | `EmailVerified` | Solo con un token de verificación válido y no expirado; el `User` pasa de `PENDING_VERIFICATION` a `ACTIVE`, habilitando recién `StartSession`. |
 | — (efecto de `BookingRegistered`) | `Payment`/`Customer` (evento de integración) | `ConfirmationEmailSent` | Solo se dispara si el `Customer` asociado tiene correo registrado (RF23); un fallo de envío no revierte el `Booking` (RF24). |
- 
+
 <br>
 
 ## 4.2. Bounded Contexts y Context Map
- 
+
 <br>
 
 | Subdominio | Tipo | Alcance / entidades | Justificación |
@@ -1110,41 +1122,45 @@ Eventos de dominio identificados por subdominio, con el comando/actor que los di
 | **Bookings** | Núcleo | `Court`, `Booking`, `ScheduleBlock`, disponibilidad, precios | Es donde vive la regla de negocio crítica (no permitir doble reserva) y la razón de ser del sistema. Aquí no cabe una solución genérica: la lógica de disponibilidad es propia de "La Canchita de Carlos". |
 | **Payments** | Soporte | `Payment`, estado (pagado/pendiente/parcial), método de pago, asociado a un `Booking` | Necesario para el negocio y con reglas propias (pagos parciales), pero no es el diferenciador del sistema; podría evolucionar de forma relativamente independiente (ej. integrarse con una pasarela en la Propuesta 2) sin afectar la lógica de Bookings. |
 | **Customers** | Soporte | `Customer`, historial básico de alquileres | Registro de datos de contacto e historial; simple hoy, pero se mantiene separado porque en la Propuesta 2 evoluciona a un contexto con más peso (cuentas de cliente, reservas propias). |
-| **Identity & Access (IAM)** | Genérico | `User` administrador, autenticación, sesión | No aporta valor diferencial al negocio — es un problema resuelto miles de veces (login/JWT). Se trata como subdominio genérico, candidato a simplificarse al máximo o reemplazarse por una solución de terceros si el proyecto creciera. |
-| **Infrastructure & Observability** | Genérico | Health checks, logging, disponibilidad del backend/BD | No es negocio, es soporte operativo: necesario porque el backend corre en un plan gratuito (Render) que "duerme" tras inactividad. Se resuelve con un endpoint `/health` y logs básicos, sin necesidad de herramientas de monitoreo dedicadas en esta fase. |
-| **Notifications** *(alcance mínimo en Propuesta 1)* | Genérico | Correo de confirmación puntual al registrar un `Booking` (RF23–RF24) y correo de resultado de autorización de cuenta (RF22). **No incluye** recordatorios recurrentes, WhatsApp, ni notificaciones dentro de la app — eso permanece en la Propuesta 2. | Se implementa como reacción a `BookingRegistered` y a `AdminAuthorized`/`AdminRejected`, sin lógica de negocio propia — solo dispara un envío de correo transaccional. Al ser un subdominio genérico desacoplado (reacciona a eventos, no los modifica), ampliar su alcance en la Propuesta 2 (recordatorios, WhatsApp) no requiere tocar Bookings ni Payments. |
- 
+| **Identity & Access (IAM)** | Genérico | `User` administrador, `AccessRequest`, autenticación, sesión | No aporta valor diferencial al negocio — es un problema resuelto miles de veces (login/JWT). Se trata como subdominio genérico, candidato a simplificarse al máximo o reemplazarse por una solución de terceros si el proyecto creciera. |
+| **Panel** | Genérico | Sin aggregate propio — agrega y expone en solo lectura datos de `Booking` y `Payment` del día (EP06: alquileres del día, ingreso total, pagos pendientes) | No introduce reglas de negocio nuevas, solo consolida datos que ya existen en Bookings y Payments para dar visibilidad operativa inmediata; se mantiene como contexto propio porque su read model cruza dos contextos distintos y no pertenece naturalmente a ninguno de los dos. |
+| **Notifications** *(alcance mínimo en Propuesta 1)* | Genérico | Correo de confirmación puntual al registrar un `Booking` (RF23–RF24) y correos del ciclo de identidad: resultado de autorización (RF22) y verificación de correo (US34). **No incluye** recordatorios recurrentes, WhatsApp, ni notificaciones dentro de la app — eso permanece en la Propuesta 2. | Se implementa como reacción a `BookingRegistered`, `AdminAuthorized` y `AdminRejected`, sin lógica de negocio propia — solo dispara un envío de correo transaccional. Al ser un subdominio genérico desacoplado (reacciona a eventos, no los modifica), ampliar su alcance en la Propuesta 2 (recordatorios, WhatsApp) no requiere tocar Bookings ni Payments. |
+
+*Nota:* además de estos seis bounded contexts de negocio, el código tiene una capa `platform/` (JWT, hash de contraseñas, manejo de errores, validación, adaptador de Supabase Storage, endpoint `/health`) que es infraestructura técnica compartida, no un subdominio con lenguaje de negocio propio — por eso no aparece como una fila más en esta tabla, a diferencia de una versión anterior de este documento que la listaba como "Infrastructure & Observability".
+
 <br>
 
 **Relaciones entre contextos (Context Map):**
- 
+
 - **Bookings → Customers** (relación *Customer/Supplier*): un alquiler referencia a un cliente existente; Bookings consume datos de Customers pero no los modifica.
 - **Bookings → Payments** (relación *Customer/Supplier*): un pago siempre pertenece a un alquiler; Payments depende del identificador de Booking generado por Bookings.
-- **Identity & Access → Bookings / Payments / Customers** (relación *Shared Kernel* mínimo): los tres contextos consumen la identidad del administrador autenticado para saber quién realizó cada acción, sin compartir más modelo que eso.
+- **Panel → Bookings** y **Panel → Payments** (relación *Customer/Supplier*, solo lectura): Panel consulta datos de ambos contextos para construir sus tres read models del día (alquileres, ingreso, pendientes de pago), sin escribir de vuelta en ninguno de los dos.
+- **Identity & Access → Bookings / Payments / Customers / Panel** (relación *Shared Kernel* mínimo): los cuatro contextos consumen la identidad del administrador autenticado para saber quién realizó cada acción, sin compartir más modelo que eso.
 - **Bookings → Notifications** (relación *Published Language / eventos*): Notifications escucha `BookingRegistered` y reacciona enviando el correo de confirmación (RF23); no tiene forma de escribir de vuelta en Bookings.
-- **Identity & Access → Notifications** (relación *Published Language / eventos*): Notifications escucha `AdminAuthorized`/`AdminRejected` para avisar por correo al solicitante (RF22).
+- **Identity & Access → Notifications** (relación *Published Language / eventos*): Notifications escucha `AdminAuthorized`/`AdminRejected` para avisar por correo al solicitante (RF22) y disparar el correo de verificación de correo (US34).
+
 <br>
 
 **Diagrama visual del Context Map:**
- 
+
 ![Context Map - La Canchita de Carlos](context-map-la-canchita.png)
- 
-*Diagrama: seis cajas (una por subdominio) agrupadas visualmente por tipo — Bookings destacado como núcleo (caja central, mayor tamaño); Payments y Customers como soporte alrededor; Identity & Access, Infrastructure & Observability y Notifications como genéricos en los bordes. Flechas etiquetadas con el tipo de relación (Customer/Supplier, Shared Kernel, Published Language) según el listado anterior.*
- 
-Este mapa es el que después se traduce, a nivel de código, en los "anillos" de la arquitectura hexagonal (4.0): cada subdominio núcleo/soporte tiene su propio dominio + casos de uso, y el subdominio genérico (Identity & Access) se mantiene deliberadamente simple.
- 
+
+*Diagrama: seis cajas (una por subdominio) agrupadas visualmente por tipo — Bookings destacado como núcleo (caja central, mayor tamaño); Payments y Customers como soporte alrededor; Identity & Access, Panel y Notifications como genéricos en los bordes. Flechas etiquetadas con el tipo de relación (Customer/Supplier, Shared Kernel, Published Language) según el listado anterior.*
+
+Este mapa es el que después se traduce, a nivel de código, en los "anillos" de la arquitectura hexagonal (4.0): cada subdominio núcleo/soporte tiene su propio dominio + casos de uso, y los subdominios genéricos (Identity & Access, Panel) se mantienen deliberadamente simples.
+
 <br>
 
-## 4.3. Diagrama de Contexto (C4 - Nivel 1)
+## 4.3. Software Architecture Context Diagram
 <br>
 
-## 4.4. Diagrama de Contenedores (C4 - Nivel 2)
+## 4.4. Software Architecture Container Diagram
 <br>
 
-## 4.5. Diagrama de Componentes (C4 - Nivel 3)
+## 4.5. Software Architecture Components Diagrams
 <br>
 
-## 4.6. Arquitectura en la Nube (PWA)
+## 4.6. Cloud Architecture (PWA)
  
 **Stack definido para este proyecto:**
  
@@ -1172,7 +1188,7 @@ Al ser una PWA desplegada 100% en servicios cloud administrados (PaaS/Serverless
  
 <br>
 
-<img src="assets/arquitectura/diagrama.png" alt="Diagrama de Arquitectura de tres capas" width="650"/>
+<img src="assets/architecture/diagram.png" alt="Diagrama de Arquitectura de tres capas" width="650"/>
 
 La matriz cruza las tres capas de la arquitectura de despliegue (Presentación, Aplicación, Datos) contra los tres niveles técnicos que las sostienen (Software, Sistema Operativo, Hardware), mostrando qué corre concretamente en cada intersección:
  
@@ -1185,316 +1201,683 @@ La matriz cruza las tres capas de la arquitectura de despliegue (Presentación, 
 <br>
 
 ## 4.7. Análisis Técnico-Económico de la Infraestructura
- 
-Análisis comparativo de tres alternativas por elemento técnico, organizado por capa de la arquitectura (Presentación, Aplicación, Datos) evaluando en cada una las categorías de Software/Hardware/Sistema Operativo aplicables, con justificación de la opción elegida (retomando y detallando las decisiones ya adelantadas en el stack. Los servicios de integración y el presupuesto de inversión total se documentan de forma transversal al final, por ser decisiones que aplican a todo el proyecto y no a una capa específica.
- 
+
+Análisis comparativo de tres alternativas por elemento técnico, organizado por capa de la arquitectura (Presentación, Aplicación, Datos) evaluando en cada una las categorías de Software/Hardware/Sistema Operativo aplicables, con justificación de la opción elegida (retomando y detallando las decisiones ya adelantadas en el stack). Además de la comparativa técnica genérica (framework, lenguaje, motor), cada capa documenta la **configuración real desplegada** y la compara contra alternativas equivalentes de otros proveedores, no solo entre planes del mismo proveedor. Los servicios de integración y el presupuesto de inversión total se documentan de forma transversal al final, por ser decisiones que aplican a todo el proyecto y no a una capa específica.
+
 <br>
 
 ### 4.7.1. Capa de Presentación
- 
-**Software (framework frontend)**
- 
+
+**Software (framework)**
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | React + Vite | Librería de UI más usada del mercado, ecosistema maduro, `vite-plugin-pwa` listo para PWA, ya dominado por la desarrolladora. | ✅ |
 | Vue 3 + Vite | Curva de aprendizaje suave, buen soporte PWA, pero requeriría aprenderlo desde cero en un plazo de 2 semanas. | — |
 | Angular | Framework completo (incluye routing, forms, DI), pero con mayor curva de aprendizaje y boilerplate — sobredimensionado para 8-11 pantallas. | — |
- 
-*Justificación:* React se elige por dominio previo de la desarrolladora (factor crítico en un plazo de 2 semanas) y por el soporte de primera clase para PWA vía `vite-plugin-pwa`.
- 
+
+<br>
+
+*Justificación:* 
+
+**React** se elige por la madurez de su ecosistema (mayor disponibilidad de librerías y soluciones ya probadas para los requisitos del proyecto) y por el soporte de primera clase para PWA vía `vite-plugin-pwa`, factor clave para cumplir RNF04 (instalación sin tienda de aplicaciones) dentro de un plazo de desarrollo de 2 semanas.
+
 <br>
 
 **Lenguaje**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | TypeScript | Tipado estático, comparte tipos con el backend (vía Prisma), detecta errores antes de producción. | ✅ |
 | JavaScript | Sin tipado, más rápido de escribir al inicio pero mayor riesgo de errores en tiempo de ejecución. | — |
- 
-*Justificación:* TypeScript de punta a punta (frontend + backend) permite compartir contratos de datos y atrapar errores de integración en tiempo de compilación, valioso dado que es una sola desarrolladora sin red de code review.
- 
+
 <br>
 
-**Sistema Operativo (dispositivo del administrador)**
- 
+*Justificación:* 
+
+**TypeScript** de punta a punta (frontend + backend) permite compartir contratos de datos y atrapar errores de integración en tiempo de compilación, valioso dado que es una sola desarrolladora sin red de code review.
+
+<br>
+
+**Sistema Operativo**
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | Android / iOS (celular) | Dispositivo principal de uso diario de Carlos y su trabajador en campo. | ✅ |
 | Windows / macOS / Linux (laptop) | Uso secundario, para configuración inicial o revisión desde escritorio. | ✅ |
- 
-*Justificación:* no hay elección real que hacer — el sistema debe funcionar en los dispositivos que Carlos y su trabajador ya tienen (RNF09), por eso el diseño es mobile-first y la PWA es instalable sin tienda de aplicaciones (RNF04).
- 
+
+<br>
+
+*Justificación:* 
+
+El sistema debe funcionar en los dispositivos que Carlos y su trabajador ya tienen (RNF09), por eso el diseño es mobile-first y la PWA es instalable sin tienda de aplicaciones (RNF04).
+
 <br>
 
 **Hardware**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | Dispositivo propio del administrador | Celular/laptop personal de Carlos y su trabajador, sin costo adicional para el proyecto. | ✅ |
 | Hardware dedicado (tablet fija en el local) | Mayor consistencia de experiencia, pero implica un costo de compra no contemplado en Propuesta 1. | — |
+
+<br>
+
+*Justificación:* 
+
+La Propuesta 1 no contempla presupuesto para hardware dedicado; el sistema se diseña para funcionar bien en los dispositivos que ya existen.
+
+<br>
+
+**Hosting (Servidor del Static Site)**
+
+El frontend compilado (`npm run build`) es un conjunto de archivos estáticos (HTML/CSS/TS) sin lógica de servidor, por lo que no requiere cómputo dedicado — solo un servicio de hosting estático con CDN. Se compararon cuatro proveedores bajo el mismo criterio:
  
-*Justificación:* la Propuesta 1 no contempla presupuesto para hardware dedicado; el sistema se diseña para funcionar bien en los dispositivos que ya existen.
- 
+<br>
+
+| Proveedor | Plan evaluado | Ancho de banda | Otros límites relevantes | Elegido |
+|---|---|---|---|---|
+| **Render (Static Site)** | Free | Sin límite duro publicado, uso razonable | Despliegue automático desde GitHub, dominio propio con SSL gratuito, sin "cold start" (los sitios estáticos no se suspenden, a diferencia de los Web Services) | ✅ |
+| Cloudflare Pages | Free | Sin límite de ancho de banda en GB, pero sí de solicitudes: **100,000 requests/día**, 200,000 eventos de observabilidad/día, 3,000 minutos de build/mes (500 builds/mes) | 20,000 archivos por sitio, ~300 ubicaciones de CDN | — |
+| Netlify | Free (modelo de créditos desde sep. 2025) | ~15 GB/mes (300 créditos, 20 créditos/GB) | 15 despliegues a producción/mes aprox., timeout de funciones de 10s | — |
+| Vercel | Hobby | 100 GB/mes | **Uso exclusivamente no comercial** — un proyecto que genera ingresos (como un sistema de alquiler de canchas) requeriría el plan Pro (US$20/mes) | — |
+
+<br>
+
+*Justificación:* 
+
+Se eligió **Render (Static Site)** porque ya aloja el backend del proyecto (mismo proveedor, mismo dashboard, mismo flujo de despliegue continuo desde GitHub para frontend y backend), sin límite de solicitudes relevante para el volumen actual (2 administradores, uso interno) y sin costo. Cloudflare Pages y Netlify también cubrirían el volumen actual sin problema, pero desplegar el frontend en un proveedor distinto al del backend sumaría una cuenta y un flujo de configuración adicional sin un beneficio concreto para el tamaño de este proyecto. Vercel se descarta de plano porque su plan gratuito prohíbe el uso comercial, y este es un sistema que gestiona el cobro de un negocio real. El frontend se sirve bajo el dominio propio **`lacanchitadecarlos.moli-voleibol.com`**, con SSL automático y región **Global** (el CDN de Render distribuye el contenido estático sin necesidad de elegir una región específica, a diferencia del Web Service del backend).
+
 <br>
 
 ### 4.7.2. Capa de Aplicación
- 
+
 **Software (framework backend)**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | Node.js + Express | Framework minimalista, control total sobre la estructura (compatible con arquitectura hexagonal), stack ya dominado. | ✅ |
-| NestJS | Framework más opinado, con DI e módulos incorporados que se asemejan a arquitectura hexagonal de fábrica, pero mayor curva de aprendizaje. | — |
+| NestJS | Framework más opinado, con DI y módulos incorporados que se asemejan a arquitectura hexagonal de fábrica, pero mayor curva de aprendizaje. | — |
 | Firebase Functions | Backend serverless gestionado, pero atado al ecosistema Firebase (menor control sobre transacciones SQL, clave para RF06). | — |
- 
-*Justificación:* Express da la velocidad de desarrollo necesaria en 2 semanas sin sacrificar el control sobre transacciones de base de datos, indispensable para la invariante de no doble reserva (RF06).
- 
+
+<br>
+
+*Justificación:* 
+
+**Express** da la velocidad de desarrollo necesaria en 2 semanas sin sacrificar el control sobre transacciones de base de datos, indispensable para la invariante de no doble reserva (RF06).
+
 <br>
 
 **Lenguaje**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | TypeScript | Mismo lenguaje que el frontend, tipado compartido vía Prisma. | ✅ |
-| JavaScript | Sin tipado; descartado por la misma razón que en 4.7.1. | — |
- 
-*Justificación:* consistencia end-to-end con el frontend.
- 
+| JavaScript | Sin tipado; descartado | — |
+
+<br>
+
+*Justificación:* 
+
+Consistencia end-to-end con el frontend.
+
 <br>
 
 **Motor de ejecución**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | Node.js | Motor de ejecución de JavaScript/TypeScript en servidor, mismo runtime que se usa en desarrollo local. | ✅ |
 | Deno | Runtime más moderno con TypeScript nativo, pero ecosistema de librerías más chico y menor compatibilidad con Prisma en 2024-2025. | — |
 | Bun | Runtime muy rápido, pero aún menos maduro en producción para proyectos con Prisma/Express. | — |
- 
-*Justificación:* Node.js tiene la mayor compatibilidad probada con Express + Prisma + Render, sin riesgo de incompatibilidades de última hora en un plazo ajustado.
- 
+
+<br>
+
+*Justificación:* 
+
+**Node.js** tiene la mayor compatibilidad probada con **Express + Prisma + Render**, sin riesgo de incompatibilidades de última hora en un plazo ajustado.
+
 <br>
 
 **Editor / IDE**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | WebStorm | IDE completo de JetBrains, integración nativa con TypeScript, Git y npm scripts, ya usado por la desarrolladora. | ✅ |
 | VS Code | Editor gratuito, extensible, muy popular, pero requiere configurar extensiones equivalentes a lo que WebStorm trae de fábrica. | — |
- 
-*Justificación:* WebStorm ya es la herramienta de trabajo habitual de la desarrolladora — no hay curva de adaptación en un proyecto de 2 semanas.
- 
+
+<br>
+
+*Justificación:* 
+
+**WebStorm** ya es la herramienta de trabajo habitual de la desarrolladora — no hay curva de adaptación en un proyecto de 2 semanas.
+
 <br>
 
 **Herramientas de pruebas API**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | Postman | Estándar de facto para probar endpoints REST manualmente durante el desarrollo, colecciones reutilizables. | ✅ |
 | Insomnia | Alternativa más ligera, similar en funcionalidad, pero sin ventaja concreta sobre Postman para este proyecto. | — |
 | Thunder Client (extensión VS Code) | Integrado al editor, pero atado a VS Code (no se usa aquí, ver Editor/IDE). | — |
- 
-*Justificación:* Postman es suficiente y ya conocido; no se requiere automatización de pruebas de API para el alcance de Propuesta 1.
- 
+
+<br>
+
+*Justificación:* 
+
+**Postman** es suficiente y ya conocido; no se requiere automatización de pruebas de API para el alcance de Propuesta 1.
+
 <br>
 
 **Sistema Operativo (entorno de ejecución)**
  
-| Alternativa | Descripción | Elegido |
-|---|---|---|
-| Linux (Ubuntu) — contenedor de Render | Sistema operativo del contenedor gestionado donde corre el backend en producción; también el SO de desarrollo local de la desarrolladora. | ✅ |
-| Windows Server | Menor compatibilidad nativa con el ecosistema Node/Docker; no es lo que ofrece Render por defecto. | — |
- 
-*Justificación:* Render aprovisiona contenedores Linux por defecto, y usar Ubuntu también en desarrollo local elimina discrepancias entre entornos (RNF07).
- 
+El backend se despliega en Render como **imagen Docker** (`render.yaml` con `runtime: docker`), construida a partir de un `Dockerfile` propio del repositorio (`FROM node:22-slim`), que instala dependencias, aplica las migraciones de Prisma (`prisma migrate deploy`) y levanta el servidor (`npm start`) en cada despliegue.
+
 <br>
 
-**Hardware**
- 
 | Alternativa | Descripción | Elegido |
 |---|---|---|
-| Render Web Service (plan Starter, de pago) | Cómputo gestionado (~0.5 vCPU / 512 MB RAM), sin "cold start", suficiente para el volumen de 2 administradores. | ✅ |
-| Render Web Service (plan Free) | Mismo cómputo, pero se suspende tras 15 min de inactividad — introduce latencia de arranque en frío inaceptable para un negocio de uso diario. | — |
-| VPS propio (DigitalOcean, AWS EC2) | Mayor control, pero requiere administrar el servidor manualmente (parches, seguridad) — injustificado para el volumen y plazo del proyecto. | — |
- 
-*Justificación:* el plan Starter de Render elimina el cold-start por un costo bajo (~US$7/mes), la relación costo-beneficio correcta para una app de uso diario en horario comercial.
- 
+| Docker (imagen propia, `node:22-slim`) | El entorno de ejecución queda fijado por el `Dockerfile` (versión exacta de Node, dependencias de sistema como `python3`/`make`/`g++` necesarias para compilar `bcrypt`), garantizando que el contenedor de producción sea idéntico en cualquier entorno donde se construya la imagen. | ✅ |
+| Build nativo de Render (sin Docker, Node autodetectado) | Render también puede construir el backend sin Dockerfile, autodetectando Node.js y ejecutando `npm install`/`npm start` directamente — más simple, pero deja el versionado exacto del entorno (versión de Node, librerías nativas del sistema operativo) en manos del buildpack de Render en vez de quedar declarado y versionado en el propio repositorio. | — |
+
+<br>
+
+*Justificación:* 
+
+Se usa Docker porque el backend depende de `bcrypt`, un paquete con un componente nativo en C++ que requiere compilarse contra herramientas de sistema (`python3`, `make`, `g++`) — el `Dockerfile` declara explícitamente esas dependencias, evitando fallos de build silenciosos si el buildpack por defecto de Render cambiara de versión de Node o de imagen base en el futuro. En ambos casos el sistema operativo subyacente es Linux (Ubuntu/Debian, según la imagen base de Render o del propio `Dockerfile`), consistente con el entorno de desarrollo local (RNF07).
+
+
+<br>
+
+**Hardware (Web Service)**
+
+<br>
+
+| Proveedor | Plan gratuito | RAM / CPU | Particularidad |
+|---|---|---|---|
+| **Render** | Free | 512 MB / 0.1 CPU | Se suspende tras ~15 min de inactividad; se reactiva automáticamente al recibir tráfico (con latencia de arranque en frío) | ✅ |
+| Railway | Free (con créditos de prueba, no permanente) | Variable según créditos consumidos | No ofrece un plan gratuito permanente para producción — los créditos gratuitos se agotan y el proyecto se pausa | — |
+| Fly. io | Free (allowance limitado) | ~256 MB por VM compartida | Requiere tarjeta de crédito desde el registro; el excedente se cobra automáticamente, riesgo no deseado para un presupuesto fijo | — |
+
+<br>
+
+*Justificación:* 
+
+Se eligió el plan **Free** de **Render**, no el Starter, para mantener el costo recurrente del backend en $ 0 durante Propuesta 1 — el volumen real (2 administradores, uso interno, sin usuarios finales concurrentes) no justifica pagar por eliminar el cold-start. La contrapartida asumida conscientemente es la latencia de arranque en frío tras inactividad prolongada (ej. la primera consulta de la mañana puede tardar unos segundos más mientras el contenedor se reactiva); por eso se implementó el endpoint `/health` (TS04), esto no elimina el cold-start, pero permite detectar y monitorear el estado del servicio en vez de que Carlos reporte "la app no funciona" sin poder diagnosticar la causa. Si el negocio crece a un punto donde la latencia de arranque afecte la operación diaria, la migración al plan Starter (US$7/mes) es inmediata, sin cambios de código. Frente a Railway y Fly. io, Render Free es la única opción sin riesgo de cobro inesperado y con reactivación automática (no requiere que el administrador la reinicie manualmente).
+
+<br>
+
+El backend corre como un **Render Web Service**, que sí requiere elegir un *Instance Type* (a diferencia del Static Site del frontend). Render ofrece los siguientes planes:
+
+<br>
+
+| Instance Type | Costo | RAM | CPU | Características |
+|---|---|---|---|---|
+| **Free** | US$ 0/mes | 512 MB | 0.1 CPU | Se suspende ("spin down") tras períodos de inactividad; sin acceso SSH, sin scaling, sin jobs puntuales, sin discos persistentes | ✅ |
+| Starter | US$ 7/mes | 512 MB | 0.5 CPU | Sin downtime, SSH, scaling, jobs puntuales, discos persistentes | — |
+| Standard | US$ 25/mes | 2 GB | 1 CPU | Igual que Starter, más recursos | — |
+| Pro | US$ 85/mes | 4 GB | 2 CPU | Igual que Starter, más recursos | — |
+
+
+<br>
+
+Región desplegada: **Oregon (US West)**, bajo el dominio propio **`api.moli-voleibol.com`**.
+
 <br>
 
 ### 4.7.3. Capa de Datos
- 
+
 **Motor de base de datos**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | PostgreSQL | Relacional, soporta transacciones ACID y constraints únicos a nivel de base de datos — necesario para blindar la invariante de no doble reserva (RF06) más allá de la validación en el backend. | ✅ |
 | MySQL | También relacional y viable, pero el soporte de constraints/transacciones complejas de Supabase y el ecosistema de Prisma están más pulidos alrededor de Postgres. | — |
 | MongoDB (NoSQL) | Flexible para datos no estructurados, pero un modelo de disponibilidad de canchas con relaciones fuertes (cancha–franja–cliente–pago) encaja naturalmente mejor en un modelo relacional. | — |
- 
-*Justificación:* la regla de negocio más crítica del sistema (RF06) se apoya en constraints e integridad transaccional — terreno donde una base relacional como PostgreSQL es más robusta que una NoSQL.
- 
+
+*Justificación:* 
+
+La regla de negocio más crítica del sistema (RF06) se apoya en constraints e integridad transaccional — terreno donde una base relacional como **PostgreSQL** es más robusta que una NoSQL.
+
 <br>
 
 **Cliente de base de datos**
- 
+
+<br>
+
 | Alternativa | Descripción | Elegido |
 |---|---|---|
 | Prisma Studio | Cliente visual incluido con el ORM elegido, sin instalación adicional, refleja el schema tipado directamente. | ✅ |
 | pgAdmin | Cliente dedicado de PostgreSQL, más completo para administración avanzada, pero redundante frente a Prisma Studio para las necesidades de este proyecto. | — |
- 
-*Justificación:* Prisma Studio cubre las necesidades de inspección y edición de datos durante el desarrollo sin agregar una herramienta adicional al flujo de trabajo.
- 
+
+*Justificación:* 
+
+**Prisma Studio** cubre las necesidades de inspección y edición de datos durante el desarrollo sin agregar una herramienta adicional al flujo de trabajo.
+
 <br>
 
-**Software (hosting de base de datos gestionada)**
- 
-| Alternativa | Descripción | Elegido |
-|---|---|---|
-| Supabase | PostgreSQL gestionado + Storage de archivos en un mismo proveedor — permite alojar tanto la base de datos como las imágenes de comprobantes/canchas (RF25, RF31) sin sumar un tercer servicio. | ✅ |
-| Neon | PostgreSQL gestionado serverless, buen rendimiento, pero no incluye almacenamiento de archivos — obligaría a contratar un proveedor de Storage aparte. | — |
-| Base de datos autogestionada en el mismo VPS | Evita depender de un proveedor externo, pero suma la responsabilidad de backups, parches de seguridad y disponibilidad — injustificado para el plazo y una sola desarrolladora. | — |
- 
-*Justificación:* consolidar base de datos y almacenamiento de archivos en Supabase reduce a un solo proveedor lo que de otra forma serían dos, simplificando configuración, monitoreo y el presupuesto de inversión total.
- 
+**Hardware (hosting de base de datos gestionada)**
+
 <br>
 
-**Sistema Operativo y Hardware**
- 
-| Alternativa | Descripción | Elegido |
-|---|---|---|
-| Linux (Ubuntu) — infraestructura gestionada por Supabase | Sistema operativo y hardware/almacenamiento completamente abstraídos por el proveedor; no requiere administración manual. | ✅ |
-| Servidor propio con PostgreSQL autoinstalado | Mismo trade-off que en la fila anterior: más control, más responsabilidad operativa injustificada para el proyecto. | — |
- 
-*Justificación:* coherente con el enfoque 100% PaaS/administrado del proyecto — sin servidores propios que mantener en ninguna capa.
- 
+| Proveedor | Plan gratuito | Almacenamiento BD | Incluye almacenamiento de archivos | Particularidad |
+|---|---|---|---|---|
+| **Supabase** | Free | 500 MB | Sí (1 GB, mismo proyecto) | Un solo proveedor para BD + Storage + panel de administración; egress 5 GB/mes | ✅ |
+| Neon | Free | 0.5 GB (equivalente) | No — requiere contratar un proveedor de Storage aparte | Serverless con "scale-to-zero" (el cómputo se apaga solo, no cobra por inactividad), pero no resuelve RF25/RF31 (fotos y comprobantes) por sí solo | — |
+| filess. io | Free | 10 MB | No | Almacenamiento muy por debajo de lo necesario incluso para el volumen actual (27 MB ya en uso); descartado por insuficiente, no por diseño | — |
+
+*Justificación:* 
+
+**Supabase** se mantiene como la elección correcta porque resuelve en un mismo proveedor tanto la base de datos relacional (RF06) como el almacenamiento de archivos (RF25 comprobantes, RF31 fotos de cancha) — Neon obligaría a sumar un tercer servicio de Storage (ej. AWS S3 o Cloudinary) para cubrir la misma necesidad, y filess. io directamente no tiene espacio suficiente ni en su plan pagado más económico para el volumen ya en uso. Consolidar en un proveedor reduce el número de cuentas, dashboards y puntos de facturación a administrar por una sola desarrolladora.
+
+El proyecto está desplegado en **Supabase** con la siguiente configuración real:
+
 <br>
 
-**Almacenamiento de comprobantes y fotos (Storage)**
- 
-| Alternativa | Descripción | Elegido |
+| Parámetro | Valor |
+|---|---|
+| Proveedor de infraestructura subyacente | AWS |
+| Región | `us-west-1` |
+| Instancia de cómputo | Nano (CPU compartida, hasta 0.5 GB de memoria en el plan Free) |
+| Plan | Free |
+
+<br>
+
+Consumo actual (ciclo de facturación vigente, referencial — crece con el uso):
+
+| Recurso | Uso actual | Límite del plan Free |
 |---|---|---|
-| Supabase Storage | Mismo proveedor que la base de datos (fila anterior), plan gratuito suficiente para el volumen proyectado, URLs directamente utilizables desde el backend. | ✅ |
-| Servicio de almacenamiento separado (AWS S3, Cloudinary) | Más especializado en manejo de imágenes (ej. transformaciones automáticas), pero suma un proveedor y una cuenta adicional a administrar. | — |
- 
-*Justificación:* mismo razonamiento que la elección del motor de base de datos — un proveedor menos que administrar, mismo dashboard y facturación que la base de datos.
- 
+| Egress | 49 MB | 5 GB |
+| Tamaño de base de datos | 27 MB | 500 MB |
+| Usuarios activos mensuales (Supabase Auth, no usado en este proyecto) | 0 | 50,000 |
+| File Storage | 1 MB | 1 GB |
+
+<br>
+
+El consumo actual está muy por debajo de los límites del plan gratuito, consistente con la proyección de crecimiento estimada en el punto siguiente.
+
+<br>
+
+**Cómo funciona el almacenamiento (Supabase Storage)**
+
+El proyecto usa un único bucket llamado `la-canchita-de-carlos`, organizado en tres carpetas según el tipo de archivo:
+
+| Carpeta | Contenido | Requisito funcional |
+|---|---|---|
+| `perfiles/` | Fotos de perfil de los administradores (`User`) | — |
+| `canchas/` | Fotos de las canchas (`Court`) | RF31 |
+| `comprobantes/` | Imágenes de comprobante de pago (`Payment`) | RF25 |
+
+<br>
+
+El flujo de subida es el mismo para los tres casos, implementado en `SupabaseFileStorage` (adaptador de la interfaz `FileStorage` del `platform/`):
+
+1. El backend valida el archivo antes de subirlo: solo `image/jpeg`, `image/png` o `image/webp`, y un tamaño máximo de 5 MB — cualquier otro formato o archivo más pesado se rechaza con un error 400 antes de tocar Supabase.
+2. El archivo se sube al bucket con una ruta generada (`carpeta/uuid.extensión`), evitando colisiones de nombres entre distintos administradores o clientes.
+3. La base de datos **nunca almacena el archivo en sí**, solo la ruta (`usu_photo_url`, `cou_photo_url`, `boo_receipt_url` en el schema) — el archivo físico vive únicamente en Supabase Storage. Esto mantiene las filas de la base de datos livianas incluso con muchas imágenes asociadas (ver proyección de crecimiento).
+4. Para mostrar una imagen, el backend genera una **URL firmada** (`createSignedUrl`) con un tiempo de expiración, en vez de exponer el bucket públicamente — esto controla quién puede ver los comprobantes de pago y fotos, sin depender de que el bucket sea público.
+5. Al eliminar una cancha, un usuario o reemplazar una foto, el backend llama explícitamente a `delete()` sobre el archivo anterior en Storage — evita archivos huérfanos que ocupen espacio sin estar referenciados por ninguna fila de la base de datos (corrección aplicada tras detectar este caso durante el desarrollo).
+
 <br>
 
 **Proyección de crecimiento de datos**
- 
+
 Con el motor y el proveedor ya elegidos arriba, cabe verificar si van a alcanzar en el tiempo. Uso diario del sistema no implica los mismos riesgos de escala para la base de datos relacional que para el almacenamiento de imágenes — crecen a ritmos muy distintos:
- 
-- **Filas en PostgreSQL (`Booking`, `Payment`, `Customer`):** techo teórico de ~60 alquileres/día si las ~5 canchas estuvieran ocupadas 12 horas diarias sin excepción → ~21,900 filas/año → ~219,000 en 10 años. A unos cientos de bytes por fila, esto representa apenas 40-50 MB acumulados en una década, en el escenario más exagerado posible. PostgreSQL maneja sin esfuerzo tablas de millones de filas — la base relacional no es un cuello de botella ni con uso diario sostenido por años.
 
-- **Imágenes (comprobantes de pago, fotos de canchas):** en el mismo escenario de uso intenso, con una imagen de ~300-800 KB por comprobante, el volumen anual ronda los 10-15 GB. Un plan de storage gratuito (usualmente ~1 GB) se quedaría corto en meses, no en años — este es el recurso que realmente hay que vigilar, no la base de datos.
+- **Filas en PostgreSQL (`Booking`, `Payment`, `Customer`):** techo teórico de ~60 alquileres/día si las ~5 canchas estuvieran ocupadas 12 horas diarias sin excepción → ~21,900 filas/año → ~219,000 en 10 años. A unos cientos de bytes por fila, esto representa apenas 40-50 MB acumulados en una década, en el escenario más exagerado posible. PostgreSQL maneja sin esfuerzo tablas de millones de filas — la base relacional no es un cuello de botella ni con uso diario sostenido por años. El consumo real observado (27 MB de 500 MB, ver tabla de consumo actual) es consistente con esta proyección.
 
-- **Mitigación preventiva (documentada para no volverse un problema en 1-2 años):** índices en `Booking` sobre `(courtId, fecha, hora)` — ya necesarios para prevenir doble reserva y que de paso aceleran las consultas del calendario aunque la tabla crezca; compresión/resize de imágenes en el cliente antes de subir (ej. máx. 1000px de ancho, suficiente para verificar un comprobante); y una eventual política de retención de comprobantes antiguos a definir con Carlos (decisión de negocio, no técnica) si no necesita conservarlos indefinidamente por temas contables.
+- **Imágenes (comprobantes de pago, fotos de canchas):** en el mismo escenario de uso intenso, con una imagen de ~300-800 KB por comprobante, el volumen anual ronda los 10-15 GB. El plan gratuito de Supabase Storage (1 GB) se quedaría corto en meses, no en años — este es el recurso que realmente hay que vigilar, no la base de datos. El uso actual (1 MB de 1 GB) confirma que todavía se está muy al inicio de esa curva.
+
+- **Mitigación preventiva (documentada para no volverse un problema en 1-2 años):** índices en `Booking` sobre `(courtId, fecha, hora)` — ya necesarios para prevenir doble reserva y que de paso aceleran las consultas del calendario aunque la tabla crezca; compresión/resize de imágenes en el cliente antes de subir (ej. máx. 1000px de ancho, suficiente para verificar un comprobante); y una eventual política de retención de comprobantes antiguos a definir con Carlos (decisión de negocio, no técnica) si no necesita conservarlos indefinidamente por temas contables. Si el consumo de Storage se acerca al límite de 1 GB, la migración al plan Pro de Supabase (US$25/mes, incluye 100 GB) es la vía directa sin cambiar de proveedor ni de código.
 
 <br>
 
 ### 4.7.4. Servicios de Integración
- 
+
+<br>
+
 | Servicio | Alternativas consideradas | Elegido | Justificación |
 |---|---|---|---|
-| Envío de correo transaccional | Resend, SendGrid, Amazon SES | **Resend** | API simple desde Node/Express, plan gratuito con volumen muy por encima de lo que RF23–RF24 necesitan (correo puntual, no masivo); evita configurar SMTP manualmente como exigiría SES. |
+| Envío de correo transaccional | Resend, SendGrid, Amazon SES | **Resend** | Plan gratuito: 3,000 correos/mes (máx. 100/día), 1 dominio verificado — muy por encima de lo que RF23–RF24 necesitan (correo puntual, no masivo); API simple desde Node/Express; evita configurar SMTP manualmente como exigiría SES. El dominio de envío se verifica gratis sobre el subdominio (`moli-voleibol.com`), sin costo adicional de dominio. |
 | Repositorio y control de versiones | GitHub, GitLab | **GitHub** | Integración directa con Render para despliegue continuo (CI/CD) de ambos servicios (Static Site + Web Service) sin configuración adicional. |
 | Contacto directo con clientes | WhatsApp (enlace `wa.me`), API de WhatsApp Business | **Enlace `wa.me`** | RF30 solo requiere abrir un chat existente, no enviar mensajes automatizados — un enlace directo cubre la necesidad sin el costo/complejidad de la API oficial de WhatsApp Business (reservada para la Propuesta 2). |
- 
+| Dominio propio | Registro en Cloudflare, GoDaddy, Namecheap | **Cloudflare Domains** | `moli-voleibol.com` registrado por **US$ 10.46/año** (pago único anual, sin renovación automática obligatoria); Cloudflare no cobra markup sobre el precio mayorista del TLD, a diferencia de la mayoría de registradores. Sobre este dominio raíz se crearon dos subdominios sin costo adicional: `api.moli-voleibol.com` (backend, apuntando al Web Service de Render) y `lacanchitadecarlos.moli-voleibol.com` (frontend, apuntando al Static Site de Render), ambos vía registro CNAME en modo "DNS only" para no interferir con el certificado SSL automático de Render. |
+
 <br>
 
 ### 4.7.5. Presupuesto de Inversión Total (transversal)
- 
+
 | Concepto | Costo | Frecuencia |
 |---|---|---|
 | Desarrollo (Propuesta 1) | S/ 1,700 | Pago único |
-| Render Web Service (plan Starter) | ~US$ 7/mes (~S/ 26/mes) | Recurrente, obligatorio |
-| Render Static Site (frontend) | US$ 0 | Recurrente, plan gratuito |
-| Supabase (base de datos + Storage) | US$ 0 | Recurrente, plan gratuito |
-| Resend (correo transaccional) | US$ 0 | Recurrente, plan gratuito |
-| Dominio propio (opcional, no incluido en Propuesta 1) | ~US$ 10-15/año | Recurrente, opcional |
-| **TOTAL implementado (pago único + primer mes de operación)** | **S/ 1,726 aprox.** | — |
-| **TOTAL recurrente mensual (a partir del mes 2)** | **~S/ 26/mes** | Mensual |
- 
-*El único costo recurrente obligatorio para mantener el sistema operativo tras el desarrollo es el plan Starter de Render (~US$7/mes), elegido para evitar el cold-start en una aplicación de uso diario. Todos los demás servicios operan dentro de sus límites de plan gratuito para el volumen proyectado de este negocio.*
+| Dominio `moli-voleibol.com` (Cloudflare Registrar) | US$ 10.46 (~S/ 39) | Anual |
+| Render Web Service — backend (plan Free) | US$ 0/mes | Recurrente, plan gratuito |
+| Render Static Site — frontend (plan Free) | US$ 0/mes | Recurrente, plan gratuito |
+| Supabase (base de datos + Storage, plan Free) | US$ 0/mes | Recurrente, plan gratuito |
+| Resend (correo transaccional, plan Free) | US$ 0/mes | Recurrente, plan gratuito |
+| **TOTAL implementado (pago único + dominio del primer año)** | **≈ S/ 1,739** | — |
+| **TOTAL mensual** | **S/ 0/mes** | Mensual |
+| **TOTAL anual (renovación de dominio)** | **≈ S/ 39/año** | Anual |
+
+<br>
+
+A diferencia de lo estimado inicialmente, el sistema opera hoy con **costo recurrente mensual de S/ 0**, tanto ambas partes de la aplicación corren en los planes gratuitos de Render, y la base de datos/almacenamiento en el plan gratuito de Supabase. El único costo recurrente real del proyecto es la renovación anual del dominio (~US$10-15/año, según el precio al momento de renovar). 
+
+La contrapartida de no pagar el plan Starter de Render (US$7/mes) es el cold-start del backend tras inactividad, una decisión presupuestaria consciente para Propuesta 1, revertible en cualquier momento sin cambios de código si el crecimiento del negocio lo justifica.
+
+<br>
+
+### 4.7.6. Seguridad
+
+Medidas de seguridad implementadas de forma transversal a las tres capas de la arquitectura, con la ubicación exacta en el código donde se aplica cada una.
+
+<br>
+
+| Medida | Implementación | Motivo |
+|---|---|---|
+| Autenticación por token | JWT (`jsonwebtoken`), firmado con `JWT_SECRET` (variable de entorno, no versionada), payload mínimo (`userId`, `isOwner`), expiración configurable (`JWT_EXPIRES_IN`, actualmente 1h). | Evita mantener estado de sesión en el servidor para cada request; el propio token demuestra la identidad del administrador sin consultar la base de datos en cada llamada. |
+| Registro de sesiones activas | Cada login crea una fila en `sessions` (`ses_token_hash`, IP, user-agent, fecha de expiración) — el token nunca se guarda en texto plano, solo su hash (SHA-256). Al cerrar sesión o cambiar contraseña, la sesión se marca `ses_revoked = true`. | Trazabilidad de accesos (desde qué IP/dispositivo se conectó cada administrador) y base para poder invalidar sesiones activas. |
+| Hash de contraseñas | bcrypt con 12 salt rounds (`platform/security/password.ts`). Nunca se guarda ni se registra la contraseña en texto plano, ni siquiera en logs de error. | Estándar de la industria para almacenamiento de credenciales — un volcado de la base de datos no expone las contraseñas reales. |
+| Autorización por rol (RBAC de 2 niveles) | Middleware `requireAuth` (exige un JWT válido) + `requireOwner` (exige `isOwner: true` en el payload) aplicado a rutas sensibles (autorizar/rechazar solicitudes de acceso, ver administradores activos). | Separa lo que puede hacer cualquier administrador de lo reservado al dueño (EP07), sin necesitar un sistema de permisos más complejo para solo 2 roles. |
+| Tokens de un solo uso, hasheados | Los tokens de verificación de correo (`email_verification_tokens`) y de reseteo de contraseña (`password_reset_tokens`) se generan con `crypto.randomBytes(32)` (aleatoriedad criptográfica) y se guardan en la base de datos **hasheados con SHA-256**, no en texto plano, con fecha de expiración y bandera `used`. | Aunque alguien accediera a un volcado de la base de datos, no podría reconstruir el enlace de verificación/reseteo original a partir del hash — mismo principio que el hash de contraseñas. |
+| Registro de administradores controlado | Una cuenta nueva no se crea directamente: pasa por `AccessRequest` (pendiente de aprobación del dueño) y, tras aprobarse, el `User` nace en `PENDING_VERIFICATION` hasta confirmar el correo (US20-21, US34) — evita cuentas activas con un correo mal escrito o no verificado. | Control de acceso de dos pasos (aprobación humana + verificación de correo) sin depender de un proveedor de identidad externo. |
+| Bootstrap del primer usuario protegido | La creación del primer administrador dueño (`bootstrapOwner.usecase.ts`) exige un `SETUP_TOKEN` secreto (variable de entorno, sin valor por defecto — si falta, el endpoint responde error 500 en vez de operar sin protección). | Evita que el endpoint de creación del primer dueño quede abierto sin control una vez desplegado en producción. |
+| CORS restringido | `cors({ origin: FRONTEND_URL })` — la API solo acepta solicitudes desde el dominio del frontend (`lacanchitadecarlos.moli-voleibol.com` en producción), no desde cualquier origen. | Reduce la superficie de ataque frente a scripts de terceros que intenten llamar a la API desde otro dominio. |
+| Validación y saneamiento de entrada | `platform/validation/validators.ts`: normalización de texto/correo/teléfono y validaciones explícitas (formato de correo, longitud mínima/máxima, montos positivos) antes de persistir cualquier dato, en cada caso de uso. | Rechaza datos malformados antes de que lleguen a la base de datos, con mensajes de error específicos por campo. |
+| Prevención de inyección SQL | Todo acceso a base de datos pasa por Prisma ORM con consultas parametrizadas — no hay SQL crudo concatenado con datos de entrada en ningún punto del código. | Elimina por diseño la clase de vulnerabilidad más común en APIs con base de datos relacional. |
+| Manejo de errores sin fuga de información | `errorMiddleware` centralizado: traduce errores conocidos de Prisma (violación de unicidad P2002, de llave foránea P2003) y de Multer a mensajes claros en español; cualquier error no anticipado responde genéricamente `"Error interno del servidor"` (500) y se registra en el log del servidor (`console.error`), sin exponer el stack trace ni detalles internos al cliente. | Evita que un error inesperado revele detalles de la implementación (nombres de tablas, rutas de archivos, versión de librerías) a quien esté probando la API. |
+| Cifrado en tránsito (HTTPS) | Certificados SSL automáticos en las tres capas: Render (frontend y backend) y Supabase (base de datos y Storage) — no hay tráfico sin cifrar entre el navegador del administrador, la API y la base de datos. | Protege credenciales, tokens y datos de clientes/pagos de ser interceptados en la red. |
+| Gestión de secretos | `JWT_SECRET`, `SETUP_TOKEN`, `RESEND_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DATABASE_URL`/`DIRECT_URL` nunca se versionan en el repositorio (`.gitignore` excluye `.env`); en producción se inyectan como variables de entorno en Render (`sync: false` en `render.yaml`, configuradas manualmente en el dashboard, no en el código). | Un acceso al repositorio de GitHub no expone ninguna credencial de producción. |
+| Almacenamiento de archivos con acceso controlado | Las imágenes (fotos de cancha, comprobantes de pago, fotos de perfil) no son públicas: se sirven mediante URLs firmadas con expiración (`createSignedUrl`), no por acceso directo al bucket | Un comprobante de pago no queda expuesto indefinidamente por una URL adivinable o indexada. |
+
+<br>
+
+**Limitación conocida:** 
+
+La revocación de sesión (`sessions.revoke` / `revokeAllForUser`, disparada al cerrar sesión o cambiar contraseña) actualiza la base de datos, pero el middleware `requireAuth` valida únicamente la firma y expiración del JWT — no consulta la tabla `sessions` en cada request. En la práctica, un token ya emitido sigue siendo válido hasta su expiración natural (1h) aunque la sesión se haya marcado como revocada. El riesgo está acotado por la corta duración del token, pero no es una invalidación inmediata real todavía.
 
 <br>
 
 ---
 
-# Capítulo V: Diseño Orientado a Objetos
+# Capítulo V: Software Object-Oriented Design
 
-## 5.1. Diagrama de Clases — Backend
+## 5.1. Class Diagrams — Backend
 
+El backend está organizado como un monolito modular con **arquitectura hexagonal (ports & adapters)**, dividido en 6 bounded contexts independientes. Cada uno sigue la misma estructura de 4 capas: `domain/model` (entidades y puertos, sin dependencias de framework), `application` (casos de uso), `infrastructure/persistence/repositories` (adaptadores Prisma) e `interfaces/rest` (routers Express + DTOs). Todos los contextos comparten dos piezas de infraestructura transversal: la conexión a **Supabase Postgres** vía Prisma, y **Supabase Storage** para archivos (fotos, comprobantes).
 
-## 5.2. Diagrama de Clases — Frontend
+La conexión a la base de datos usa dos URLs distintas de Supabase: `DATABASE_URL` (conexión con *connection pooling*/PgBouncer, la que usa la app en tiempo de ejecución a través del adaptador `PrismaPg`) y `DIRECT_URL` (conexión directa, usada solo por Prisma CLI para migraciones, en `prisma.config.ts`). Los archivos (fotos de perfil, fotos de cancha, comprobantes de pago) no se guardan en la base de datos: se suben a un bucket de **Supabase Storage** (`la-canchita-de-carlos`) a través del adaptador `SupabaseFileStorage`, organizados en 3 carpetas `perfiles/`, `canchas/` y `comprobantes/` y la base de datos solo guarda la *ruta* del archivo (`usu_photo_url`, `cou_photo_url`, `boo_receipt_url`), no la imagen. Al reemplazar o quitar una foto, el sistema borra el archivo anterior del bucket para no acumular archivos huérfanos.
 
+<br>
+
+### 5.1.1. Bounded context: Bookings (Reservas, Canchas y Mantenimiento)
+
+![Class Backend Diagrams](assets/class-diagrams/backend/bookings-context.png)
+
+Este es el contexto más grande del sistema: agrupa las entidades `Booking`, `Court` y `ScheduleBlock`, con sus reglas de dominio (`overlaps`, `hasConflict`, `assertWithinOperatingHours`, `assertNotInPast`, `assertCourtAvailableForBooking`). Expone **17 endpoints** bajo `/bookings` (5) y `/courts` (12): registrar/editar/cancelar/buscar reservas (incluyendo reservas en serie multidía/recurrente vía `POST /bookings/serie`), y el CRUD completo de canchas más el manejo de bloqueos de horario por mantenimiento (`/courts/:id/bloqueos*`).
+
+**Conexión con Supabase:** 
+
+`PrismaBookingRepository`, `PrismaCourtRepository` y `PrismaScheduleBlockRepository` leen/escriben sobre las tablas `bookings`, `courts` y `schedule_blocks`. Además, `addCourtPhoto.usecase.ts` usa `SupabaseFileStorage` para subir la foto de la cancha a la carpeta `canchas/` del bucket.
+
+**Conexión con Resend:** 
+
+Al registrar una reserva (individual o en serie), este contexto dispara dos correos — `sendBookingConfirmation` al cliente (solo si dejó un correo de contacto opcional en el formulario, ya que `Customer` no guarda correo en la base de datos) y `sendNewBookingAlert` a todos los demás administradores activos. También genera notificaciones internas (campanita) de tipo `NEW_BOOKING` en cada registro, y `COURT_MAINTENANCE` cuando se programa un bloqueo **en serie** (el bloqueo individual de una sola franja no notifica).
+
+<br>
+
+### 5.1.2. Bounded context: Customers (Clientes)
+
+![Class Backend Diagrams](assets/class-diagrams/backend/customers-context.png)
+
+Contexto simple, con una única entidad `Customer` (nombre, teléfono, DNI/RUC opcional, estado). Expone **5 endpoints** bajo `/customers`: listar/buscar, crear, editar, desactivar (borrado lógico, `DELETE` marca `INACTIVE` en vez de eliminar el registro) y consultar el historial de reservas de un cliente (`GET /customers/:id/historial`).
+
+**Conexión con Supabase:** 
+
+`PrismaCustomerRepository` opera sobre la tabla `customers`. Este contexto no sube archivos a Storage (el campo de foto del cliente se eliminó del modelo) ni dispara correos directamente — el correo de confirmación de reserva lo dispara el contexto `bookings`, usando el `customerEmail` que llega en el formulario, no un dato persistido de `Customer`.
+
+<br>
+
+### 5.1.3. Bounded context: Identity (Usuarios, Sesiones y Acceso)
+
+![Class Backend Diagrams](assets/class-diagrams/backend/identity-context.png)
+
+Agrupa `User`, `Session`, `PasswordResetToken`, `EmailVerificationToken` y `AccessRequest`. Expone **20 endpoints**: 5 bajo `/auth` (login, logout, bootstrap del primer owner, y el flujo completo de "olvidé mi contraseña") y 15 bajo `/users` (solicitudes de acceso, gestión de perfil propio, gestión de administradores, subida/borrado de foto de perfil).
+
+**Conexión con Supabase:** 
+
+5 repositorios Prisma (`PrismaUserRepository`, `PrismaSessionRepository`, `PrismaPasswordResetTokenRepository`, `PrismaEmailVerificationTokenRepository`, `PrismaAccessRequestRepository`) sobre sus tablas respectivas. `uploadUserPhoto.usecase.ts`/`removeUserPhoto.usecase.ts` usan `SupabaseFileStorage` con la carpeta `perfiles/`.
+
+**Conexión con Resend:**  
+
+Es el contexto que más tipos de correo dispara — `sendNewAccessRequestAlert` (a todos los owners, cuando alguien pide una cuenta), `sendAdminDecision` (al solicitante, al aprobar/rechazar), `sendEmailVerification` (al nuevo admin, junto con la aprobación) y `sendPasswordReset` (al pedir recuperar contraseña). No genera notificaciones internas (campanita) — las solicitudes de acceso hoy solo notifican por correo, no en la app.
+
+<br>
+
+### 5.1.4. Bounded context: Notifications (Notificaciones y Correos)
+
+![Class Backend Diagrams](assets/class-diagrams/backend/notifications-context.png)
+
+Este contexto tiene doble función: por un lado, la entidad `Notification` y sus **2 endpoints** bajo `/notifications` (`GET /` para listar las propias, `PATCH /:id/leida` para marcarlas leídas) alimentan la campanita del panel — de los 6 tipos definidos en el enum, solo `NEW_BOOKING` y `COURT_MAINTENANCE` están conectados a un disparador real (ver 5.1.1); `ACCESS_REQUEST`, `PAYMENT_PENDING`, `BOOKING_CANCELLED` y `GENERAL` quedan reservados para una fase futura.
+
+Por otro lado, este mismo contexto es dueño del **adaptador de Resend** (`ResendNotificationSender`, que implementa el puerto `NotificationSender`), usado por los otros contextos (`bookings`, `identity`) para enviar sus 6 tipos de correo. Todos comparten una misma plantilla HTML (`emailTemplate.ts`) para mantener consistencia visual. Si la variable `RESEND_API_KEY` no está configurada, el envío se omite silenciosamente (útil en desarrollo local, sin bloquear el flujo principal).
+
+**Conexión con Supabase:** 
+
+`PrismaNotificationRepository` sobre la tabla `notifications`. No sube archivos a Storage.
+
+<br>
+
+### 5.1.5. Bounded context: Panel (Métricas del Dashboard)
+
+![Class Backend Diagrams](assets/class-diagrams/backend/panel-context.png)
+
+Contexto de solo lectura, sin entidad propia: agrega datos de `bookings` y `payments` para alimentar el resumen del día en el Panel. Expone **3 endpoints** bajo `/panel`: reservas del día, ingreso del día y pagos pendientes del día.
+
+**Conexión con Supabase:** 
+
+`PrismaPanelRepository` ejecuta consultas de agregación directamente sobre las tablas `bookings` y `payments` (no tiene su propia tabla). No dispara correos ni notificaciones — es puramente consultivo.
+
+<br>
+
+### 5.1.6. Bounded context: Payments (Pagos)
+
+![Class Backend Diagrams](assets/class-diagrams/backend/payments-context.png)
+
+Contiene la entidad `Payment` (historial de pagos parciales/totales por reserva). Expone **4 endpoints** bajo `/payments`: registrar un pago, listar los pagos de una reserva, subir el comprobante y generar una URL firmada temporal para verlo.
+
+**Conexión con Supabase:** 
+
+`PrismaPaymentRepository` sobre la tabla `payments`, con una operación atómica (`registerPaymentAtomic`) que inserta el pago y actualiza `boo_paid_amount`/`boo_payment_status` en `bookings` en la misma transacción, para que ambas tablas nunca queden desincronizadas. `attachReceipt.usecase.ts` usa `SupabaseFileStorage` con la carpeta `comprobantes/`, y `createSignedUrl` genera enlaces temporales (no públicos) para ver el comprobante. Este contexto no dispara correos ni notificaciones internas propias.
+
+<br>
+
+## 5.2. Class Diagrams — Frontend
+
+El frontend está organizado por **módulo de negocio**, cada uno con su carpeta `hooks/` (llamadas a la API vía TanStack Query, usando `apiClient` de Axios con el token JWT inyectado por interceptor) y `components/` (las pantallas). En total son 18 pantallas repartidas en 20 rutas.
+
+<br>
+
+### 5.2.1. Mapa General de Módulos
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/overview.png)
+
+Vista general de cómo se relacionan los 7 módulos entre sí antes de entrar al detalle de cada uno. Los módulos `bookings`, `customers`, `dashboard` y `settings` tienen su propia carpeta `hooks/` que llama a `apiClient`/`queryClient` (módulo `shared`); `courts` es el único módulo sin hooks propios, reutiliza directamente los de `bookings` (`useAllCourts`, `useBookings`) y también sus modales de mantenimiento. `dashboard` a su vez depende de los hooks de `bookings` para calcular ocupación y próximo horario libre, y `bookings` depende de `useCustomers` (módulo `customers`) para la búsqueda de cliente al reservar. Todas las pantallas protegidas pasan por `AppShell`/`ProtectedRoute` (módulo `shared`), que a su vez dependen de `AuthProvider`/`useAuth` (módulo `auth`) y de `useNotifications`.
+
+<br>
+
+### 5.2.2. Módulo `auth` — Sesión y Acceso
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/auth.png)
+
+- **`LoginPage`** (`/login`): formulario de inicio de sesión con usuario/correo y contraseña; llama a `POST /auth/login` y guarda el token vía `useAuth`.
+- **`RequestAccessPage`** (`/solicitar-acceso`): formulario para pedir una cuenta de administrador nueva; llama a `POST /users/solicitudes`.
+- **`SolicitudEnviadaPage`** (`/solicitud-enviada`): pantalla de confirmación tras enviar la solicitud, sin llamadas a la API.
+- **`ForgotPasswordPage`** (`/olvide-password`): pide el correo para iniciar la recuperación; llama a `POST /auth/olvide-password`.
+- **`ResetPasswordPage`** (`/restablecer-password`): toma el token de la URL y define la nueva contraseña; llama a `POST /auth/restablecer-password`.
+- **`VerificarCorreoPage`** (`/verificar-correo`): confirma el correo de un administrador recién aprobado usando el token del enlace del correo; llama a `GET /users/verificar`.
+
+Todas comparten el layout `AuthLayout` y se apoyan en `AuthProvider`/`useAuth` (contexto de React que guarda el usuario y el token, y expone `login`/`logout`/`updateUser`).
+
+<br>
+
+### 5.2.3. Módulo `dashboard` — Panel Principal
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/dashboard.png)
+
+- **`PanelPage`** (`/panel`): pantalla de inicio tras loguearse. Combina 3 fuentes de datos (`useTodayBookings` contra `/panel/alquileres-del-dia`, `useCourts`, `useScheduleBlocks`) para mostrar el resumen del día, el próximo horario libre calculado en el cliente (`calculateNextFreeSlot`), el gráfico de ocupación semanal (`calculateWeeklyOccupancy`), avisos de mantenimiento del día y el botón flotante (FAB) de acceso directo a "Nueva reserva".
+
+<br>
+
+### 5.2.4. Módulo `bookings` — Calendario, Reservas y Mantenimiento
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/bookings.png)
+
+- **`CalendarioPage`** (`/calendario`): calendario de disponibilidad por cancha en 3 vistas (día/semana/mes), construido a partir de `useCourts`, `useBookings`, `useScheduleBlocks`/`useScheduleBlocksRange`; permite reservar o programar mantenimiento directo desde una celda libre.
+- **`NuevaReservaPage`** (`/calendario/nueva-reserva` y `/calendario/nueva-reserva/:id/editar`): formulario para registrar o editar una reserva (individual, multidía o recurrente vía `POST /bookings` o `POST /bookings/serie`), elegir cliente, método de pago y adjuntar comprobante.
+- **`ReservasPage`** (`/reservas`): listado/búsqueda de todas las reservas con filtros, gestión de pagos pendientes y cancelaciones (`POST /bookings/:id/cancelar`).
+- **`ProgramarMantenimientoModal`** (modal, sin ruta propia): formulario para bloquear una o varias franjas horarias por mantenimiento, usado tanto desde `CalendarioPage` como desde `CanchasPage`.
+- **`MantenimientosProgramadosModal`** (modal, sin ruta propia): lista los próximos mantenimientos programados de una cancha y permite cancelarlos.
+
+<br>
+
+### 5.2.5. Módulo `courts` — Canchas
+
+Este módulo no tiene diagrama de clases propio (sus componentes `CanchasPage` y `NuevaCanchaPage` consumen directamente los hooks de `bookings`):
+
+- **`CanchasPage`** (`/canchas`): catálogo de canchas — ver, activar/desactivar, eliminar, y acceso a mantenimientos programados.
+- **`NuevaCanchaPage`** (`/canchas/nueva` y `/canchas/:id/editar`): formulario para registrar o editar una cancha (nombre, deporte, tarifa, horario de atención, foto).
+
+<br>
+
+### 5.2.6. Módulo `customers` — Clientes
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/customers.png)
+
+- **`ClientesPage`** (`/clientes`): ficha de clientes registrados — buscar, crear, editar, ver historial de reservas, contactar por WhatsApp y eliminar (con modal de confirmación propio). Usa `useCustomers` contra `GET /customers`.
+
+<br>
+
+### 5.2.7. Módulo `settings` — Ajustes y Administración
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/settings.png)
+
+- **`AjustesPage`** (`/ajustes`): perfil propio (foto, nombre, usuario, correo, contraseña vía `PATCH /users/me/*`), vista previa de solicitudes de acceso pendientes y de usuarios activos (ambas solo visibles para el owner), y eliminar cuenta propia.
+- **`SolicitudesAccesoPage`** (`/ajustes/solicitudes`): gestión completa de solicitudes de acceso (aprobar/rechazar vía `useApproveAccessRequest`/`useRejectAccessRequest`) y de administradores con acceso (quitar acceso/eliminar vía `useDeactivateAdminUser`) — protegida para que solo el owner pueda entrar (redirige a `/ajustes` si no lo es).
+
+<br>
+
+### 5.2.8. Módulo `shared` — Componentes Base
+
+![Class Frontend Diagrams](assets/class-diagrams/frontend/shared.png)
+
+- **`AppShell`**: layout compartido por todas las pantallas protegidas — barra de navegación, buscador, campanita de notificaciones (`useNotifications`/`useMarkNotificationRead` contra `/notifications`), botón de ayuda/WhatsApp, avatar y menú inferior en móvil.
+- **`ProtectedRoute`**: envuelve las rutas que requieren sesión activa; redirige a `/login` si no hay usuario autenticado.
+- **`NotFoundPage`** (`*`, cualquier ruta no reconocida): página 404 con enlace de regreso al Panel o al Login según si hay sesión activa.
+- **`apiClient`/`queryClient`**: instancia de Axios con interceptor de `Authorization: Bearer <token>`, y el `QueryClient` de TanStack Query que cachea y sincroniza todas las llamadas anteriores.
+
+<br>
 
 ---
 
-# Capítulo VI: Diseño de Base de Datos
+# Capítulo VI: Database Design
 
 ## 6.1. Modelo Entidad-Relación
- 
-**Nomenclatura.** 
 
-Tablas y columnas se nombran en inglés, en snake_case, con un prefijo fijo de 3 letras por tabla en cada columna (ej. tabla `users` tiene las columnas `usu_id`, `usu_name`). En el script SQL ejecutable (`schema.sql`, Anexos) el prefijo se escribe en minúscula (`usu_id`) porque PostgreSQL vuelve case-sensitive cualquier identificador en mayúscula si no se lo entrecomilla siempre; en este capítulo se muestra en mayúscula (`USU_id`) solo por legibilidad. Los nombres de tabla siguen el mismo aggregate en inglés del Lenguaje Ubicuo y el diseño de clases: `User`, `Court`, `Customer`, `Booking`, `ScheduleBlock`, `AccessRequest`. El sufijo `_id` se usa de forma consistente para toda PK y FK del modelo.
- 
+**Nomenclatura.**
+
+Tablas y columnas se nombran en inglés, en snake_case, con un prefijo fijo de 3 letras por tabla en cada columna (ej. tabla `users` tiene las columnas `usu_id`, `usu_name`). En el script SQL ejecutable (`schema.sql`, Anexos) el prefijo se escribe en minúscula (`usu_id`) porque PostgreSQL vuelve case-sensitive cualquier identificador en mayúscula si no se lo entrecomilla siempre; en este capítulo se muestra en mayúscula (`USU_id`) solo por legibilidad. Los nombres de tabla siguen el mismo aggregate en inglés del Lenguaje Ubicuo y el diseño de clases: `User`, `Court`, `Customer`, `Booking`, `ScheduleBlock`, `AccessRequest`, `Payment`. El sufijo `_id` se usa de forma consistente para toda PK y FK del modelo.
+
 <br>
 
 ### 6.1.1. Entidades
- 
-El modelo tiene 9 entidades, agrupadas en 4 categorías según el módulo del sistema al que pertenecen.
- 
+
+El modelo tiene 11 entidades, agrupadas en 4 categorías según el módulo del sistema al que pertenecen.
+
 **a) Entidades Base**
- 
-- **Court** (`courts`, prefijo `COU_`): catálogo administrable de canchas del colegio — nombre, deporte, superficie, tarifa por hora y estado operativo (RF11-RF12).
+
+- **Court** (`courts`, prefijo `COU_`): catálogo administrable de canchas del colegio — nombre, deporte, superficie, tarifa por hora, horario de atención y estado operativo (RF11-RF12).
 
 - **ScheduleBlock** (`schedule_blocks`, prefijo `BLO_`): franjas horarias bloqueadas manualmente por mantenimiento u otro motivo, asociadas a una cancha (RF07, RF32).
 
 **b) Entidades de Identidad y Acceso**
- 
+
 - **User** (`users`, prefijo `USU_`): administradores con acceso al sistema — Carlos (dueño) y su trabajador.
 
 - **Session** (`sessions`, prefijo `SES_`): historial de inicios de sesión y control de sesiones activas por administrador (US01, US03).
+
 - **PasswordResetToken** (`password_reset_tokens`, prefijo `PRT_`): tokens de un solo uso para el flujo de "Olvidé mi contraseña".
+
+- **EmailVerificationToken** (`email_verification_tokens`, prefijo `EVT_`): tokens de un solo uso enviados por correo para confirmar la cuenta de un administrador recién aprobado, antes de que pueda iniciar sesión.
 
 - **AccessRequest** (`access_requests`, prefijo `REQ_`): solicitudes de cuenta nueva, pendientes de aprobación por el administrador dueño (RF20-RF22).
 
 **c) Entidades de Reservas**
- 
+
 - **Customer** (`customers`, prefijo `CUS_`): personas o grupos externos que alquilan canchas de forma recurrente y quedan registrados con ficha propia (RF09, RF30).
 
-- **Booking** (`bookings`, prefijo `BOO_`): reservas de cancha — fecha, horario, cliente, estado de pago (ver nota abajo) y, desde el Sprint 2, las reservas en serie (multidía/recurrente).
-*Nota de diseño — `Payment` sin tabla propia:* en el Event Storming y las User Stories (US14-US16), `Payment` se modela como aggregate independiente. En la implementación real cada `Booking` solo necesita su **estado de pago actual** (pendiente/parcial/pagado) y los montos total/pagado, no un historial de pagos parciales con ciclo de vida propio — por eso `BOO_total_amount`, `BOO_paid_amount`, `BOO_payment_status` y `BOO_receipt_url` (RF25) viven como columnas de `bookings` en vez de una tabla `payments` separada. Si la Propuesta 2 necesita pagos parciales independientes, `payments` se extrae como tabla propia sin romper el resto del modelo (RNF06).
- 
+- **Booking** (`bookings`, prefijo `BOO_`): reservas de cancha — fecha, horario, cliente, estado de pago (ver nota abajo) y las reservas en serie (multidía/recurrente).
+
+- **Payment** (`payments`, prefijo `PAY_`): historial de pagos parciales o totales registrados sobre una reserva — monto, método (efectivo/Yape/otro) y fecha (US14-US16).
+
+*Nota de diseño — `Payment` sí tiene tabla propia:* a diferencia del planteamiento inicial del Event Storming (donde se evaluó no separarlo), la implementación final sí extrajo `Payment` como aggregate con tabla propia, porque el negocio necesitaba conservar el historial de cada pago parcial (monto, método, fecha), no solo el acumulado. Para no penalizar cada lectura de `bookings` con un JOIN/SUM sobre `payments`, `Booking` mantiene columnas denormalizadas (`BOO_total_amount`, `BOO_paid_amount`, `BOO_payment_status`, `BOO_receipt_url`) que se actualizan de forma atómica cada vez que se registra un nuevo `Payment` (RNF06).
+
+
 **d) Entidades de Soporte y Notificaciones**
- 
+
 - **Notification** (`notifications`, prefijo `NTF_`): avisos internos mostrados en la campanita del panel — nueva reserva, pago pendiente, solicitud de acceso, mantenimiento, etc.
 
 <br>
 
 ### 6.1.2. Enfoque relacional
- 
+
 **Relaciones del módulo Identidad y Acceso**
- 
+
 - `User` ➔ `Session`: un administrador inicia muchas sesiones a lo largo del tiempo (US01). Tipo de relación: 1 a N. Clave foránea: `SES_user_id` en la tabla `sessions`.
 - `User` ➔ `PasswordResetToken`: un administrador puede pedir varios tokens de recuperación (uno por intento de "Olvidé mi contraseña"). Tipo de relación: 1 a N. Clave foránea: `PRT_user_id` en la tabla `password_reset_tokens`.
+- `User` ➔ `EmailVerificationToken`: un administrador nuevo recibe un token para confirmar su correo antes de poder iniciar sesión. Tipo de relación: 1 a N. Clave foránea: `EVT_user_id` en la tabla `email_verification_tokens`.
 - `User` ➔ `AccessRequest`: el administrador dueño aprueba o rechaza solicitudes de acceso; cada solicitud aprobada queda enlazada al `User` que se creó a partir de ella (RF21). Tipo de relación: 1 a N (opcional). Clave foránea: `REQ_created_user_id` en la tabla `access_requests`.
+
 **Relaciones del módulo Canchas**
- 
+
 - `Court` ➔ `ScheduleBlock`: una cancha puede tener varios bloqueos por mantenimiento; un bloqueo pertenece a una sola cancha. Tipo de relación: 1 a N. Clave foránea: `BLO_court_id` en la tabla `schedule_blocks`.
 - `Court` ➔ `Booking`: una cancha puede tener muchos alquileres; un alquiler es de una sola cancha (RF06). Tipo de relación: 1 a N. Clave foránea: `BOO_court_id` en la tabla `bookings`.
+
 **Relaciones del módulo Reservas**
- 
+
 - `Customer` ➔ `Booking`: un cliente registrado puede tener muchas reservas; la relación es opcional porque las reservas grupales/walk-in (ej. "Torneo Vóley Mix") no requieren un `Customer` con ficha propia, solo guardan el nombre en `BOO_customer_name`. Tipo de relación: 1 a N (opcional). Clave foránea: `BOO_customer_id` en la tabla `bookings`.
+- `Booking` ➔ `Payment`: un alquiler puede recibir varios pagos parciales a lo largo del tiempo (US14-US16); cada pago pertenece a una sola reserva. Tipo de relación: 1 a N. Clave foránea: `PAY_booking_id` en la tabla `payments`. Al eliminarse la reserva, sus pagos se eliminan en cascada.
+
 **Relaciones del módulo Notificaciones**
- 
+
 - `User` ➔ `Notification`: un administrador puede recibir muchas notificaciones; la relación es opcional porque una notificación puede ser general (dirigida a todos, `NTF_user_id` = NULL) en vez de individual. Tipo de relación: 1 a N (opcional). Clave foránea: `NTF_user_id` en la tabla `notifications`.
 
 <br>
 
-## 6.2. Diagrama de Base de Datos
+## 6.2. Database Diagrams
 
-Diagrama de Base de Datos entidad-relación físico de La canchita de Carlos, con llaves primarias (PK), foráneas (FK) y únicas (UK):
+Diagrama de Base de Datos entidad-relación físico de La Canchita de Carlos, con llaves primarias (PK), foráneas (FK) y únicas (UK):
 
 <br>
 
@@ -1509,13 +1892,13 @@ Diagrama de Base de Datos entidad-relación físico de La canchita de Carlos, co
 <br>
 
 ## 6.3. Diccionario de Datos
- 
+
 Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, restricciones y descripción funcional cruzada con los RF/US correspondientes.
- 
+
 <br>
 
 **Tabla: `users`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | USU_id | SERIAL | PK | Identificador único del administrador. |
@@ -1524,16 +1907,16 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | USU_email | VARCHAR(150) | NOT NULL, UNIQUE | Correo del administrador, usado para login y recuperación de contraseña. |
 | USU_password_hash | VARCHAR(255) | NOT NULL | Hash bcrypt/argon2 de la contraseña. Nunca texto plano (RNF01). |
 | USU_is_owner | BOOLEAN | NOT NULL, DEFAULT false | `true` solo para Carlos; habilita aprobar/rechazar solicitudes de acceso (RF21). |
-| USU_status | ENUM (`user_status_enum`) | NOT NULL, DEFAULT 'ACTIVE' | `ACTIVE` / `INACTIVE`. Revocar acceso marca `INACTIVE` en vez de borrar el registro. |
+| USU_status | ENUM (`user_status_enum`) | NOT NULL, DEFAULT 'ACTIVE' | `ACTIVE` / `INACTIVE` / `PENDING_VERIFICATION`. Los administradores nuevos quedan en `PENDING_VERIFICATION` hasta confirmar su correo; revocar acceso marca `INACTIVE` en vez de borrar el registro. |
 | USU_photo_url | TEXT | — | URL de la foto de perfil. |
 | USU_last_access | TIMESTAMPTZ | — | Último inicio de sesión exitoso (redundante con `sessions`, para lectura rápida). |
 | USU_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Fecha de alta. |
 | USU_updated_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Se actualiza automáticamente en cada UPDATE (trigger). |
- 
+
 <br>
 
 **Tabla: `sessions`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | SES_id | SERIAL | PK | Identificador de la sesión. |
@@ -1544,11 +1927,11 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | SES_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Momento del inicio de sesión. |
 | SES_expires_at | TIMESTAMPTZ | NOT NULL | Momento en que la sesión deja de ser válida. |
 | SES_revoked | BOOLEAN | NOT NULL, DEFAULT false | `true` si se cerró sesión manualmente antes de expirar (`SessionClosed`, US03). |
- 
+
 <br>
 
 **Tabla: `password_reset_tokens`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | PRT_id | SERIAL | PK | Identificador del token. |
@@ -1557,11 +1940,24 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | PRT_expires_at | TIMESTAMPTZ | NOT NULL | Vencimiento del token (recomendado: 1 hora desde su creación). |
 | PRT_used | BOOLEAN | NOT NULL, DEFAULT false | `true` una vez consumido; impide reutilizar el mismo enlace. |
 | PRT_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Momento de la solicitud. |
- 
+
+<br>
+
+**Tabla: `email_verification_tokens`**
+
+| Campo | Tipo | Restricciones | Descripción |
+|---|---|---|---|
+| EVT_id | SERIAL | PK | Identificador del token. |
+| EVT_user_id | INTEGER | NOT NULL, FK → users.USU_id | Administrador que debe confirmar su correo. |
+| EVT_token_hash | VARCHAR(255) | NOT NULL, UNIQUE | Hash del token enviado por correo (nunca el token en texto plano). |
+| EVT_expires_at | TIMESTAMPTZ | NOT NULL | Vencimiento del token. |
+| EVT_used | BOOLEAN | NOT NULL, DEFAULT false | `true` una vez consumido; impide reutilizar el mismo enlace. |
+| EVT_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Momento en que se generó. |
+
 <br>
 
 **Tabla: `access_requests`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | REQ_id | SERIAL | PK | Identificador de la solicitud. |
@@ -1573,11 +1969,11 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | REQ_created_user_id | INTEGER | FK → users.USU_id, NULL | Se llena al aprobar; enlaza la solicitud con el `User` creado. |
 | REQ_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Fecha de la solicitud. |
 | REQ_resolved_at | TIMESTAMPTZ | — | Fecha en que se aprobó o rechazó. |
- 
+
 <br>
 
 **Tabla: `courts`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | COU_id | SERIAL | PK | Identificador de la cancha. |
@@ -1589,13 +1985,15 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | COU_enabled | BOOLEAN | NOT NULL, DEFAULT true | Si acepta nuevas reservas (independiente del estado operativo). |
 | COU_photo_url | TEXT | — | Foto de la cancha (RF31). |
 | COU_description | TEXT | — | Notas u observaciones adicionales. |
+| COU_open_time | VARCHAR(5) | — | Hora de apertura de la cancha (formato HH:mm), usada para calcular disponibilidad y bloquear franjas fuera de horario. |
+| COU_close_time | VARCHAR(5) | — | Hora de cierre de la cancha (formato HH:mm). |
 | COU_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Fecha de alta (RF11). |
 | COU_updated_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Última edición. |
- 
+
 <br>
 
 **Tabla: `schedule_blocks`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | BLO_id | SERIAL | PK | Identificador del bloqueo. |
@@ -1604,11 +2002,11 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | BLO_time | TIME | NOT NULL | Franja horaria bloqueada. |
 | BLO_reason | VARCHAR(200) | — | Nota del motivo del bloqueo (RF32), opcional (US31, escenario 3). |
 | BLO_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Fecha en que se registró el bloqueo. |
- 
+
 <br>
 
 **Tabla: `customers`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | CUS_id | SERIAL | PK | Identificador del cliente. |
@@ -1616,14 +2014,13 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | CUS_phone | VARCHAR(30) | NOT NULL | Número de contacto / WhatsApp (RF30). |
 | CUS_document_number | VARCHAR(20) | UNIQUE (si no es NULL) | DNI (persona natural) o RUC (persona jurídica) (RF09). |
 | CUS_status | ENUM (`customer_status_enum`) | NOT NULL, DEFAULT 'ACTIVE' | `ACTIVE` / `INACTIVE`. |
-| CUS_photo_url | TEXT | — | Foto de referencia del cliente, opcional. |
 | CUS_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Fecha de registro. |
 | CUS_updated_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Última edición. |
- 
+
 <br>
 
 **Tabla: `bookings`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | BOO_id | SERIAL | PK | Identificador del alquiler. |
@@ -1637,7 +2034,7 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | BOO_status | ENUM (`booking_status_enum`) | NOT NULL, DEFAULT 'BOOKED' | `BOOKED` / `CANCELLED` / `COMPLETED` (US05). |
 | BOO_payment_status | ENUM (`payment_status_enum`) | NOT NULL, DEFAULT 'PENDING' | `PENDING` / `PARTIAL` / `PAID` (US14-US15). |
 | BOO_total_amount | NUMERIC(10,2) | NOT NULL, DEFAULT 0, CHECK ≥ 0 | Monto total del alquiler. |
-| BOO_paid_amount | NUMERIC(10,2) | NOT NULL, DEFAULT 0, CHECK ≥ 0, CHECK ≤ BOO_total_amount | Monto abonado hasta el momento. |
+| BOO_paid_amount | NUMERIC(10,2) | NOT NULL, DEFAULT 0, CHECK ≥ 0, CHECK ≤ BOO_total_amount | Monto abonado hasta el momento (se actualiza al registrar cada `Payment`). |
 | BOO_booking_type | ENUM (`booking_type_enum`) | NOT NULL, DEFAULT 'SINGLE' | `SINGLE` / `MULTIDAY` / `RECURRING`. |
 | BOO_series_id | UUID | NULL | Agrupa las fechas generadas por una misma reserva multidía/recurrente. |
 | BOO_series_payment_mode | ENUM (`series_payment_mode_enum`) | NULL | `INDIVIDUAL` (se cobra fecha por fecha) o `LUMP_SUM` (se cobra en bloque). |
@@ -1647,11 +2044,23 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 | BOO_receipt_url | TEXT | NULL | Imagen/PDF del comprobante de pago (RF25). |
 | BOO_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Fecha de registro. |
 | BOO_updated_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Última edición (US05, escenario 2). |
- 
+
+<br>
+
+**Tabla: `payments`**
+
+| Campo | Tipo | Restricciones | Descripción |
+|---|---|---|---|
+| PAY_id | SERIAL | PK | Identificador del pago. |
+| PAY_booking_id | INTEGER | NOT NULL, FK → bookings.BOO_id (ON DELETE CASCADE) | Reserva a la que corresponde el pago. |
+| PAY_amount | NUMERIC(10,2) | NOT NULL, CHECK ≥ 0 | Monto de este pago (parcial o total). |
+| PAY_method | VARCHAR(30) | NOT NULL | Método de pago: `EFECTIVO` / `YAPE` / `OTRO`. |
+| PAY_created_at | TIMESTAMPTZ | NOT NULL, DEFAULT now() | Momento en que se registró el pago (US14-US16). |
+
 <br>
 
 **Tabla: `notifications`**
- 
+
 | Campo | Tipo | Restricciones | Descripción |
 |---|---|---|---|
 | NTF_id | SERIAL | PK | Identificador de la notificación. |
@@ -1666,10 +2075,18 @@ Detalle completo campo por campo, agrupado por entidad, con tipo SQL exacto, res
 <br>
 
 ---
-# Capítulo VII: Gestión del Proyecto (Scrum, 2 semanas)
+# Capítulo VII: Gestión del Proyecto
+
+La gestión del proyecto sigue **Scrum**, adaptado a un equipo de una sola desarrolladora y a un plazo comprimido de 2 semanas. Se mantienen los artefactos esenciales del marco pero conservando su propósito: trabajar en incrementos cortos, entregables y verificables, con retroalimentación del cliente al cierre de cada sprint.
+ 
+El proyecto se divide en **2 sprints de 1 semana cada uno**. El Sprint 1 prioriza el subdominio núcleo (Bookings) y el riesgo de negocio más alto (la doble reserva) antes que los subdominios de soporte, siguiendo el orden de prioridad establecido en el Product Backlog. El Sprint 2 completa la construcción del backend, conecta el sistema de punta a punta y lo despliega en producción.
+ 
+**Herramienta de gestión:** el seguimiento de sprints, historias y tareas se realiza en **Jira**, donde el Product Backlog se modela como el backlog del proyecto, cada sprint corresponde a un Sprint de Jira con su propio tablero, y cada Work-Item se registra como una tarea vinculada a su historia de usuario o historia técnica correspondiente. Esto permite trazar el avance real de cada sprint directamente desde el tablero, además de lo documentado en este capítulo.
+ 
+<br>
 
 ## 7.1. Plan de Sprints
-
+ 
 El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-14), con una sola desarrolladora como equipo, siguiendo el orden real de construcción: primero la documentación y el diseño, luego el frontend contra un fake API (para no bloquearse esperando el backend), en paralelo/después el backend con su base de datos, y al final la conexión real entre ambos junto con la preparación del despliegue.
  
 <br>
@@ -1687,7 +2104,7 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
  
 <br>
 
-## 7.2. Sprint 1 — Documentación, Diseño y Base del Sistema
+## 7.2. Sprint 1
  
 ### 7.2.1. Sprint Planning 1
  
@@ -1828,7 +2245,7 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 ![JSON Fake API](assets/sprints/sprint-1/services06.png)
  
 <br>
-## 7.3. Sprint 2 — Desarrollo, Integración, Pruebas y Despliegue
+## 7.3. Sprint 2
  
 ### 7.3.1. Sprint Planning 2
  
@@ -1844,8 +2261,8 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 | **Sprint 1 Review Summary** | Se completó la documentación de Capítulos I-IV y todas las pantallas del frontend quedaron funcionando contra `json-server`, validadas navegacionalmente. Queda pendiente para este sprint construir el backend real y reemplazar los datos de prueba. |
 | **Sprint 1 Retrospective Summary** | Trabajar contra un fake API permitió avanzar el frontend sin bloquearse esperando el backend, y adelantar el diseño del schema de base de datos (Capítulo VI) para que el Sprint 2 empiece con el modelo de datos ya validado contra las pantallas reales. |
 | **Sprint 2 Goal** | Nuestro enfoque está en construir el backend real y conectar el frontend ya construido en el Sprint 1, reemplazando el fake API. Creemos que esto permitirá tener el sistema completo, desplegado y usable por Carlos. Esto se confirmará cuando todas las pantallas consuman la API real contra Supabase y el sistema esté accesible públicamente desde un celular real (PWA instalable). |
-| **Sprint 2 Velocity** | 54 |
-| **Sum of Story Points** | 54 |
+| **Sprint 2 Velocity** | 59 |
+| **Sum of Story Points** | 59 |
  
 <br>
 
@@ -1855,7 +2272,7 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
  
 **Sprint Goal:** *Carlos puede usar el sistema completo — reservas, pagos, panel, autorización de administradores, notificaciones por correo — desde su celular, con datos reales persistidos en Supabase, sin ningún dato de prueba expuesto.*
  
-**Story Points comprometidos: 54 SP | Duración: 1 semana | Stack: Express / TypeScript / Prisma / Supabase / Render**
+**Story Points comprometidos: 59 SP | Duración: 1 semana | Stack: Express / TypeScript / Prisma / Supabase / Render**
  
 <br>
 
@@ -1883,6 +2300,7 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 | US21 | Autorizar o rechazar solicitudes de acceso | 3 | T-14 | `PATCH /solicitudes/{id}/autorizar` y `/rechazar` | Restringido al administrador dueño (TS05); rechaza con 403 si quien lo intenta no es el dueño. | 3h | Pendiente |
 | TS05 | Endpoints de solicitud y autorización de cuentas | 3 | T-15 | Conectar `SolicitudesAccesoPage` | Listado de solicitudes pendientes conectado a los endpoints reales de T-13/T-14. | 2h | Pendiente |
 | US26 | Ver administradores activos | 2 | T-16 | `GET /users?estado=ACTIVO` + listado | Listado de administradores activos en `AjustesPage`, sin exponer pendientes ni rechazados. | 2h | Pendiente |
+| US34 | Verificar mi correo antes de acceder al sistema | 3 | T-27 | `GET /users/verificar` (TS11) + envío del enlace tras autorización | Genera un token de verificación al autorizar la solicitud (T-14), lo envía por correo, y activa la cuenta solo si el token es válido y vigente. | 3h | Pendiente |
 | US22 | Recibir correo de confirmación al registrar un alquiler | 3 | T-17 | Listener de `BookingRegistered` → Resend | Envío de correo de confirmación sin bloquear la respuesta HTTP del registro; no revierte el alquiler si falla (RF24). | 3h | Pendiente |
 | TS06 | Listener de correo de confirmación sobre `BookingRegistered` | 3 | T-18 | Prueba end-to-end del correo | Verificación del caso feliz y del caso de fallo del proveedor de correo. | 2h | Pendiente |
 | US23 | Recibir correo con el resultado de mi solicitud de acceso | 2 | T-19 | Listener de `AdminAuthorized`/`AdminRejected` → Resend | Correo de autorización o rechazo al solicitante, sin exponer el motivo interno. | 2h | Pendiente |
@@ -1897,7 +2315,7 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 <br>
 
 **Trabajo del sprint, en el orden real de construcción:**
-
+ 
 1. **Backend + base de datos:** repositorio de backend con Express + TypeScript + Prisma, migraciones aplicadas contra Supabase, implementación de todos los endpoints y la lógica de dominio (incluyendo los ya diseñados en el Sprint 1: doble reserva, bloqueo con motivo, tipo de reserva, fotos de cancha).
 
 2. **Conexión frontend-backend:** se apaga `json-server` y el frontend pasa a consumir la API real (cambio de `VITE_API_URL`), ajustando lo que sea necesario para que las pantallas ya construidas funcionen con datos reales en vez de datos de prueba.

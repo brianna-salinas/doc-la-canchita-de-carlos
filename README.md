@@ -2,12 +2,10 @@
 
 <br>
 
+**Presented by**
+
 <img src="assets/oryon/oryon.png" alt="Oryon" width="140"/>
 
-### ORYON
-**Soluciones Tecnológicas**
-
-<br>
 <br>
 
 ## Sistema de Gestión de Alquiler de Canchas
@@ -18,14 +16,15 @@
 
 <br>
 
-### Documento de Producto — Propuesta 1 (Uso Interno)
+## Project Documentation 
+### Propuesta 1 - Uso Interno
 
-<br>
+
 
 | | |
 |---|---|
 | **Cliente** | Carlos Maldonado |
-| **Desarrollado por** | Oryon — Soluciones Tecnológicas |
+| **Desarrollado por** | Oryon |
 | **Responsable del proyecto** | Brianna Salinas |
 | **Plazo** | 2 semanas (documentación, diseño, prototipo, desarrollo, pruebas y despliegue) |
 | **Producto** | [lacanchitadecarlos.moli-voleibol.com](https://lacanchitadecarlos.moli-voleibol.com/) |
@@ -43,69 +42,83 @@
 ---
 
 # Tabla de Contenidos
-
+ 
+[About the Product](#about-the-product)
+ 
 [Capítulo I: Introducción](#capítulo-i-introducción)
 * [1.1. Perfil del negocio](#11-perfil-del-negocio)
 * [1.2. Alcance del producto](#12-alcance-del-producto)
 * [1.3. Objetivos del proyecto](#13-objetivos-del-proyecto)
 * [1.4. Usuarios del sistema](#14-usuarios-del-sistema)
-
 [Capítulo II: Especificación de Requisitos](#capítulo-ii-especificación-de-requisitos)
 * [2.1. Requisitos Funcionales](#21-requisitos-funcionales)
 * [2.2. Requisitos No Funcionales](#22-requisitos-no-funcionales)
 * [2.3. Lenguaje Ubicuo](#23-lenguaje-ubicuo)
 * [2.4. User Stories](#24-user-stories)
 * [2.5. Product Backlog](#25-product-backlog)
-
 [Capítulo III: Diseño de Producto (UX/UI)](#capítulo-iii-diseño-de-producto-uxui)
 * [3.1. Arquitectura de Información](#31-arquitectura-de-información)
-* [3.2. Style Guideline](#32-style-guideline)
+* [3.2. Style Guideliness](#32-style-guideliness)
 * [3.3. Wireframes y Mockups](#33-wireframes-y-mockups)
 * [3.4. Prototipo en Figma](#34-prototipo-en-figma)
-
 [Capítulo IV: Arquitectura de Software (Domain-Driven Design)](#capítulo-iv-arquitectura-de-software-domain-driven-design)
 * [4.0. Patrón de Arquitectura](#40-patrón-de-arquitectura)
-* [4.1. Event Storming](#41-event-storming)
+* [4.1. Design-Level Event Storming](#41-design-level-event-storming)
 * [4.2. Bounded Contexts y Context Map](#42-bounded-contexts-y-context-map)
-* [4.3. Diagrama de Contexto (C4 - Nivel 1)](#43-diagrama-de-contexto-c4---nivel-1)
-* [4.4. Diagrama de Contenedores (C4 - Nivel 2)](#44-diagrama-de-contenedores-c4---nivel-2)
-* [4.5. Diagrama de Componentes (C4 - Nivel 3)](#45-diagrama-de-componentes-c4---nivel-3)
-* [4.6. Arquitectura en la Nube (PWA)](#46-arquitectura-en-la-nube-pwa)
+* [4.3. Software Architecture Context Diagram](#43-software-architecture-context-diagram)
+* [4.4. Software Architecture Container Diagram](#44-software-architecture-container-diagram)
+* [4.5. Software Architecture Components Diagrams](#45-software-architecture-components-diagrams)
+* [4.6. Cloud Architecture (PWA)](#46-cloud-architecture-pwa)
 * [4.7. Análisis Técnico-Económico de la Infraestructura](#47-análisis-técnico-económico-de-la-infraestructura)
-
-[Capítulo V: Diseño Orientado a Objetos](#capítulo-v-diseño-orientado-a-objetos)
-* [5.1. Diagrama de Clases - Backend](#51-diagrama-de-clases--backend)
-* [5.2. Diagrama de Clases - Frontend](#52-diagrama-de-clases--frontend)
-
-[Capítulo VI: Diseño de Base de Datos](#capítulo-vi-diseño-de-base-de-datos)
+* [4.8. Diagrama de Secuencia](#48-diagrama-de-secuencia)
+[Capítulo V: Software Object-Oriented Design](#capítulo-v-software-object-oriented-design)
+* [5.1. Class Diagrams - Backend](#51-class-diagrams--backend)
+* [5.2. Class Diagrams - Frontend](#52-class-diagrams--frontend)
+[Capítulo VI: Database Design](#capítulo-vi-database-design)
 * [6.1. Modelo Entidad-Relación](#61-modelo-entidad-relación)
-* [6.2. Diagrama de Base de Datos](#62-diagrama-de-base-de-datos)
+* [6.2. Database Diagrams](#62-diagrama-de-base-de-datos)
 * [6.3. Diccionario de Datos](#63-diccionario-de-datos)
-
 [Capítulo VII: Gestión del Proyecto](#capítulo-vii-gestión-del-proyecto)
 * [7.1. Plan de Sprints](#71-plan-de-sprints)
 * [7.2. Sprint 1](#72-sprint-1)
 * [7.3. Sprint 2](#73-sprint-2)
 * [7.4. Definition of Done](#74-definition-of-done)
-
 [Capítulo VIII: Implementación](#capítulo-viii-implementación)
 * [8.1. Configuración del Entorno de Desarrollo](#81-configuración-del-entorno-de-desarrollo)
 * [8.2. Gestión de Código Fuente](#82-gestión-de-código-fuente)
 * [8.3. Convenciones de Código](#83-convenciones-de-código)
 * [8.4. Configuración de Despliegue](#84-configuración-de-despliegue)
 * [8.5. Avance por Sprint](#85-avance-por-sprint)
-
+* [8.6. JSON Server (Fake API)](#86-json-server-fake-api)
 [Capítulo IX: Pruebas y Validación](#capítulo-ix-pruebas-y-validación)
 * [9.1. Estrategia de Pruebas](#91-estrategia-de-pruebas)
 * [9.2. Casos de Prueba Clave](#92-casos-de-prueba-clave)
 * [9.3. Validación con el Cliente](#93-validación-con-el-cliente)
-
 [Capítulo X: Despliegue](#capítulo-x-despliegue)
 * [10.1. Ambiente de Producción](#101-ambiente-de-producción)
 * [10.2. Checklist de Despliegue](#102-checklist-de-despliegue)
 * [10.3. Plan de Rollback](#103-plan-de-rollback)
-
 [Anexos](#anexos)
+ 
+<br>
+
+---
+
+# About the Product
+
+<div align="center">
+
+**La Canchita de Carlos** — Sistema de Gestión de Alquiler de Canchas
+
+<br>
+
+[Ver video del producto](AÑADIR-LINK-DEL-VIDEO-AQUÍ)
+
+<br>
+
+*Video demostrativo del sistema funcionando en producción: inicio de sesión, calendario de disponibilidad, registro de un alquiler, registro de pago y panel operativo del día.*
+
+</div>
 
 <br>
 
@@ -629,7 +642,7 @@ Estructura de navegación derivada directamente de los Epics y priorizada según
 
 <br>
 
-## 3.2. Style Guideline
+## 3.2. Style Guideliness
 
 ### 3.2.1. General Style Guidelines
 
@@ -1314,9 +1327,9 @@ El **Notifications Controller** expone las notificaciones internas del sistema (
 <br>
 
 ## 4.6. Cloud Architecture (PWA)
- 
+
 **Stack definido para este proyecto:**
- 
+
 <br>
 
 | Capa | Tecnología | Motivo |
@@ -1328,7 +1341,7 @@ El **Notifications Controller** expone las notificaciones internas del sistema (
 | Base de datos | PostgreSQL gestionado (Supabase, plan gratuito) | Relacional, soporta transacciones/constraints para evitar doble reserva (clave para RF06). |
 | Autenticación | JWT + bcrypt implementado en Express | Solo 2 usuarios administradores; no se justifica un proveedor de auth externo todavía. |
 | Hosting Frontend | Render (Static Site, plan gratuito) | Build de Vite servido con CDN y HTTPS incluidos, en el mismo proveedor y dashboard que el backend — evita administrar una cuenta/proveedor adicional (Vercel/Netlify) con el plazo de 2 semanas y 1 sola desarrolladora. |
-| Hosting Backend | Render (Web Service, plan Starter, de pago, ~US$7/mes) | Despliegue simple de un servicio Node/Express, variables de entorno fáciles de configurar. El plan de pago evita el "cold start" del plan gratuito (que suspende el servicio tras inactividad) — importante porque la app se usa a diario en horario de alquiler. |
+| Hosting Backend | Render (Web Service, plan Free) | Despliegue simple de un servicio Node/Express, variables de entorno fáciles de configurar. Se mantiene en el plan gratuito para conservar el costo recurrente en US$0 (ver 4.7.2); la contrapartida es el "cold start" tras inactividad, mitigado mediante el endpoint `/health` (TS04), no eliminado. |
 | Repositorio | GitHub | Integración directa con Render para despliegue continuo de ambos servicios (Static Site + Web Service). |
 | Envío de correo | Resend (plan gratuito) | API simple desde Node/Express, plan gratuito con volumen muy por encima de lo que este negocio necesita (RF23–RF24); evita configurar SMTP manualmente. |
 | Almacenamiento de archivos | Supabase Storage (plan gratuito) | Guarda las imágenes de comprobante de pago (RF25) fuera de la base de datos relacional (evita guardar binarios pesados en Postgres); plan gratuito suficiente para el volumen de este negocio. |
@@ -1769,6 +1782,18 @@ Medidas de seguridad implementadas de forma transversal a las tres capas de la a
 **Limitación conocida:** 
 
 La revocación de sesión (`sessions.revoke` / `revokeAllForUser`, disparada al cerrar sesión o cambiar contraseña) actualiza la base de datos, pero el middleware `requireAuth` valida únicamente la firma y expiración del JWT — no consulta la tabla `sessions` en cada request. En la práctica, un token ya emitido sigue siendo válido hasta su expiración natural (1h) aunque la sesión se haya marcado como revocada. El riesgo está acotado por la corta duración del token, pero no es una invalidación inmediata real todavía.
+
+<br>
+
+## 4.8. Diagrama de Secuencia
+ 
+El siguiente diagrama de secuencia detalla la interacción entre los componentes del sistema (Frontend PWA, Backend API, Base de Datos y Resend) para el flujo crítico de negocio: **registrar un alquiler validando la invariante de no doble reserva (RF06)** y disparando el correo de confirmación de forma asíncrona (RF23-RF24).
+ 
+<br>
+
+![Sequence Diagram](assets/sequence-diagram/sequence.png)
+
+El flujo mostrado es: el Administrador completa el formulario de Nueva Reserva → el Frontend envía `POST /bookings` al Backend → el Backend abre una transacción en PostgreSQL para validar que no exista un `Booking` activo en la misma cancha/franja → si hay conflicto, retorna `409` (`DoubleBookingRejected`); si no, persiste el `Booking`, retorna `201` (`BookingRegistered`) y dispara de forma asíncrona el envío del correo de confirmación vía Resend, sin bloquear la respuesta HTTP ya entregada al administrador.
 
 <br>
 
@@ -2270,9 +2295,9 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
 | **Date** | 12/07/2026 |
 | **Location** | Trabajo individual|
 | **Prepared By** | Salinas Guzmán, Brianna |
-| **Sprint 1 Goal** | Nuestro enfoque está en cerrar la documentación base y construir todas las pantallas de la interfaz de usuario contra un fake API. Creemos que esto permitirá validar tempranamente los flujos de uso con Carlos sin esperar al backend real. Esto se confirmará cuando las pantallas de Identidad y Acceso, Gestión de Reservas, Gestión de Canchas y Gestión de Clientes estén completamente navegables contra `json-server`. |
-| **Sprint 1 Velocity** | 63 |
-| **Sum of Story Points** | 63 |
+| **Sprint 1 Goal** | Nuestro enfoque está en cerrar la documentación base y construir todas las pantallas de la interfaz de usuario contra un fake API. Creemos que esto permitirá validar tempranamente los flujos de uso con Carlos sin esperar al backend real. Esto se confirmará cuando las pantallas de Identidad y Acceso, Gestión de Reservas, Gestión de Canchas, Gestión de Clientes, Panel Operativo, Solicitudes de Acceso y Ajustes de Cuenta estén completamente navegables contra `json-server`. |
+| **Sprint 1 Velocity** | 88 |
+| **Sum of Story Points** | 88 |
  
 <br>
 
@@ -2280,9 +2305,9 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
  
 **Objetivo del Sprint:** cerrar la documentación y el diseño, y construir todas las pantallas de la interfaz en React funcionando de punta a punta contra un fake API (`json-server`) — así el desarrollo de la parte gráfica no queda bloqueado esperando que el backend real esté listo, y sirve además como validación temprana de los flujos con Carlos.
  
-**Sprint Goal:** *Carlos puede navegar el flujo completo de reservas, canchas y clientes sobre datos de prueba, y validar que la interfaz cubre lo que necesita antes de que exista backend real.*
+**Sprint Goal:** *Carlos puede navegar el flujo completo de reservas, canchas, clientes, panel operativo, solicitudes de acceso y ajustes de cuenta sobre datos de prueba, y validar que la interfaz cubre lo que necesita antes de que exista backend real.*
  
-**Story Points comprometidos: 63 SP | Duración: 1 semana | Stack: React / Vite / TypeScript / Tailwind / json-server**
+**Story Points comprometidos: 88 SP | Duración: 1 semana | Stack: React / Vite / TypeScript / Tailwind / json-server**
  
 <br>
 
@@ -2306,9 +2331,10 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
 | | | | T-10 | Cancelar alquiler | Acción de cancelar desde `ReservasPage`, libera la franja de inmediato en el calendario. | 2h | Done |
 | US06 | Impedir la doble reserva de una cancha | 5 | T-11 | Validación de conflicto de horario (frontend) | Verificación contra `json-server` antes de confirmar una reserva; bloquea el envío si la franja ya está ocupada. | 3h | Done |
 | TS01 | Endpoint de alquiler con validación de conflicto | 3 | T-12 | Diseño del constraint anti-doble-reserva | Índice único (`courtId` + fecha + hora, filtrado por estado) diseñado en el schema Prisma (Capítulo VI), listo para el Sprint 2. | 2h | Done |
-| US07 | Bloquear una franja por mantenimiento | 3 | T-13 | Modal de bloqueo de franja | Bloqueo manual de una franja libre desde el calendario; rechaza el bloqueo si ya hay un alquiler activo. | 2h | Done |
+| US07 | Bloquear y desbloquear una franja por mantenimiento | 3 | T-13 | Modal de bloqueo de franja | Bloqueo manual de una franja libre desde el calendario; rechaza el bloqueo si ya hay un alquiler activo. Cubre el escenario de *bloquear*; el de *desbloquear* se implementa con el endpoint real en Sprint 2 (T-49). | 2h | Done |
 | US31 | Registrar y ver el motivo de un bloqueo por mantenimiento | 3 | T-14 | Motivo de bloqueo | Campo de texto opcional en el modal de bloqueo (T-13) y su visualización en el calendario. | 2h | Done |
-| US32 | Registrar tipo de reserva y nombre de equipo | 2 | T-15 | Tipo de reserva y equipo | Campos "tipo de reserva" y "nombre de equipo/grupo" en Nueva Reserva, opcionales. | 2h | Done |
+| US32 | Registrar reservas de varias fechas (multi-día o recurrentes) | 5 | T-15 | Selector de tipo de reserva (Única/Multidía/Recurrente) | Campos de rango de fechas o repeticiones en Nueva Reserva; valida disponibilidad de todas las fechas contra `json-server` antes de confirmar la serie. | 3h | Done |
+| TS12 | Endpoint de registro de reservas en serie | 5 | T-27 | Contrato de `POST /bookings/serie` | Diseño del payload (fechas, modo de pago de la serie individual/acumulado) y de la transacción atómica con rollback total ante conflicto, listo para implementarse en el Sprint 2. | 1h | Done |
 | US08 | Buscar y filtrar el historial de alquileres | 3 | T-16 | Filtros de Reservas | Filtros por fecha, cancha, estado y cliente en `ReservasPage`. | 3h | Done |
 | US28 | Registrar un cliente nuevo desde el formulario de alquiler | 3 | T-17 | Cliente embebido en Nueva Reserva | Formulario de alta de cliente dentro del mismo flujo de reserva, sin salir a la sección de Clientes. | 3h | Done |
 | TS09 | Endpoint de alquiler con creación de cliente embebida | 2 | T-18 | Contrato de `POST /bookings` con cliente embebido | Diseño del payload que acepta `clienteNuevo` o `clienteId`, base para T-17 en el backend real. | 1h | Done |
@@ -2320,7 +2346,15 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
 | US09 | Registrar, editar y eliminar clientes | 3 | T-24 | Pantalla de Clientes (CRUD) | `ClientesPage` con alta, edición y eliminación, conservando el historial de alquileres al eliminar. | 3h | Done |
 | US10 | Consultar historial de un cliente | 2 | T-25 | Ficha de cliente | Detalle de cliente con lista de alquileres asociados ordenados por fecha. | 2h | Done |
 | TS04 | Endpoint de health check | 1 | T-26 | Contrato de `/health` | Definición de la respuesta esperada (`200 ok` / `503`) para verificar backend y base de datos en Sprint 2. | 1h | Done |
- 
+| US17 | Ver alquileres del día | 2 | T-28 | Pantalla "Panel" — tarjeta de alquileres del día | `PanelPage` mostrando los alquileres del día, sobre datos de prueba de `db.json`. | 2h | Done |
+| US18 | Ver ingreso total del día | 2 | T-29 | Pantalla "Panel" — tarjeta de ingreso del día | Cálculo del ingreso total sobre los pagos de prueba de `db.json`. | 1h | Done |
+| US19 | Ver pagos pendientes del día | 2 | T-30 | Pantalla "Panel" — lista de pagos pendientes | Lista de alquileres pendientes/parciales del día con su saldo, sobre datos de prueba. | 1h | Done |
+| US20 | Solicitar registro de nueva cuenta de administrador | 3 | T-31 | Pantallas "Solicitar Acceso" y "Solicitud Enviada" | `RequestAccessPage` + `SolicitudEnviadaPage`, con estilos de marca, contra `json-server`. | 3h | Done |
+| US21 | Autorizar o rechazar solicitudes de acceso | 3 | T-32 | Pantalla "Solicitudes de Acceso" | `SolicitudesAccesoPage` con listado de solicitudes pendientes y acciones de autorizar/rechazar, sobre datos de prueba. | 3h | Done |
+| US24 | Actualizar mi correo | 2 | T-33 | Pantalla "Ajustes de Cuenta" — formulario de correo | `AjustesPage` con formulario de cambio de correo, sobre datos de prueba. | 2h | Done |
+| US25 | Cambiar mi contraseña | 2 | T-34 | Pantalla "Ajustes de Cuenta" — formulario de contraseña | Formulario de cambio de contraseña en `AjustesPage`, sobre datos de prueba. | 1h | Done |
+| US37 | Recuperar el acceso olvidando mi contraseña | 3 | T-35 | Pantalla "Olvidé mi contraseña" | `ForgotPasswordPage` con formulario de solicitud de restablecimiento, contra `json-server`. | 2h | Done |
+
 <br>
 
 **Trabajo no funcional del sprint:**
@@ -2331,13 +2365,13 @@ El proyecto se organiza en 2 sprints de 1 semana cada uno (días 1-7 y días 8-1
 
 - Repositorio de frontend con React + Vite + TypeScript + Tailwind, `json-server` sirviendo un `db.json` de prueba con canchas, alquileres y clientes de ejemplo.
 
-- Diseño del schema de base de datos en Prisma (Capítulo VI) e índices necesarios para blindar RF06 a nivel de base de datos, listo para cuando arranque el backend real en el Sprint 2.
+- Diseño del schema de base de datos en Prisma e índices necesarios para blindar RF06 a nivel de base de datos, listo para cuando arranque el backend real en el Sprint 2.
 
 <br>
 
 ### 7.2.3. Development Evidence for Sprint Review
  
-Durante el Sprint 1 el trabajo se realizó directamente sobre la rama `main` del repositorio de frontend, consistente con el flujo descrito. El desarrollo avanzó en el orden real de construcción: primero la configuración base del proyecto y el fake API, luego las pantallas de autenticación, después el Panel con datos reales del `db.json`, y por último la gestión de Canchas, Clientes y Ajustes — cerrando con modo oscuro y reservas recurrentes/multidía.
+Durante el Sprint 1 el trabajo se realizó en el repositorio de frontend, consistente con el flujo descrito. El desarrollo avanzó en el orden real de construcción: primero la configuración base del proyecto y el fake API, luego las pantallas de autenticación, después el Panel con datos reales del `db.json`, y por último la gestión de Canchas, Clientes y Ajustes — cerrando con modo oscuro y reservas recurrentes/multidía.
  
 <br>
 
@@ -2555,37 +2589,54 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 
 ### 7.3.4. Execution Evidence for Sprint Review
  
+Las siguientes capturas corresponden a la ejecución real de la aplicación desplegada (frontend en producción conectado al backend real sobre Render/Supabase), evidenciando el funcionamiento de punta a punta de las historias de usuario completadas en el Sprint 2.
+
 <br>
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/login.png)
+*Pantalla de inicio de sesión (US01) conectada al backend real: autenticación contra `POST /auth/login`, con validación de credenciales y emisión de JWT.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/register.png)
+*Pantalla de "Solicitar Acceso" (US20) enviando la solicitud de nueva cuenta de administrador al backend real, para su posterior autorización.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/restablecer.png)
+*Flujo de "Olvidé mi contraseña" / restablecimiento de contraseña (US37) mediante enlace enviado por correo (Resend) y token de un solo uso validado por el backend.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/panel.png)
+*Panel operativo (US17, US18, US19) mostrando los alquileres del día, el ingreso total y los pagos pendientes calculados en tiempo real sobre datos reales de la base de datos.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/calendario.png)
+*Vista de calendario (US04) con la disponibilidad real de las canchas por día/semana/mes, reflejando alquileres, bloqueos por mantenimiento y franjas libres almacenados en PostgreSQL.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/reservas.png)
+*Listado de reservas (US08) con filtros por fecha, cancha, estado y cliente, consumiendo el endpoint real de búsqueda de alquileres.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/reserva.png)
+*Formulario de registro/edición de una reserva (US05, US06, US28, US32) con validación de conflicto de horario contra el backend y soporte para reservas de una o varias fechas.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/clientes.png)
+*Listado de clientes (US09) con las operaciones de alta, edición y eliminación conectadas al backend real, preservando el historial de alquileres.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/cliente.png)
+*Ficha de detalle de un cliente (US10) mostrando su historial completo de alquileres obtenido desde la base de datos real.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/canchas.png)
+*Vista consolidada de canchas (US13) con el estado de disponibilidad de todas las canchas para la fecha seleccionada.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/cancha.png)
+*Formulario de registro/edición de una cancha (US11, US12, US29) con precio por hora y carga de fotografías almacenadas en Supabase Storage.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/info.png)
+*Detalle informativo de una cancha/reserva mostrando los datos consolidados (precio, disciplina, disponibilidad y adjuntos) tal como los consume el administrador desde el backend real.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/ajustes.png)
+*Pantalla de "Ajustes de Cuenta" (US24, US25) con los formularios de actualización de correo y cambio de contraseña conectados al backend real.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/correo1.png)
+*Correo electrónico real enviado mediante Resend confirmando el registro de un alquiler al cliente.*
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/correo2.png)
+*Correo electrónico real enviado mediante Resend notificando a los demás administradores sobre una nueva reserva o solicitud registrada.*
 
 <br>
 
@@ -2593,15 +2644,217 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
  
 Durante el Sprint 2 se implementaron los endpoints reales de la API (Express + Prisma), reemplazando por completo el fake API del Sprint 1. La API quedó organizada en ocho routers por bounded context: `bookings`, `courts`, `customers`, `auth`, `users`, `notifications`, `panel` y `payments`, todos protegidos por `requireAuth` (y `requireOwner` en las rutas exclusivas del administrador dueño).
  
+Las pruebas se ejecutaron con Postman contra la API real desplegada en Render (`https://api.moli-voleibol.com`), y las capturas de cada request/response se adjuntan como evidencia de funcionamiento.
+ 
 <br>
 
-![Execution Evidence](assets/sprints/sprint-2/execution/correo2.png)
+#### 7.3.5.1. Configuración previa en Postman
+
+1. Crear un Environment con las variables `baseUrl` = `https://api.moli-voleibol.com`, `token` (vacío, se completa tras el login) y `bookingId` / `courtId` / `customerId` (se completan según las respuestas).
+2. En cada request protegida, configurar el header `Authorization: Bearer {{token}}`.
+3. Ejecutar primero el bloque **Auth** para obtener el token antes de probar el resto de los módulos.
+
+<br>
+
+#### 7.3.5.2. Plan de pruebas por módulo
+
+<br>
+
+**Auth (`/auth`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Body de ejemplo | Resultado esperado |
+|---|---|---|---|---|---|
+| 1 | POST | `/auth/bootstrap-dueno` | Crear el primer usuario dueño (solo funciona una vez, protegido por `SETUP_TOKEN`). | `{ "name": "Carlos", "email": "carlos@example.com", "password": "********", "setupToken": "..." }` | `201` con el usuario creado. Repetir la prueba debe devolver `409` (ya existe un dueño). |
+| 2 | POST | `/auth/login` | Iniciar sesión con credenciales válidas. | `{ "email": "carlos@example.com", "password": "********" }` | `200` con `token` (JWT) y datos del usuario. Guardar el token en la variable `{{token}}`. |
+| 3 | POST | `/auth/login` | Iniciar sesión con contraseña incorrecta. | `{ "email": "carlos@example.com", "password": "incorrecta" }` | `401 Credenciales inválidas`. |
+| 4 | POST | `/auth/olvide-password` | Solicitar restablecimiento de contraseña. | `{ "email": "carlos@example.com" }` | `200` (respuesta genérica, no revela si el correo existe). Verificar en Resend que se envió el correo "Restablece tu contraseña". |
+| 5 | POST | `/auth/restablecer-password` | Restablecer la contraseña con el token recibido por correo. | `{ "token": "<token del correo>", "newPassword": "NuevaClave123" }` | `200`, y cierre de todas las sesiones activas del usuario. |
+| 6 | POST | `/auth/logout` | Cerrar sesión con el token vigente. | — (header `Authorization: Bearer {{token}}`) | `200`, y una llamada posterior a cualquier endpoint protegido con ese mismo token responde `401`. |
+
+<br>
+
+**Users (`/users`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Body de ejemplo | Resultado esperado |
+|---|---|---|---|---|---|
+| 7 | POST | `/users/solicitudes` | Registrar una solicitud de acceso de nuevo administrador. | `{ "name": "Ana Torres", "email": "ana@example.com", "password": "********" }` | `201`. Verificar en Resend el correo "Nueva solicitud de acceso" enviado a los administradores existentes. |
+| 8 | GET | `/users/verificar?token=...` | Verificar el correo con el token enviado tras la autorización. | — | `200`, cuenta marcada como verificada. |
+| 9 | GET | `/users/solicitudes` | Listar solicitudes pendientes (requiere rol dueño). | — | `200` con el arreglo de solicitudes. Repetir con un token que no sea de dueño debe devolver `403`. |
+| 10 | PATCH | `/users/solicitudes/:id/autorizar` | Autorizar una solicitud. | — | `200`. Verificar en Resend el correo "Tu solicitud de acceso fue autorizada" + el correo de verificación. |
+| 11 | PATCH | `/users/solicitudes/:id/rechazar` | Rechazar una solicitud. | — | `200`. Verificar en Resend el correo "Tu solicitud de acceso fue rechazada". |
+| 12 | PATCH | `/users/:id/promover-dueno` | Promover a un administrador a dueño (requiere rol dueño). | — | `200` con el usuario actualizado. |
+| 13 | GET | `/users` | Listar administradores activos. | — | `200` con el arreglo de usuarios. |
+| 14 | GET | `/users/me` | Obtener el perfil del usuario autenticado. | — | `200` con los datos propios (incluye URL firmada de foto si tiene). |
+| 15 | PATCH | `/users/me/correo` | Actualizar el correo propio. | `{ "email": "nuevo@example.com" }` | `200` con el correo actualizado. |
+| 16 | PATCH | `/users/me/contrasena` | Cambiar la contraseña propia. | `{ "currentPassword": "...", "newPassword": "..." }` | `200`. Repetir con `currentPassword` incorrecta debe devolver `401`. |
+| 17 | PATCH | `/users/me/perfil` | Actualizar nombre u otros datos del perfil. | `{ "name": "Carlos Ríos" }` | `200` con el perfil actualizado. |
+| 18 | POST | `/users/:id/foto` | Subir foto de perfil (form-data, campo `foto`). | form-data: `foto` = archivo `.jpg` | `200` con la URL firmada de la foto. |
+| 19 | DELETE | `/users/:id/foto` | Eliminar la foto de perfil. | — | `200`, foto eliminada de Supabase Storage. |
+| 20 | DELETE | `/users/me` | Eliminar la cuenta propia. | — | `200`/`204`. |
+| 21 | DELETE | `/users/:id` | Eliminar a otro administrador (requiere rol dueño). | — | `200`/`204`. Repetir sin rol dueño debe devolver `403`. |
+
+<br>
+
+**Courts (`/courts`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Body de ejemplo | Resultado esperado |
+|---|---|---|---|---|---|
+| 22 | POST | `/courts` | Registrar una nueva cancha. | `{ "name": "Cancha 1", "sport": "Vóley", "openTime": "08:00", "closeTime": "22:00", "pricePerHour": 40 }` | `201` con la cancha creada. Guardar `id` en `{{courtId}}`. |
+| 23 | GET | `/courts` | Listar todas las canchas. | — | `200` con el arreglo de canchas. |
+| 24 | PATCH | `/courts/:id` | Editar nombre/disciplina de una cancha. | `{ "name": "Cancha Vóley 1" }` | `200` con la cancha actualizada. |
+| 25 | PATCH | `/courts/:id/precio` | Actualizar el precio por hora. | `{ "pricePerHour": 45 }` | `200`. Repetir con un monto negativo debe devolver `400`. |
+| 26 | GET | `/courts/disponibilidad?date=YYYY-MM-DD` | Consultar disponibilidad consolidada de todas las canchas para una fecha. | — | `200` con el estado de cada cancha (libre/ocupada/bloqueada por franja). |
+| 27 | POST | `/courts/:id/bloqueos` | Bloquear una franja por mantenimiento. | `{ "date": "2026-08-01", "startTime": "09:00", "endTime": "10:00", "reason": "Mantenimiento de piso" }` | `201`. Repetir sobre una franja con alquiler activo debe devolver `409`. |
+| 28 | POST | `/courts/:id/bloqueos/serie` | Bloquear la misma franja en varias fechas. | `{ "dates": ["2026-08-01","2026-08-08"], "startTime": "09:00", "endTime": "10:00" }` | `201` con los bloqueos creados. |
+| 29 | GET | `/courts/:id/bloqueos/proximos` | Listar los próximos bloqueos de una cancha. | — | `200` con el arreglo de bloqueos futuros. |
+| 30 | GET | `/courts/:id/bloqueos` | Listar todos los bloqueos de una cancha. | — | `200` con el arreglo completo de bloqueos. |
+| 31 | DELETE | `/courts/bloqueos/:blockId` | Eliminar (desbloquear) un bloqueo. | — | `200`/`204`, franja liberada. |
+| 32 | POST | `/courts/:id/fotos` | Subir foto de la cancha (form-data, campo `foto`). | form-data: `foto` = archivo `.jpg` | `200` con la URL firmada de la foto. |
+| 33 | DELETE | `/courts/:id` | Eliminar una cancha. | — | `200`/`204`. **Nota:** por la relación `onDelete: Cascade` del schema, esto elimina también sus alquileres y pagos asociados — usar con una cancha de prueba sin historial. |
+
+<br>
+
+**Customers (`/customers`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Body de ejemplo | Resultado esperado |
+|---|---|---|---|---|---|
+| 34 | POST | `/customers` | Registrar un cliente nuevo. | `{ "name": "Juan Pérez", "phone": "987654321", "documentNumber": "12345678" }` | `201` con el cliente creado. Guardar `id` en `{{customerId}}`. |
+| 35 | GET | `/customers` | Listar clientes. | — | `200` con el arreglo de clientes. |
+| 36 | PATCH | `/customers/:id` | Editar datos de un cliente. | `{ "phone": "987000000" }` | `200` con el cliente actualizado. |
+| 37 | GET | `/customers/:id/historial` | Consultar el historial de alquileres de un cliente. | — | `200` con el arreglo de alquileres asociados. |
+| 38 | DELETE | `/customers/:id` | Eliminar un cliente. | — | `200`/`204`. Verificar que el historial de alquileres no se borra (el cliente queda desasociado, no se aplica cascade). |
+
+<br>
+
+**Bookings (`/bookings`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Body de ejemplo | Resultado esperado |
+|---|---|---|---|---|---|
+| 39 | POST | `/bookings` | Registrar un alquiler. | `{ "courtId": {{courtId}}, "customerId": {{customerId}}, "customerName": "Juan Pérez", "customerEmail": "juan@example.com", "date": "2026-08-01", "startTime": "18:00", "endTime": "19:00", "totalAmount": 40 }` | `201` con el alquiler creado. Verificar en Resend el correo "Confirmación de tu alquiler". Guardar `id` en `{{bookingId}}`. |
+| 40 | POST | `/bookings` | Repetir el mismo request (misma cancha/fecha/horario). | (igual al anterior) | `409 Ya existe un alquiler activo en esa franja` — evidencia de la validación anti-doble-reserva. |
+| 41 | POST | `/bookings/serie` | Registrar una serie de reservas (multi-día). | `{ "courtId": {{courtId}}, "customerName": "Juan Pérez", "dates": ["2026-08-03","2026-08-10","2026-08-17"], "startTime": "18:00", "endTime": "19:00", "totalAmount": 120, "seriesPaymentMode": "LUMP_SUM" }` | `201` con las 3 reservas creadas, `seriesId` compartido. Repetir con una de las fechas ya ocupada debe devolver `409` y no crear ninguna reserva de la serie (rollback transaccional). |
+| 42 | PATCH | `/bookings/:id` | Editar un alquiler existente. | `{ "startTime": "19:00", "endTime": "20:00" }` | `200` con el alquiler actualizado. |
+| 43 | POST | `/bookings/:id/cancelar` | Cancelar un alquiler. | — | `200`, estado `CANCELLED`. Verificar que sus pagos asociados quedan marcados con `reversedAt` (ver módulo Payments). |
+| 44 | GET | `/bookings?courtId=&status=&from=&to=` | Buscar/filtrar alquileres. | — | `200` con el arreglo filtrado. Probar combinaciones de `status=PENDING`, rango de fechas, y `customerId`. |
+
+<br>
+
+**Payments (`/payments`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Body de ejemplo | Resultado esperado |
+|---|---|---|---|---|---|
+| 45 | POST | `/payments` | Registrar un pago sobre un alquiler. | `{ "bookingId": {{bookingId}}, "amount": 40, "method": "EFECTIVO" }` | `201` con el pago creado. |
+| 46 | GET | `/payments/:bookingId` | Listar los pagos de un alquiler. | — | `200` con el arreglo de pagos (excluye los revertidos). |
+| 47 | POST | `/payments/:bookingId/comprobante` | Subir comprobante de pago (form-data, campo `comprobante`). | form-data: `comprobante` = archivo `.jpg`/`.pdf` | `200`/`201` con la referencia del archivo guardada. |
+| 48 | GET | `/payments/:bookingId/comprobante` | Obtener la URL firmada del comprobante. | — | `200` con una URL temporal (300 segundos). Repetir la prueba 6 minutos después debe devolver la URL vencida (`403`/`expired` al abrirla). Sin comprobante cargado debe devolver `404`. |
+
+<br>
+
+**Panel (`/panel`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Resultado esperado |
+|---|---|---|---|---|
+| 49 | GET | `/panel/alquileres-del-dia` | Consultar los alquileres del día actual. | `200` con el arreglo de alquileres de hoy. |
+| 50 | GET | `/panel/ingreso-del-dia` | Consultar el ingreso total del día. | `200` con el monto total calculado sobre los pagos reales. |
+| 51 | GET | `/panel/pendientes-del-dia` | Consultar los pagos pendientes del día. | `200` con el arreglo de alquileres con saldo pendiente. |
+
+<br>
+
+**Notifications (`/notifications`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Resultado esperado |
+|---|---|---|---|---|
+| 52 | GET | `/notifications` | Listar las notificaciones internas del usuario autenticado. | `200` con el arreglo de notificaciones (por ejemplo, las generadas al registrar una reserva o un bloqueo). |
+| 53 | PATCH | `/notifications/:id/leida` | Marcar una notificación como leída. | `200` con la notificación actualizada. |
+
+<br>
+
+**Health (`/health`)**
+
+| # | Método | Endpoint | Descripción de la prueba | Resultado esperado |
+|---|---|---|---|---|
+| 54 | GET | `/health` | Verificar que la API y la base de datos están operativas. | `200 { "status": "ok" }`. Usado por Render para mantener vivo el servicio en el plan gratuito. |
+
+<br>
+
+#### 7.3.5.3. Evidencia de pruebas en Postman
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/services/login.png)
+![Services Evidence](assets/sprints/sprint-2/services/login-bad.png)
+![Services Evidence](assets/sprints/sprint-2/services/forgot.png)
+*Colección de Postman ejecutando el flujo de autenticación (`login`, `olvide-password`, `restablecer-password`, `logout`) contra la API real.*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/services/bookings.png)
+![Services Evidence](assets/sprints/sprint-2/services/getbookings.png)
+*Prueba de `POST /bookings` mostrando la respuesta `201` y, en un segundo request idéntico, el `409` que evidencia la validación anti-doble-reserva.*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/services/courts.png)
+![Services Evidence](assets/sprints/sprint-2/services/many.png)
+*Pruebas del módulo `courts`: creación de cancha, actualización de precio y bloqueo de franja por mantenimiento.*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/services/customer.png)
+![Services Evidence](assets/sprints/sprint-2/services/customers.png)
+*Pruebas del módulo `customers`: creación, edición y consulta de historial de un cliente.*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/services/payment.png)
+*Prueba de `POST /payments` y de la obtención de la URL firmada del comprobante mediante `GET /payments/:bookingId/comprobante`.*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/services/healt.png)
+*Prueba de `GET /health` verificando la disponibilidad del servicio desplegado en Render (plan gratuito).*
+
+<br>
+
+#### 7.3.5.4. Evidencia de pruebas del servicio de correo (Resend)
+
+El envío de correos reales se validó disparando cada flujo desde la API (no se probó Resend de forma aislada, sino a través de los endpoints que lo invocan) y verificando la recepción en el dashboard de Resend y en la bandeja de entrada de prueba.
+
+| # | Correo | Disparado por | Resultado esperado |
+|---|---|---|---|
+| 1 | Confirmación de alquiler | `POST /bookings` (con `customerEmail`) | Correo recibido con cancha, fecha y horario del alquiler. |
+| 2 | Nueva reserva registrada (alerta a otros administradores) | `POST /bookings`, `POST /bookings/serie`, `POST /courts/:id/bloqueos` | Correo recibido por cada administrador activo distinto de quien registró la reserva/bloqueo. |
+| 3 | Nueva solicitud de acceso | `POST /users/solicitudes` | Correo recibido por los administradores existentes con los datos del solicitante. |
+| 4 | Solicitud de acceso autorizada/rechazada | `PATCH /users/solicitudes/:id/autorizar` o `/rechazar` | Correo recibido por el solicitante con el resultado de su solicitud. |
+| 5 | Verificación de correo | Automático tras autorizar una solicitud | Correo con enlace `{{FRONTEND_URL}}/verificar-correo?token=...`, válido por 24 horas. |
+| 6 | Restablecimiento de contraseña | `POST /auth/olvide-password` | Correo con enlace `{{FRONTEND_URL}}/restablecer-password?token=...`, válido por 1 hora. |
+
+<br>
+<br>
+
+
+![Services Evidence](assets/sprints/sprint-2/resend-pruebas/pruebas.png)
+
+![Services Evidence](assets/sprints/sprint-2/resend-pruebas/1.png)
+
+![Services Evidence](assets/sprints/sprint-2/resend-pruebas/2.png)
+*Dashboard de Resend mostrando los correos entregados exitosamente durante las pruebas (confirmación de alquiler, solicitudes de acceso, verificación y restablecimiento de contraseña).*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/execution/correo1.png)
+*Correo real recibido de confirmación de alquiler.*
+
+<br>
+
+![Services Evidence](assets/sprints/sprint-2/resend-pruebas/contraseña.png)
+*Correo real recibido de restablecimiento de contraseña, con el botón de acción hacia el frontend.*
  
 <br>
 
 ### 7.3.6. Software Deployment Evidence for Sprint Review
  
-Despliegue del sistema completo (frontend + backend + base de datos) según el stack definido en 4.6: Render (Static Site) para el frontend, Render (Web Service, **plan Free**) para el backend — con arranque en frío tras inactividad, mitigado con el endpoint `/health` para monitoreo (ver 4.1, Step 3 Hotspots) — y Supabase para base de datos + Storage.
+Despliegue del sistema completo (frontend + backend + base de datos) según el stack definido en 4.6: Render (Static Site) para el frontend, Render (Web Service, **plan Free**) para el backend — con arranque en frío tras inactividad, mitigado con el endpoint `/health` para monitoreo y Supabase para base de datos + Storage.
  
 <br>
 
@@ -2613,7 +2866,9 @@ Despliegue del sistema completo (frontend + backend + base de datos) según el s
 
 3. Configurar el repositorio de frontend en Render como Static Site, con `VITE_API_URL` apuntando al backend ya desplegado (`https://api.moli-voleibol.com`).
 
-4. Verificar que la PWA sea instalable desde un celular real (RNF04) y que el flujo completo funcione de punta a punta contra producción.
+4. Configurar el dominio propio administrado en Cloudflare (registros DNS) y enlazarlo como dominio personalizado del Static Site en Render.
+
+5. Verificar que la PWA sea instalable desde un celular real (RNF04) y que el flujo completo funcione de punta a punta contra producción.
 
 <br>
 
@@ -2623,25 +2878,54 @@ Despliegue del sistema completo (frontend + backend + base de datos) según el s
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/supabase.png)
 
+![Deployment Evidence](assets/sprints/sprint-2/deploy/bucket.png)
+
+*Proyecto de Supabase en producción: base de datos PostgreSQL y bucket de Storage utilizados por el backend real.*
+
+<br>
+
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/resend.png)
+*Panel de Resend con el dominio de envío verificado y la API key configurada como variable de entorno del backend.*
+
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/domain.png)
+*Dominio propio (`moli-voleibol.com`) registrado, base para el subdominio de la aplicación.*
+
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/backend.png)
+*Web Service del backend en Render (`la-canchita-de-carlos-backend`), plan Free, mostrando el despliegue activo y las variables de entorno configuradas.*
+
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/cloudflare.png)
+*Panel de Cloudflare administrando la zona DNS del dominio `moli-voleibol.com`.*
+
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/deploy1.png)
+*Log de build y deploy exitoso en Render, confirmando la instalación de dependencias, la ejecución de migraciones de Prisma y el arranque del servicio.*
 
-![Deployment Evidence](assets/sprints/sprint-2/deploy/frontend.png)
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/custom.png)
+*Configuración del dominio personalizado (`lacanchitadecarlos.moli-voleibol.com`) enlazado al Static Site en Render.*
+
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/dns.png)
+*Registros DNS (CNAME) en Cloudflare apuntando el subdominio de la aplicación hacia Render.*
 
-![Deployment Evidence](assets/sprints/sprint-2/deploy/final.png)
+<br>
+
+![Deployment Evidence](assets/sprints/sprint-2/deploy/frontend.png)
+*Aplicación final funcionando en producción sobre la URL pública, accesible desde el navegador.*
+
+<br>
 
 ![Deployment Evidence](assets/sprints/sprint-2/deploy/project.png)
+*Vista general del proyecto en Render agrupando el Web Service (backend) y el Static Site (frontend) desplegados.*
 
 <br>
 
@@ -2984,6 +3268,24 @@ El frontend está organizado por feature (`auth`, `bookings`, `courts`, `custome
 
 <br>
 
+## 8.6. JSON Server (Fake API)
+
+Durante el Sprint 1, el frontend se desarrolló contra un fake API con `json-server`, sirviendo un `db.json` con datos de prueba de canchas, alquileres, clientes y usuarios, para no bloquear el avance de la interfaz mientras el backend real aún no existía.
+
+<br>
+
+**Diagrama de datos del fake API**
+
+<br>
+
+![JSON Server Data Diagram](assets/json-diagram/json-server.png)
+
+<br>
+
+El `db.json` reflejó desde el inicio la misma forma de datos que después tomó el schema real de Prisma, para minimizar el trabajo de reconexión al reemplazar `json-server` por la API real en el Sprint 2 (T-24).
+
+<br>
+
 ---
 
 # Capítulo IX: Pruebas y Validación
@@ -3068,8 +3370,6 @@ La validación con Carlos Maldonado se realiza al cierre de cada sprint, mostran
 ---
 
 # Anexos
-
-<br>
 
 - Repositorio del frontend: https://github.com/brianna-salinas/la-canchita-de-carlos-frontend.git
 - Repositorio del backend: https://github.com/brianna-salinas/la-canchita-de-carlos-backend.git

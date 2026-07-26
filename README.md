@@ -973,7 +973,7 @@ Se identificaron y representaron todos los eventos que modifican el estado del s
 
 <br>
 
-![Step 1 - Unstructured Exploration](event-storming-step1.png)
+![Step 1 - Unstructured Exploration](assets/event-storming/step1.png)
 
 <br>
 
@@ -983,7 +983,7 @@ Se ordenaron los eventos de forma cronológica de izquierda a derecha, estableci
 
 <br>
 
-![Step 2 - Timelines](event-storming-step2.png)
+![Step 2 - Timelines](assets/event-storming/step2.png)
 
 <br>
 
@@ -997,7 +997,7 @@ Se identificaron los puntos críticos del sistema y riesgos técnicos del negoci
 
 <br>
 
-![Step 3 - Hotspots](event-storming-step3.png)
+![Step 3 - Hotspots](assets/event-storming/step3.png)
 
 <br>
 
@@ -1007,7 +1007,7 @@ Se definieron eventos pivote que segmentan el flujo en fases funcionales: `Admin
 
 <br>
 
-![Step 4 - Pivotal Events](event-storming-step4.png)
+![Step 4 - Pivotal Events](assets/event-storming/step4.png)
 
 <br>
 
@@ -1017,7 +1017,7 @@ Se definieron los commands (post-its azules) que disparan los eventos, y los act
 
 <br>
 
-![Step 5 - Commands & Actors](event-storming-step5.png)
+![Step 5 - Commands & Actors](assets/event-storming/step5.png)
 
 <br>
 
@@ -1029,10 +1029,11 @@ Se incorporaron las business policies (post-its lilas), reglas reactivas que aut
 - Cuando ocurre `BookingRegistered` y el `Customer` asociado tiene correo registrado → se dispara `ConfirmationEmailSent`, sin revertir el alquiler si el envío falla.
 - Cuando ocurre `AdminAuthorized` → se crea el `User` (en estado `PENDING_VERIFICATION`) y se disparan dos correos: el de resultado de la solicitud y el de verificación de correo.
 - Cuando ocurre `AdminRejected` → se notifica por correo al solicitante, sin crear ningún `User`.
+- Cuando ocurre `BookingCancelled` y el alquiler tenía pagos registrados → se reversan automáticamente todos sus pagos activos (`PaymentReversed`, soft-reversal: el registro no se borra, solo se marca con `reversedAt` para conservar el rastro de auditoría) y se reinicia el saldo pagado del alquiler a 0 antes de marcarlo como cancelado.
 
 <br>
 
-![Step 6 - Policies](event-storming-step6.png)
+![Step 6 - Policies](assets/event-storming/step6.png)
 
 <br>
 
@@ -1042,7 +1043,7 @@ Se mapearon los read models (post-its verdes), las vistas que el administrador n
 
 <br>
 
-![Step 7 - Read Models](event-storming-step7.png)
+![Step 7 - Read Models](assets/event-storming/step7.png)
 
 <br>
 
@@ -1052,7 +1053,7 @@ Se identificaron los sistemas externos (post-its rosados) que interactúan con e
 
 <br>
 
-![Step 8 - External Systems](event-storming-step8.png)
+![Step 8 - External Systems](assets/event-storming/step8.png)
 
 <br>
 
@@ -1062,7 +1063,7 @@ Se incrementó el nivel de abstracción agrupando comandos y eventos alrededor d
 
 <br>
 
-![Step 9 - Aggregates](event-storming-step9.png)
+![Step 9 - Aggregates](assets/event-storming/step9.png)
 
 <br>
 
@@ -1072,14 +1073,14 @@ Finalmente, se delimitaron los límites semánticos y transaccionales del domini
 
 <br>
 
-![Step 10 - Bounded Contexts](event-storming-step10.png)
+![Step 10 - Bounded Contexts](assets/event-storming/step10.png)
 
 <br>
 El proceso de Design-Level Event Storming permitió profundizar en el comportamiento técnico del sistema a partir de los flujos operativos reales del negocio de Carlos. En esta etapa se definieron los límites transaccionales (Bounded Contexts) y se incorporaron elementos de diseño táctico como Comandos, Aggregates y Policies, cuyo detalle tabular se documenta a continuación.
 
 <br>
 
-*Ver tablero interactivo en Miro:*
+[Ver tablero interactivo en Miro](https://miro.com/app/board/uXjVH4Z9siM=/?share_link_id=815397269909)
 
 <br>
 
@@ -1094,7 +1095,7 @@ Eventos de dominio identificados por subdominio, con el comando/actor que los di
 | RegisterBooking | `Booking` | `BookingRegistered` | No puede existir otro `Booking` activo para la misma `Court` + franja horaria. |
 | — (rechazo del comando anterior) | `Booking` | `DoubleBookingRejected` | Se emite en vez de `BookingRegistered` cuando la franja ya está ocupada o bloqueada. |
 | EditBooking | `Booking` | `BookingEdited` | El nuevo horario/cancha tampoco puede colisionar con otro alquiler activo. |
-| CancelBooking | `Booking` | `BookingCancelled` | Libera la franja horaria inmediatamente para nuevas reservas. |
+| CancelBooking | `Booking` | `BookingCancelled` | Libera la franja horaria inmediatamente para nuevas reservas; si el alquiler tenía pagos registrados, se reversan automáticamente antes de marcarlo como `CANCELLED` (ver `PaymentReversed`). |
 | BlockSchedule | `ScheduleBlock` | `ScheduleBlocked` | No puede bloquearse una franja con un `Booking` activo. |
 | UnblockSchedule | `ScheduleBlock` | `ScheduleUnblocked` | — |
 | RegisterCourt | `Court` | `CourtRegistered` | Nombre de cancha único dentro del negocio. |
@@ -1103,6 +1104,7 @@ Eventos de dominio identificados por subdominio, con el comando/actor que los di
 | UpdateCustomer | `Customer` | `CustomerUpdated` | — |
 | RegisterPayment | `Payment` | `PaymentRegistered` | El monto pagado no puede exceder el total del alquiler asociado. |
 | RegisterPartialPayment | `Payment` | `PartialPaymentRegistered` | El saldo pendiente se recalcula y nunca puede ser negativo. |
+| — (efecto de `BookingCancelled`) | `Payment` | `PaymentReversed` | Se marca cada pago activo del alquiler cancelado con `reversedAt` (soft-reversal, no se borra el registro) y se reinicia `paidAmount` a 0 y `paymentStatus` a `PENDING` en el `Booking` asociado. |
 | StartSession | `User` | `SessionStarted` | Credenciales inválidas no generan sesión. |
 | CloseSession | `User` | `SessionClosed` | — |
 | RequestAdminRegistration (actor: solicitante, sin sesión) | `AccessRequest` | `RegistrationRequestCreated` | El `AccessRequest` se crea en estado `PENDING`; no existe ningún `User` todavía, por lo que el solicitante no tiene acceso al sistema. |
@@ -1133,7 +1135,7 @@ Eventos de dominio identificados por subdominio, con el comando/actor que los di
 **Relaciones entre contextos (Context Map):**
 
 - **Bookings → Customers** (relación *Customer/Supplier*): un alquiler referencia a un cliente existente; Bookings consume datos de Customers pero no los modifica.
-- **Bookings → Payments** (relación *Customer/Supplier*): un pago siempre pertenece a un alquiler; Payments depende del identificador de Booking generado por Bookings.
+- **Bookings → Payments** (relación *Customer/Supplier*, con una escritura puntual en sentido inverso): un pago siempre pertenece a un alquiler, por lo que Payments depende del identificador de Booking generado por Bookings; adicionalmente, al ejecutar `CancelBooking`, Bookings invoca a Payments (`reverseAllForBooking`) para reversar los pagos activos del alquiler antes de marcarlo como cancelado — es la única operación en la que Bookings escribe sobre el modelo de Payments.
 - **Panel → Bookings** y **Panel → Payments** (relación *Customer/Supplier*, solo lectura): Panel consulta datos de ambos contextos para construir sus tres read models del día (alquileres, ingreso, pendientes de pago), sin escribir de vuelta en ninguno de los dos.
 - **Identity & Access → Bookings / Payments / Customers / Panel** (relación *Shared Kernel* mínimo): los cuatro contextos consumen la identidad del administrador autenticado para saber quién realizó cada acción, sin compartir más modelo que eso.
 - **Bookings → Notifications** (relación *Published Language / eventos*): Notifications escucha `BookingRegistered` y reacciona enviando el correo de confirmación (RF23); no tiene forma de escribir de vuelta en Bookings.
@@ -1180,7 +1182,7 @@ Los diagramas de componentes muestran a cada uno de los 6 bounded contexts defin
 
 <br>
 
-### 4.5.1. Components — Bookings (núcleo)
+### 4.5.1. Components — Bookings
 
 <br>
 
@@ -2337,6 +2339,7 @@ Durante el Sprint 1 el alcance estuvo centrado en el frontend contra un fake API
 ![JSON Fake API](assets/sprints/sprint-1/services06.png)
  
 <br>
+
 ## 7.3. Sprint 2
  
 ### 7.3.1. Sprint Planning 2
@@ -2469,7 +2472,7 @@ Despliegue del sistema completo (frontend + backend + base de datos) según el s
 
 <br>
 
-**URL pública:** *[URL del frontend desplegado en Render]*
+**URL pública:** lacanchitadecarlos.moli-voleibol.com
  
 <br>
 
@@ -2771,8 +2774,6 @@ src/
 
 ## 9.1. Estrategia de Pruebas
 
-<br>
-
 Dado que se trata de un desarrollo individual, la estrategia de pruebas se centra en:
 
 - **Pruebas manuales guiadas por Postman** sobre cada endpoint del backend, cubriendo el caso exitoso y al menos un caso de error por endpoint.
@@ -2805,8 +2806,6 @@ Dado que se trata de un desarrollo individual, la estrategia de pruebas se centr
 
 ## 9.3. Validación con el Cliente
 
-<br>
-
 La validación con Carlos Maldonado se realiza al cierre de cada sprint, mostrando el sistema en funcionamiento (Sprint 1: navegación y pantallas contra datos de prueba; Sprint 2: sistema completo desplegado con datos reales) y recogiendo su conformidad o los ajustes solicitados antes de continuar.
 
 <br>
@@ -2831,21 +2830,17 @@ La validación con Carlos Maldonado se realiza al cierre de cada sprint, mostran
 
 ## 10.2. Checklist de Despliegue
 
-<br>
-
-- [ ] Migraciones de Prisma aplicadas contra la base de datos de producción.
-- [ ] Variables de entorno configuradas en Render (frontend y backend).
-- [ ] `VITE_API_URL` del frontend apuntando al backend de producción.
-- [ ] Endpoint `/health` respondiendo correctamente en producción.
-- [ ] PWA instalable verificada en un celular real.
-- [ ] Flujo completo (reserva → pago → confirmación por correo) probado de punta a punta en producción.
-- [ ] Validación final con Carlos.
+- [✓] Migraciones de Prisma aplicadas contra la base de datos de producción.
+- [✓] Variables de entorno configuradas en Render (frontend y backend).
+- [✓] `VITE_API_URL` del frontend apuntando al backend de producción.
+- [✓] Endpoint `/health` respondiendo correctamente en producción.
+- [✓] PWA instalable verificada en un celular real.
+- [✓] Flujo completo (reserva → pago → confirmación por correo) probado de punta a punta en producción.
+- [✓] Validación final con Carlos.
 
 <br>
 
 ## 10.3. Plan de Rollback
-
-<br>
 
 - Mantener la versión anterior desplegada identificada por su commit en `main` antes de cada despliegue nuevo.
 - Ante un fallo crítico detectado después del despliegue, revertir el Web Service y el Static Site en Render al commit anterior conocido como estable.
@@ -2862,4 +2857,4 @@ La validación con Carlos Maldonado se realiza al cierre de cada sprint, mostran
 
 - Repositorio del frontend: https://github.com/brianna-salinas/la-canchita-de-carlos-frontend.git
 - Repositorio del backend: https://github.com/brianna-salinas/la-canchita-de-carlos-backend.git
-- Prototipo navegable en Figma (3.4).
+- Prototipo navegable en Figma: https://www.figma.com/site/iprLtSv1JAy2xLH9kklVbt/La-Canchita-de-Carlos?node-id=0-1&t=xrfrClNrYt8S0jPV-1

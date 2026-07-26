@@ -2,9 +2,15 @@
 
 <br>
 
-## Sistema de Gestión de Alquiler de Canchas
+<img src="assets/oryon/oryon.png" alt="Oryon" width="140"/>
+
+### ORYON
+**Soluciones Tecnológicas**
 
 <br>
+<br>
+
+## Sistema de Gestión de Alquiler de Canchas
 
 # La Canchita de Carlos
 
@@ -16,22 +22,23 @@
 
 <br>
 
-**Cliente: Carlos Maldonado**
-**Desarrollado por: Brianna Salinas**
+| | |
+|---|---|
+| **Cliente** | Carlos Maldonado |
+| **Desarrollado por** | Oryon — Soluciones Tecnológicas |
+| **Responsable del proyecto** | Brianna Salinas |
+| **Plazo** | 2 semanas (documentación, diseño, prototipo, desarrollo, pruebas y despliegue) |
+| **Producto** | [lacanchitadecarlos.moli-voleibol.com](https://lacanchitadecarlos.moli-voleibol.com/) |
 
 <br>
-
-*Plazo: 2 semanas (documentación, diseño, prototipo, desarrollo, pruebas y despliegue)*
-
 <br>
-
-**Fecha**
 
 ### **Julio 2026**
 
 <br>
 
 </div>
+
 
 ---
 
@@ -2705,7 +2712,7 @@ Un sprint se considera terminado cuando todas sus historias comprometidas cumple
 
 <br>
 
-**Pruebas de Software**
+**Pruebas de API Rest**
 
 <br>
 
@@ -2723,6 +2730,9 @@ Un sprint se considera terminado cuando todas sus historias comprometidas cumple
 |---|---|
 | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) | Motor de base de datos relacional. |
 | ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) | Hosting de base de datos y almacenamiento de archivos. |
+| ![Structurizr](https://img.shields.io/badge/Structurizr-1168BD?style=for-the-badge&logoColor=white) | Diagramas C4 (Contexto, Contenedores, Componentes) de la arquitectura del sistema, a partir de `.dsl`. |
+| ![PlantUML](https://img.shields.io/badge/PlantUML-grey?style=for-the-badge&logoColor=white) | Diagramas de clases por bounded context (identity, bookings, payments) y diagramas de despliegue, a partir de `.puml`. |
+| ![dbdiagram.io](https://img.shields.io/badge/dbdiagram.io-F97316?style=for-the-badge&logoColor=white) | Diagrama entidad-relación de la base de datos, a partir del DBML exportado del schema de Prisma. |
 
 <br>
 
@@ -2744,6 +2754,7 @@ Un sprint se considera terminado cuando todas sus historias comprometidas cumple
 | Herramienta | Uso |
 |---|---|
 | ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white) | Hosting del frontend (Static Site) y backend (Web Service, plan Free). |
+| ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?style=for-the-badge&logo=cloudflare&logoColor=white) | Dominio y DNS del producto (`lacanchitadecarlos.moli-voleibol.com` / `api.moli-voleibol.com`), apuntando a Render. |
 
 <br>
 
@@ -2850,15 +2861,39 @@ npm run dev
 
 ```
 src/
-  routes/
-  services/
-  middlewares/
-  db.ts
-  index.ts
+contexts/
+bookings/
+domain/model/{aggregates, ports}
+application/
+infrastructure/persistence/repositories/
+interfaces/rest/{resources, transform}
+customers/
+identity/
+notifications/
+panel/
+payments/
+platform/
+errors/
+interfaces/rest/
+middlewares/
+security/
+storage/ports/
+types/
+validation/
+db.ts
+index.ts
 prisma/
-  schema.prisma
-  prisma.config.ts
+schema.prisma
+migrations/
+prisma.config.ts
+features/ # pruebas BDD (Cucumber)
+step-definitions/
+support/
 ```
+
+<br>
+
+Cada bounded context (`bookings`, `customers`, `identity`, `notifications`, `panel`, `payments`) sigue la misma subestructura hexagonal: `domain` (aggregates y ports), `application` (use cases), `infrastructure` (repositorios Prisma) e `interfaces/rest` (routers Express). `platform/` contiene la infraestructura técnica transversal (JWT, hash de contraseñas, middlewares, adaptador de Supabase Storage) que no pertenece a ningún bounded context.
 
 <br>
 
@@ -2866,12 +2901,34 @@ prisma/
 
 ```
 src/
-  pages/
-  components/
-  services/
-  hooks/
-  types/
+auth/
+components/
+bookings/
+components/
+hooks/
+courts/
+components/
+customers/
+components/
+hooks/
+dashboard/
+components/
+hooks/
+settings/
+components/
+hooks/
+shared/
+api/
+components/
+hooks/
+theme/
+utils/
+App.tsx
+main.tsx
+index.css
 ```
+
+El frontend está organizado por feature (`auth`, `bookings`, `courts`, `customers`, `dashboard`, `settings`), no por tipo genérico (`pages`/`services`/`types`); cada carpeta de feature agrupa sus propios `components/` y, cuando aplica, `hooks/`. `shared/` concentra lo transversal: el cliente de API (`shared/api`), componentes reutilizables, hooks comunes, el tema visual y utilidades.
 
 <br>
 

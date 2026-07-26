@@ -46,58 +46,115 @@
 [About the Product](#about-the-product)
  
 [Capítulo I: Introducción](#capítulo-i-introducción)
-* [1.1. Perfil del negocio](#11-perfil-del-negocio)
-* [1.2. Alcance del producto](#12-alcance-del-producto)
-* [1.3. Objetivos del proyecto](#13-objetivos-del-proyecto)
-* [1.4. Usuarios del sistema](#14-usuarios-del-sistema)
+
+[1.1. Perfil del negocio](#11-perfil-del-negocio)
+
+[1.2. Alcance del producto](#12-alcance-del-producto)
+
+[1.3. Objetivos del proyecto](#13-objetivos-del-proyecto)
+
+[1.4. Usuarios del sistema](#14-usuarios-del-sistema)
+
 [Capítulo II: Especificación de Requisitos](#capítulo-ii-especificación-de-requisitos)
-* [2.1. Requisitos Funcionales](#21-requisitos-funcionales)
-* [2.2. Requisitos No Funcionales](#22-requisitos-no-funcionales)
-* [2.3. Lenguaje Ubicuo](#23-lenguaje-ubicuo)
-* [2.4. User Stories](#24-user-stories)
-* [2.5. Product Backlog](#25-product-backlog)
+
+[2.1. Requisitos Funcionales](#21-requisitos-funcionales)
+
+[2.2. Requisitos No Funcionales](#22-requisitos-no-funcionales)
+
+[2.3. Lenguaje Ubicuo](#23-lenguaje-ubicuo)
+
+[2.4. User Stories](#24-user-stories)
+
+[2.5. Product Backlog](#25-product-backlog)
+
+
 [Capítulo III: Diseño de Producto (UX/UI)](#capítulo-iii-diseño-de-producto-uxui)
-* [3.1. Arquitectura de Información](#31-arquitectura-de-información)
-* [3.2. Style Guideliness](#32-style-guideliness)
-* [3.3. Wireframes y Mockups](#33-wireframes-y-mockups)
-* [3.4. Prototipo en Figma](#34-prototipo-en-figma)
+
+[3.1. Arquitectura de Información](#31-arquitectura-de-información)
+
+[3.2. Style Guideliness](#32-style-guideliness)
+
+[3.3. Wireframes y Mockups](#33-wireframes-y-mockups)
+
+[3.4. Prototipo en Figma](#34-prototipo-en-figma)
+
+
 [Capítulo IV: Arquitectura de Software (Domain-Driven Design)](#capítulo-iv-arquitectura-de-software-domain-driven-design)
-* [4.0. Patrón de Arquitectura](#40-patrón-de-arquitectura)
-* [4.1. Design-Level Event Storming](#41-design-level-event-storming)
-* [4.2. Bounded Contexts y Context Map](#42-bounded-contexts-y-context-map)
-* [4.3. Software Architecture Context Diagram](#43-software-architecture-context-diagram)
-* [4.4. Software Architecture Container Diagram](#44-software-architecture-container-diagram)
-* [4.5. Software Architecture Components Diagrams](#45-software-architecture-components-diagrams)
-* [4.6. Cloud Architecture (PWA)](#46-cloud-architecture-pwa)
-* [4.7. Análisis Técnico-Económico de la Infraestructura](#47-análisis-técnico-económico-de-la-infraestructura)
-* [4.8. Diagrama de Secuencia](#48-diagrama-de-secuencia)
+
+[4.0. Patrón de Arquitectura](#40-patrón-de-arquitectura)
+
+[4.1. Design-Level Event Storming](#41-design-level-event-storming)
+
+[4.2. Bounded Contexts y Context Map](#42-bounded-contexts-y-context-map)
+
+[4.3. Software Architecture Context Diagram](#43-software-architecture-context-diagram)
+
+[4.4. Software Architecture Container Diagram](#44-software-architecture-container-diagram)
+
+[4.5. Software Architecture Components Diagrams](#45-software-architecture-components-diagrams)
+
+[4.6. Cloud Architecture (PWA)](#46-cloud-architecture-pwa)
+
+[4.7. Análisis Técnico-Económico de la Infraestructura](#47-análisis-técnico-económico-de-la-infraestructura)
+
+[4.8. Diagrama de Secuencia](#48-diagrama-de-secuencia)
+
+
 [Capítulo V: Software Object-Oriented Design](#capítulo-v-software-object-oriented-design)
-* [5.1. Class Diagrams - Backend](#51-class-diagrams--backend)
-* [5.2. Class Diagrams - Frontend](#52-class-diagrams--frontend)
+
+[5.1. Class Diagrams - Backend](#51-class-diagrams--backend)
+
+[5.2. Class Diagrams - Frontend](#52-class-diagrams--frontend)
+
 [Capítulo VI: Database Design](#capítulo-vi-database-design)
-* [6.1. Modelo Entidad-Relación](#61-modelo-entidad-relación)
-* [6.2. Database Diagrams](#62-diagrama-de-base-de-datos)
-* [6.3. Diccionario de Datos](#63-diccionario-de-datos)
+
+[6.1. Modelo Entidad-Relación](#61-modelo-entidad-relación)
+
+[6.2. Database Diagrams](#62-diagrama-de-base-de-datos)
+
+[6.3. Diccionario de Datos](#63-diccionario-de-datos)
+
 [Capítulo VII: Gestión del Proyecto](#capítulo-vii-gestión-del-proyecto)
-* [7.1. Plan de Sprints](#71-plan-de-sprints)
-* [7.2. Sprint 1](#72-sprint-1)
-* [7.3. Sprint 2](#73-sprint-2)
-* [7.4. Definition of Done](#74-definition-of-done)
+
+[7.1. Plan de Sprints](#71-plan-de-sprints)
+
+[7.2. Sprint 1](#72-sprint-1)
+
+[7.3. Sprint 2](#73-sprint-2)
+
+[7.4. Definition of Done](#74-definition-of-done)
+
 [Capítulo VIII: Implementación](#capítulo-viii-implementación)
-* [8.1. Configuración del Entorno de Desarrollo](#81-configuración-del-entorno-de-desarrollo)
-* [8.2. Gestión de Código Fuente](#82-gestión-de-código-fuente)
-* [8.3. Convenciones de Código](#83-convenciones-de-código)
-* [8.4. Configuración de Despliegue](#84-configuración-de-despliegue)
-* [8.5. Avance por Sprint](#85-avance-por-sprint)
-* [8.6. JSON Server (Fake API)](#86-json-server-fake-api)
+
+[8.1. Configuración del Entorno de Desarrollo](#81-configuración-del-entorno-de-desarrollo)
+
+[8.2. Gestión de Código Fuente](#82-gestión-de-código-fuente)
+
+[8.3. Convenciones de Código](#83-convenciones-de-código)
+
+[8.4. Configuración de Despliegue](#84-configuración-de-despliegue)
+
+[8.5. Avance por Sprint](#85-avance-por-sprint)
+
+[8.6. JSON Server (Fake API)](#86-json-server-fake-api)
+
+
 [Capítulo IX: Pruebas y Validación](#capítulo-ix-pruebas-y-validación)
-* [9.1. Estrategia de Pruebas](#91-estrategia-de-pruebas)
-* [9.2. Casos de Prueba Clave](#92-casos-de-prueba-clave)
-* [9.3. Validación con el Cliente](#93-validación-con-el-cliente)
+
+[9.1. Estrategia de Pruebas](#91-estrategia-de-pruebas)
+
+[9.2. Casos de Prueba Clave](#92-casos-de-prueba-clave)
+
+[9.3. Validación con el Cliente](#93-validación-con-el-cliente)
+
 [Capítulo X: Despliegue](#capítulo-x-despliegue)
-* [10.1. Ambiente de Producción](#101-ambiente-de-producción)
-* [10.2. Checklist de Despliegue](#102-checklist-de-despliegue)
-* [10.3. Plan de Rollback](#103-plan-de-rollback)
+
+[10.1. Ambiente de Producción](#101-ambiente-de-producción)
+
+[10.2. Checklist de Despliegue](#102-checklist-de-despliegue)
+
+[10.3. Plan de Rollback](#103-plan-de-rollback)
+
 [Anexos](#anexos)
  
 <br>

@@ -169,7 +169,9 @@
 
 <br>
 
-[Ver video del producto](AÑADIR-LINK-DEL-VIDEO-AQUÍ)
+[![About The Product](https://img.youtube.com/vi/oH_CxSht8-A/0.jpg)](https://youtu.be/oH_CxSht8-A)
+
+[Ver video del producto](https://youtu.be/oH_CxSht8-A)
 
 <br>
 
@@ -2694,6 +2696,19 @@ Las siguientes capturas corresponden a la ejecución real de la aplicación desp
 
 ![Execution Evidence](assets/sprints/sprint-2/execution/correo2.png)
 *Correo electrónico real enviado mediante Resend notificando a los demás administradores sobre una nueva reserva o solicitud registrada.*
+
+<br>
+
+
+## Mobile Execution Evidence for Sprint Review
+
+<br>
+
+![Mobile Execution Evidence](assets/sprints/sprint-2/mobile/1.jpeg)
+
+![Mobile Execution Evidence](assets/sprints/sprint-2/mobile/2.jpeg)
+
+![Mobile Execution Evidence](assets/sprints/sprint-2/mobile/3.jpeg)
 
 <br>
 

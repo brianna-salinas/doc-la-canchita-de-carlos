@@ -165,8 +165,6 @@
 
 <div align="center">
 
-**La Canchita de Carlos** — Sistema de Gestión de Alquiler de Canchas
-
 <br>
 
 [![About The Product](https://img.youtube.com/vi/oH_CxSht8-A/0.jpg)](https://youtu.be/oH_CxSht8-A)
